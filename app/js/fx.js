@@ -16,6 +16,8 @@ export class FX {
     this.parts = [];
     this.reduced = false;
     this.motion = 1;
+    // Unlockable particle theme (id041, id042): replaces part of the confetti.
+    this.theme = null;
     this.sprites = ['pink', 'blue', 'yellow', 'mint', 'violet'].map((p) => dopakichiSprite(p, 96));
   }
   resize() {
@@ -31,11 +33,12 @@ export class FX {
     return p;
   }
   scale(n) { return this.reduced ? Math.min(4, Math.ceil(n * 0.1)) : Math.round(n * (0.15 + 0.85 * this.motion)); }
+  themed(kind) { return kind === 'confetti' && this.theme && Math.random() < 0.65 ? this.theme : kind; }
 
   burst(x, y, { count = 20, speed = 420, kinds = ['confetti'], up = 0, spread = Math.PI * 2, angle = -Math.PI / 2, colors = PAPER, size = 1, gravity = 1, life = 1 } = {}) {
     const n = this.scale(count);
     for (let i = 0; i < n; i++) {
-      const kind = pick(kinds);
+      const kind = this.themed(pick(kinds));
       const a = angle + (Math.random() - 0.5) * spread;
       const v = speed * rand(0.35, 1);
       const p = { kind, x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - up, rot: rand(0, 6.28), vr: rand(-12, 12), flip: rand(0, 6.28), vf: rand(6, 16), color: pick(colors), size: size * rand(0.7, 1.3), life: rand(1.4, 2.6), g: 900 * gravity, drag: 0.8 };
@@ -44,6 +47,7 @@ export class FX {
       if (kind === 'coin') { p.life = rand(1.4, 2.2); p.g = 1300 * gravity; p.drag = 0.4; }
       if (kind === 'mini') { p.life = rand(1.6, 2.4); p.g = 900 * gravity; p.drag = 0.5; p.sprite = pick(this.sprites); p.vr = rand(-6, 6); p.size = size * rand(0.8, 1.2); }
       if (kind === 'heart') { p.life = rand(1, 1.6); p.g = -80; p.drag = 1.8; p.color = pick(['#ff3f8e', '#ff7ab6']); }
+      THEME_INIT[kind] && THEME_INIT[kind](p);
       p.life *= life;
       this.add(p);
     }
@@ -70,9 +74,10 @@ export class FX {
   }
   rain(W, n = 60, { kinds = ['confetti'] } = {}) {
     for (let i = 0; i < this.scale(n); i++) {
-      const kind = pick(kinds);
+      const kind = this.themed(pick(kinds));
       const p = { kind, x: rand(0, W), y: rand(-160, -10), vx: rand(-60, 60), vy: rand(60, 260), rot: rand(0, 6), vr: rand(-8, 8), flip: rand(0, 6), vf: rand(5, 12), color: pick(PAPER), size: rand(0.8, 1.3), life: rand(2.5, 4), g: 120, drag: 0.6 };
       if (kind === 'mini') { p.sprite = pick(this.sprites); p.size = rand(0.6, 1.1); p.g = 260; }
+      THEME_INIT[kind] && THEME_INIT[kind](p);
       this.add(p);
     }
   }
@@ -214,7 +219,11 @@ export class FX {
           c.strokeStyle = p.color; c.lineWidth = p.w; c.stroke();
           break;
         }
-        default: break;
+        default: {
+          const draw = THEME_DRAW[p.kind];
+          if (draw) { const spr = draw(this, p); const wob = p.kind === 'petal' ? Math.cos(p.flip) : 1; this.stamp(spr, p.x, p.y, p.rot, p.size, p.size * wob, p.kind === 'bubble' ? fade * 0.9 : fade); }
+          break;
+        }
       }
     }
     if (sparks.length) {
@@ -232,3 +241,39 @@ export class FX {
     c.globalAlpha = 1;
   }
 }
+
+// ---------------------------------------------------------------- particle themes (id041, id042)
+// Paper cut-outs with the same ink outline as the confetti.
+const THEME_INIT = {
+  note: (p) => { p.color = pick(['#ff7ab6', '#3b6bff', '#ffd23f', '#3fdcb0', '#a77bff']); p.vr = rand(-4, 4); p.g *= 0.7; },
+  petal: (p) => { p.color = pick(['#ffc2d9', '#ff9ccc', '#ffe3ef', '#fff']); p.g = 160; p.drag = 1.4; p.life *= 1.4; p.vf = rand(3, 7); },
+  bubble: (p) => { p.color = pick(['#bfeaff', '#d9f7ff', '#c8d7ff']); p.g = -120; p.drag = 1.8; p.vr = 0; p.size *= rand(0.8, 1.6); },
+  candy: (p) => { p.color = pick(['#ff7ab6', '#ffd23f', '#3fdcb0', '#8fb4ff', '#ff9a3c']); },
+  digit: (p) => { p.color = pick(['#ff7ab6', '#3b6bff', '#ffd23f', '#3fdcb0', '#a77bff']); p.str = String(Math.floor(Math.random() * 10)); p.vr = rand(-5, 5); },
+};
+const THEME_DRAW = {
+  note: (fx, p) => fx.sprite(`nt${p.color}`, 22, 26, (g) => {
+    g.lineJoin = 'round'; g.lineCap = 'round'; g.strokeStyle = INK; g.lineWidth = 2.2;
+    g.beginPath(); g.moveTo(3, 7); g.lineTo(3, -12); g.quadraticCurveTo(9, -9, 10, -3); g.stroke();
+    g.beginPath(); g.ellipse(-2, 7, 6, 4.6, -0.4, 0, 7); g.fillStyle = p.color; g.fill(); g.stroke();
+  }),
+  petal: (fx, p) => fx.sprite(`pt${p.color}`, 18, 16, (g) => {
+    g.beginPath(); g.moveTo(0, 7); g.bezierCurveTo(-9, 2, -8, -7, -2, -7); g.lineTo(0, -4); g.lineTo(2, -7); g.bezierCurveTo(8, -7, 9, 2, 0, 7);
+    g.fillStyle = p.color; g.fill(); g.strokeStyle = INK; g.lineWidth = 1.6; g.lineJoin = 'round'; g.stroke();
+  }),
+  bubble: (fx, p) => fx.sprite(`bb${p.color}`, 22, 22, (g) => {
+    g.beginPath(); g.arc(0, 0, 9.5, 0, 7); g.fillStyle = 'rgba(255,255,255,.35)'; g.fill(); g.strokeStyle = '#3b8fd6'; g.lineWidth = 1.8; g.stroke();
+    g.beginPath(); g.arc(-3.5, -3.5, 2.6, 0, 7); g.fillStyle = '#fff'; g.fill();
+  }),
+  candy: (fx, p) => fx.sprite(`cd${p.color}`, 30, 16, (g) => {
+    g.lineJoin = 'round'; g.strokeStyle = INK; g.lineWidth = 1.7; g.fillStyle = p.color;
+    for (const s of [-1, 1]) { g.beginPath(); g.moveTo(s * 6, 0); g.lineTo(s * 14, -6); g.lineTo(s * 14, 6); g.closePath(); g.fill(); g.stroke(); }
+    g.beginPath(); g.arc(0, 0, 7, 0, 7); g.fill(); g.stroke();
+    g.beginPath(); g.moveTo(-4, -3); g.quadraticCurveTo(0, 2, 4, -3); g.strokeStyle = '#fff'; g.lineWidth = 1.6; g.stroke();
+  }),
+  digit: (fx, p) => fx.sprite(`dg${p.color}${p.str}`, 20, 24, (g) => {
+    g.font = '400 22px "Dela Gothic One", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.lineWidth = 4; g.lineJoin = 'round'; g.strokeStyle = INK; g.strokeText(p.str, 0, 1); g.fillStyle = p.color; g.fillText(p.str, 0, 1);
+  }),
+};
+export const PARTICLE_THEMES = Object.keys(THEME_DRAW);

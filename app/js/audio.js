@@ -233,6 +233,84 @@ export const SYNTH = {
     const p = pan(g, pv);
     car.connect(e); e.connect(p); p.connect(g.sfx); send(g, e, 0.35, 0.3);
   },
+  // ---- voices for the unlockable songs (id041, id043) ----
+  chip(g, t, { m, dur = 0.14, v = 0.08, pan: pv = 0 }) {
+    const o = osc(g, 'square', midiHz(m), t, t + dur + 0.05);
+    const e = env(g, t, { a: 0.002, peak: v, d: 0.05, s: 0.6, hold: dur, r: 0.03 });
+    const p = pan(g, pv);
+    o.connect(e); e.connect(p); p.connect(g.music); send(g, e, 0.08, 0.25);
+  },
+  tri(g, t, { m, dur = 0.2, v = 0.35 }) {
+    const o = osc(g, 'triangle', midiHz(m), t, t + dur + 0.05);
+    const e = env(g, t, { a: 0.002, peak: v, d: 0.05, s: 0.8, hold: dur, r: 0.04 });
+    o.connect(e); e.connect(g.music);
+  },
+  noiseHat(g, t, { v = 0.12 }) {
+    const n = noise(g, t, t + 0.06); const hp = filt(g, 'highpass', 6000, 0.7);
+    const e = env(g, t, { a: 0.001, peak: v, d: 0.04 });
+    n.connect(hp); hp.connect(e); e.connect(g.drums);
+  },
+  taiko(g, t, { v = 0.9, m = 45 }) {
+    const o = osc(g, 'sine', midiHz(m + 12), t, t + 0.7);
+    o.frequency.exponentialRampToValueAtTime(midiHz(m), t + 0.12);
+    const e = env(g, t, { a: 0.002, peak: v, d: 0.55 });
+    const n = noise(g, t, t + 0.12); const bp = filt(g, 'bandpass', 900, 0.8); const ne = env(g, t, { a: 0.001, peak: v * 0.35, d: 0.08 });
+    o.connect(e); e.connect(g.drums); n.connect(bp); bp.connect(ne); ne.connect(g.drums); send(g, e, 0.25);
+  },
+  kane(g, t, { v = 0.08 }) {
+    const hp = filt(g, 'highpass', 2500, 1); const e = env(g, t, { a: 0.001, peak: v, d: 0.22 });
+    for (const f of [1870, 2640, 3310]) { const o = osc(g, 'square', f, t, t + 0.3); o.connect(hp); }
+    hp.connect(e); e.connect(g.drums); send(g, e, 0.2);
+  },
+  shamisen(g, t, { m, v = 0.12, pan: pv = 0 }) {
+    const f = midiHz(m);
+    const o = osc(g, 'sawtooth', f * 1.01, t, t + 0.4); o.frequency.exponentialRampToValueAtTime(f, t + 0.05);
+    const hp = filt(g, 'highpass', 320, 0.7); const lp = filt(g, 'lowpass', 4200, 3);
+    lp.frequency.setValueAtTime(4200, t); lp.frequency.exponentialRampToValueAtTime(900, t + 0.2);
+    const e = env(g, t, { a: 0.001, peak: v, d: 0.28 }); const p = pan(g, pv);
+    o.connect(hp); hp.connect(lp); lp.connect(e); e.connect(p); p.connect(g.music); send(g, e, 0.25);
+  },
+  fue(g, t, { m, dur = 0.3, v = 0.09 }) {
+    const f = midiHz(m);
+    const o = osc(g, 'sine', f, t, t + dur + 0.25);
+    const lfo = osc(g, 'sine', 5, t, t + dur + 0.25); const lg = g.ctx.createGain(); lg.gain.value = 14;
+    lfo.connect(lg); lg.connect(o.detune);
+    const e = env(g, t, { a: 0.03, peak: v, d: 0.1, s: 0.85, hold: dur, r: 0.15 });
+    const n = noise(g, t, t + dur + 0.2); const bp = filt(g, 'bandpass', f * 2, 3); const ng = g.ctx.createGain(); ng.gain.value = 0.25;
+    o.connect(e); n.connect(bp); bp.connect(ng); ng.connect(e); e.connect(g.music); send(g, e, 0.45, 0.25);
+  },
+  brass(g, t, { notes, m, dur = 0.2, v = 0.1 }) {
+    const list = notes || [m];
+    const lp = filt(g, 'lowpass', 600, 1.4);
+    lp.frequency.setValueAtTime(500, t); lp.frequency.exponentialRampToValueAtTime(2800, t + 0.05); lp.frequency.exponentialRampToValueAtTime(1300, t + dur + 0.1);
+    const e = env(g, t, { a: 0.02, peak: v, d: 0.08, s: 0.75, hold: dur, r: 0.1 });
+    lp.connect(e); e.connect(g.music); send(g, e, 0.3);
+    for (const n of list) for (const dt of [-6, 6]) { const o = osc(g, 'sawtooth', midiHz(n), t, t + dur + 0.3, dt); o.connect(lp); }
+  },
+  tuba(g, t, { m, dur = 0.25, v = 0.4 }) {
+    const o = osc(g, 'square', midiHz(m), t, t + dur + 0.1); const lp = filt(g, 'lowpass', 420, 1);
+    const e = env(g, t, { a: 0.015, peak: v, d: 0.05, s: 0.8, hold: dur, r: 0.06 });
+    o.connect(lp); lp.connect(e); e.connect(g.music);
+  },
+  glock(g, t, { m, v = 0.12, pan: pv = 0 }) {
+    const f = midiHz(m);
+    const o = osc(g, 'sine', f, t, t + 0.9); const o2 = osc(g, 'sine', f * 2.76, t, t + 0.3);
+    const e = env(g, t, { a: 0.001, peak: v, d: 0.8 }); const e2 = env(g, t, { a: 0.001, peak: v * 0.4, d: 0.15 });
+    const p = pan(g, pv);
+    o.connect(e); o2.connect(e2); e.connect(p); e2.connect(p); p.connect(g.music); send(g, e, 0.3);
+  },
+  saw(g, t, { notes, m, dur = 0.2, v = 0.06, bright = 2600 }) {
+    const list = notes || [m];
+    const lp = filt(g, 'lowpass', bright, 0.9);
+    const e = env(g, t, { a: 0.004, peak: v, d: 0.08, s: 0.7, hold: dur, r: 0.12 });
+    lp.connect(e); e.connect(g.music); send(g, e, 0.35, 0.3);
+    for (const n of list) for (const dt of [-14, -5, 5, 14]) { const o = osc(g, 'sawtooth', midiHz(n), t, t + dur + 0.3, dt); o.connect(lp); }
+  },
+  sub(g, t, { m, dur = 0.3, v = 0.5 }) {
+    const o = osc(g, 'sine', midiHz(m + 12), t, t + dur + 0.1); o.frequency.exponentialRampToValueAtTime(midiHz(m), t + 0.05);
+    const e = env(g, t, { a: 0.003, peak: v, d: 0.05, s: 0.9, hold: dur, r: 0.08 });
+    o.connect(e); e.connect(g.music);
+  },
   blip(g, t, { m, v = 0.16 }) {
     const f = midiHz(m);
     const o = osc(g, 'triangle', f * 1.02, t, t + 0.14); o.frequency.exponentialRampToValueAtTime(f, t + 0.03);
@@ -307,6 +385,94 @@ const HOOK = [
 ];
 const MARIMBA = [0, 1, 2, 1, 3, 2, 1, 2];
 
+// ---------------------------------------------------------------- unlockable songs (id041, id043)
+// Every song keeps the same growth as the original: a gentle layer first,
+// then kick, bass, claps, hats, arpeggio, stabs, a lead hook and a choir as
+// the level rises; the game's tempo, key changes and reach roll apply too.
+// Melodies are original.
+const chord = (root, q, bass) => ({ root, tones: q.map((x) => 60 + root + x).map((m) => (m > 67 ? m - 12 : m)), bass: 36 + ((root + 12) % 12) });
+const DRUMS = {
+  pop(e, s, bar, t, L) {
+    const kick = (L >= 3 && s % 4 === 0) || (L >= 1 && (s === 0 || s === 8));
+    if (kick) { e.play('kick', t, { v: L < 3 ? 0.65 : 0.95 }); e.kicks.push(t); if (L >= 6) e.play('duck', t, { depth: 0.35, dur: e.stepDur * 3 }); }
+    if (L >= 3 && (s === 4 || s === 12)) e.play('clap', t, { v: 0.8 });
+    if (L >= 4 && s % 4 === 2) e.play('hat', t, { v: 0.22, open: L >= 7 });
+    if (L >= 6 && s % 2 === 1) e.play('hat', t, { v: 0.08 });
+    if (L >= 5 && bar === 3 && s >= 12) e.play('snare', t, { v: 0.2 + (s - 12) * 0.1 });
+  },
+};
+export const SONGS = {
+  chip: {
+    name: '8ビット', prog: [chord(0, [0, 4, 7]), chord(9, [0, 3, 7]), chord(5, [0, 4, 7]), chord(7, [0, 4, 7])],
+    hook: [[72, 76, 79, 76, 84, null, 79, 76], [72, 76, 81, 76, 79, null, 76, 72], [77, 81, 84, 81, 79, 77, 76, 74], [79, 83, 86, 83, 84, null, 79, null]],
+    step(e, s, bar, t, L, ch, k) {
+      if (L <= 7) e.play('tri', t, { m: ch.tones[[0, 1, 2, 1][(s >> 1) % 4]] + 12 + k, dur: e.stepDur * 0.8, v: 0.14 * (1 - L / 9) + 0.03 });
+      const kick = (L >= 3 && s % 4 === 0) || (L >= 1 && (s === 0 || s === 8));
+      if (kick) { e.play('kick', t, { v: L < 3 ? 0.55 : 0.8 }); e.kicks.push(t); }
+      if (L >= 3 && (s === 4 || s === 12)) e.play('snare', t, { v: 0.5 });
+      if (L >= 4 && s % 2 === 0) e.play('noiseHat', t, { v: s % 4 ? 0.1 : 0.06 });
+      if (L >= 2 && s % 2 === 0) e.play('tri', t, { m: ch.bass + k + (s % 4 ? 12 : 0), dur: e.stepDur * 1.5, v: 0.4 });
+      if (L >= 5) e.play('chip', t, { m: ch.tones[[0, 1, 2, 1][s % 4]] + 24 + k, dur: e.stepDur * 0.6, v: 0.045, pan: s % 2 ? 0.4 : -0.4 });
+      if (L >= 6 && (s === 2 || s === 10)) ch.tones.forEach((m) => e.play('chip', t, { m: m + 12 + k, dur: e.stepDur * 1.5, v: 0.03 }));
+      if (L >= 8 && s % 2 === 0) { const m = this.hook[bar][s / 2]; if (m) e.play('chip', t, { m: m + k, dur: e.stepDur * 1.6, v: 0.07 }); }
+      if (L >= 9 && s === 0) e.play('crash', t, { v: 0.25 });
+    },
+  },
+  matsuri: {
+    name: 'おまつり', prog: [chord(2, [0, 5, 7]), chord(2, [0, 3, 7]), chord(7, [0, 5, 7]), chord(9, [0, 3, 7])],
+    hook: [[74, 76, 79, null, 81, 79, 76, 74], [76, 79, 81, 83, 81, null, 79, 76], [79, 81, 83, 86, 83, 81, 79, null], [81, 79, 76, 74, 76, null, 74, null]],
+    step(e, s, bar, t, L, ch, k) {
+      if (s % 2 === 0 && L <= 7) e.play('shamisen', t, { m: ch.tones[[0, 2, 1, 2, 0, 1, 2, 1][(s >> 1) % 8]] + 12 + k, v: 0.14 * (1 - L / 10) + 0.03, pan: s % 4 ? 0.3 : -0.3 });
+      if (L >= 1 && (s === 0 || s === 8)) { e.play('taiko', t, { v: 0.9 }); e.kicks.push(t); }
+      if (L >= 3 && (s === 6 || s === 10 || s === 14)) { e.play('taiko', t, { v: 0.55, m: 50 }); }
+      if (L >= 1 && s % 4 === 2) e.play('kane', t, { v: 0.05 + 0.01 * L });
+      if (L >= 3 && (s === 4 || s === 12)) e.play('clap', t, { v: 0.7 });
+      if (L >= 2 && s % 4 === 0) e.play('bass', t, { m: ch.bass + k, dur: e.stepDur * 3, v: 0.4 });
+      if (L >= 5) e.play('shamisen', t, { m: ch.tones[s % 3] + 24 + k, v: 0.06, pan: s % 2 ? 0.5 : -0.5 });
+      if (L >= 6 && s % 8 === 4) e.play('stab', t, { notes: ch.tones.map((m) => m + 12 + k), v: 0.06 });
+      if (L >= 8 && s % 2 === 0) { const m = this.hook[bar][s / 2]; if (m) e.play('fue', t, { m: m + k, dur: e.stepDur * 1.8, v: 0.1 }); }
+      if (L >= 9 && s === 0) e.play('choir', t, { notes: ch.tones.map((m) => m + 12 + k), dur: e.stepDur * 15, v: 0.045 });
+      if (L >= 5 && bar === 3 && s >= 12) e.play('taiko', t, { v: 0.4 + (s - 12) * 0.12, m: 52 });
+    },
+  },
+  brass: {
+    name: 'ブラスバンド', prog: [chord(0, [0, 4, 7]), chord(5, [0, 4, 7]), chord(7, [0, 4, 7]), chord(0, [0, 4, 7])],
+    hook: [[67, null, 72, 74, 76, null, 72, null], [77, null, 76, 74, 72, null, 69, null], [71, 72, 74, 76, 77, 76, 74, 71], [72, null, 76, null, 79, null, 84, null]],
+    step(e, s, bar, t, L, ch, k) {
+      if (s % 2 === 0 && L <= 7) e.play('glock', t, { m: ch.tones[[0, 1, 2, 1][(s >> 1) % 4]] + 24 + k, v: 0.1 * (1 - L / 9) + 0.03, pan: s % 4 ? 0.3 : -0.3 });
+      const kick = (L >= 3 && s % 4 === 0) || (L >= 1 && (s === 0 || s === 8));
+      if (kick) { e.play('kick', t, { v: L < 3 ? 0.6 : 0.85 }); e.kicks.push(t); }
+      if (L >= 3 && (s === 4 || s === 12)) e.play('snare', t, { v: 0.45 });
+      if (L >= 4 && (s === 14 || s === 15)) e.play('snare', t, { v: 0.2 });
+      if (L >= 4 && s % 4 === 2) e.play('hat', t, { v: 0.14 });
+      if (L >= 2 && s % 4 === 0) e.play('tuba', t, { m: ch.bass + k + (s % 8 ? 7 : 0), dur: e.stepDur * 1.6, v: 0.42 });
+      if (L >= 5 && s % 2 === 0) e.play('glock', t, { m: ch.tones[(s >> 1) % 3] + 24 + k, v: 0.05 });
+      if (L >= 6 && s % 4 === 2) e.play('brass', t, { notes: ch.tones.map((m) => m + 12 + k), dur: e.stepDur * 0.9, v: 0.07 });
+      if (L >= 8 && s % 2 === 0) { const m = this.hook[bar][s / 2]; if (m) e.play('brass', t, { m: m + k, dur: e.stepDur * 1.7, v: 0.1 }); }
+      if (L >= 9 && s === 0) e.play('crash', t, { v: 0.3 });
+    },
+  },
+  electro: {
+    name: 'エレクトロ', prog: [chord(9, [0, 3, 7]), chord(5, [0, 4, 7]), chord(0, [0, 4, 7]), chord(7, [0, 4, 7])],
+    hook: [[81, null, 76, 81, 84, null, 83, 81], [77, null, 72, 77, 81, null, 79, 77], [76, null, 72, 76, 79, 81, 79, 76], [79, null, 74, 79, 83, 84, 86, null]],
+    step(e, s, bar, t, L, ch, k) {
+      if (s % 2 === 0 && L <= 7) e.play('pluck', t, { m: ch.tones[[0, 2, 1, 2][(s >> 1) % 4]] + 12 + k, v: 0.13 * (1 - L / 9) + 0.03, dur: 0.3, pan: s % 4 ? 0.35 : -0.35 });
+      const kick = (L >= 2 && s % 4 === 0) || (L >= 1 && (s === 0 || s === 8));
+      if (kick) { e.play('kick', t, { v: 0.95 }); e.kicks.push(t); if (L >= 4) e.play('duck', t, { depth: 0.45, dur: e.stepDur * 3 }); }
+      if (L >= 3 && (s === 4 || s === 12)) e.play('clap', t, { v: 0.75 });
+      if (L >= 4 && s % 4 === 2) e.play('hat', t, { v: 0.2, open: true });
+      if (L >= 5 && s % 2 === 1) e.play('hat', t, { v: 0.07 });
+      if (L >= 2 && s % 4 === 2) e.play('sub', t, { m: ch.bass + k, dur: e.stepDur * 1.6, v: 0.45 });
+      if (L >= 5) e.play('saw', t, { m: ch.tones[[0, 1, 2, 1, 0, 2, 1, 2][s % 8]] + 24 + k, dur: e.stepDur * 0.5, v: 0.03, bright: 1800 + 200 * L });
+      if (L >= 6 && (s === 0 || s === 6 || s === 12)) e.play('saw', t, { notes: ch.tones.map((m) => m + 12 + k), dur: e.stepDur * 1.2, v: 0.04 });
+      if (L >= 8 && s % 2 === 0) { const m = this.hook[bar][s / 2]; if (m) e.play('lead', t, { m: m + k, dur: e.stepDur * 1.5, v: 0.075 }); }
+      if (L >= 9 && s === 0) e.play('pad', t, { notes: ch.tones.map((m) => m + 12 + k), dur: e.stepDur * 15, v: 0.06, bright: 3000 });
+      if (L >= 5 && bar === 3 && s >= 8) e.play('snare', t, { v: 0.12 + (s - 8) * 0.06 });
+    },
+  },
+};
+void DRUMS;
+
 export class AudioEngine {
   constructor({ capture = false } = {}) {
     this.capture = capture;
@@ -326,7 +492,10 @@ export class AudioEngine {
     this.beats = [];
     this.combo = 0;
     this.volume = 1;
+    this.song = 'classic';
   }
+  setSong(key) { this.song = SONGS[key] ? key : 'classic'; }
+  get prog() { return this.song !== 'classic' ? SONGS[this.song].prog : PROG; }
 
   unlock() {
     if (this.capture) return;
@@ -391,24 +560,31 @@ export class AudioEngine {
     }
   }
 
-  chord(step = this.step) { return PROG[Math.floor(step / 16) % 4]; }
+  chord(step = this.step) { return this.prog[Math.floor(step / 16) % 4]; }
 
   scheduleStep(step, t) {
     const s = step % 16;
     const bar = Math.floor(step / 16) % 4;
     const L = this.level;
     const k = this.key;
-    const ch = PROG[bar];
+    const ch = this.prog[bar];
     if (s % 4 === 0) this.beats.push({ t, beat: Math.floor(step / 4) });
     if (this.beats.length > 64) this.beats.shift();
+    if (this.kicks.length > 64) this.kicks.shift();
 
     if (this.reach) {
       const el = Math.min(1, (t - this.reachStart) / 2.5);
       this.play('snare', t, { v: 0.12 + 0.5 * el });
       if (el > 0.5 && s % 2 === 1) this.play('snare', t + this.stepDur / 2, { v: 0.1 + 0.4 * el });
       if (s % 8 === 0) { this.play('kick', t, { v: 0.8 }); this.kicks.push(t); }
-      if (s === 0) this.play('pad', t, { notes: PROG[1].tones.map((m) => m + k), dur: this.stepDur * 16, v: 0.08, bright: 700 + 1400 * el });
-      if (s % 4 === 0) this.play('bass', t, { m: 43 + k, dur: this.stepDur * 3, v: 0.4 });
+      if (s === 0) this.play('pad', t, { notes: this.prog[1].tones.map((m) => m + k), dur: this.stepDur * 16, v: 0.08, bright: 700 + 1400 * el });
+      if (s % 4 === 0) this.play('bass', t, { m: this.prog[1].bass + k, dur: this.stepDur * 3, v: 0.4 });
+      return;
+    }
+    if (this.song !== 'classic') {
+      const song = SONGS[this.song];
+      song.step(this, s, bar, t, L, ch, k);
+      if (s === 0) this.play('pad', t, { notes: ch.tones.map((m) => m + k), dur: this.stepDur * 15, v: 0.03 + 0.03 * Math.min(L, 8) / 8, bright: 600 + 200 * L });
       return;
     }
 

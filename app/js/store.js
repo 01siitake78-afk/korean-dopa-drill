@@ -7,6 +7,7 @@ const VERSION = 1;
 export function defaultState() {
   return {
     version: VERSION,
+    guideSeen: false,
     settings: { count: 10, sound: true, volume: 0.8, motion: null },
     history: [],
   };
@@ -29,6 +30,7 @@ export function load(storage = backend()) {
       if (data && data.version === VERSION) {
         base.settings = { ...base.settings, ...(data.settings || {}) };
         base.history = Array.isArray(data.history) ? data.history : [];
+        base.guideSeen = data.guideSeen === true;
         for (const [k, v] of Object.entries(data)) if (!(k in base)) base[k] = v;
       }
     } catch { /* corrupted: start fresh */ }
@@ -43,6 +45,9 @@ export function save(storage = backend()) {
 }
 
 export function settings() { return load().settings; }
+
+export function hasSeenGuide() { return load().guideSeen === true; }
+export function markGuideSeen() { load().guideSeen = true; save(); }
 
 export function updateSettings(patch) {
   Object.assign(load().settings, patch);
@@ -86,27 +91,89 @@ export function monthSummary(year, month) {
 }
 
 export function playedDays() { return new Set(load().history.map((h) => h.day)); }
+// Days made "no count" with the hammer (id034): they keep a streak going
+// but are not counted as played.
+export const nocountDays = () => load().nocount || {};
+const dayBefore = (d, n = 1) => new Date(d.getFullYear(), d.getMonth(), d.getDate() - n);
 
 // Consecutive days played, counting back from today (or yesterday if today is empty).
 export function streak(today = new Date()) {
   const days = playedDays();
-  const d = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  if (!days.has(dayKey(d))) d.setDate(d.getDate() - 1);
+  const nc = nocountDays();
+  let d = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  if (!days.has(dayKey(d))) d = dayBefore(d);
   let n = 0;
-  while (days.has(dayKey(d))) { n += 1; d.setDate(d.getDate() - 1); }
+  while (days.has(dayKey(d)) || nc[dayKey(d)]) { if (days.has(dayKey(d))) n += 1; d = dayBefore(d); }
   return n;
 }
 
-// Longest run of consecutive played days.
+// Longest run of consecutive played days (no-count days bridge a run).
 export function bestStreak() {
-  const days = [...playedDays()].sort();
+  const played = playedDays();
+  const days = [...new Set([...played, ...Object.keys(nocountDays())])].sort();
   let best = 0; let run = 0; let prev = null;
   for (const d of days) {
     const t = new Date(`${d}T12:00:00`);
-    run = prev && (t - prev) / 864e5 < 1.5 ? run + 1 : 1;
+    if (!(prev && (t - prev) / 864e5 < 1.5)) run = 0;
+    if (played.has(d)) run += 1;
     best = Math.max(best, run); prev = t;
   }
   return best;
+}
+
+// ---------------------------------------------------------------- items (id034)
+// The first item: the "no count" hammer. One hammer turns one missed day into
+// a no-count day. Provisional: at most 3 held, only for the last 7 days, one
+// given at the start; more come from completing the daily quests (id035).
+export const HAMMER = { max: 3, reach: 7, first: 1 };
+export function items() {
+  const st = load();
+  if (!st.items) st.items = { hammer: HAMMER.first, got: HAMMER.first, used: 0, asked: null, log: [] };
+  return st.items;
+}
+// Adds up to n hammers without passing the limit; returns how many were added.
+export function addHammer(n = 1) {
+  const it = items();
+  const add = Math.max(0, Math.min(n, HAMMER.max - it.hammer));
+  it.hammer += add; it.got += add;
+  save();
+  return add;
+}
+// Should the title offer the hammer today? Returns the missed days (oldest
+// first) and the streak they would keep, or null. Only when the hammers held
+// cover every missed day since the last played day (within the reach) and
+// that streak is at least 2 days.
+export function hammerOffer(today = new Date()) {
+  const it = items();
+  const key = dayKey(today);
+  if (it.asked === key || !it.hammer) return null;
+  const played = playedDays();
+  const nc = nocountDays();
+  const gap = [];
+  let last = null;
+  for (let i = 1; i <= HAMMER.reach; i++) {
+    const d = dayBefore(today, i);
+    if (played.has(dayKey(d))) { last = d; break; }
+    if (!nc[dayKey(d)]) gap.push(dayKey(d));
+  }
+  if (!last || !gap.length || gap.length > it.hammer) return null;
+  const run = streak(last);
+  if (run < 2) return null;
+  return { days: gap.reverse(), run, hammers: it.hammer };
+}
+export function declineHammer(today = new Date()) { items().asked = dayKey(today); save(); }
+export function useHammer(days, today = new Date()) {
+  const st = load();
+  const it = items();
+  if (!days.length || days.length > it.hammer) return false;
+  const nc = st.nocount || (st.nocount = {});
+  for (const d of days) nc[d] = true;
+  it.hammer -= days.length; it.used += days.length;
+  it.asked = dayKey(today);
+  it.log.push({ at: today.getTime(), days: days.slice() });
+  if (it.log.length > 50) it.log.splice(0, it.log.length - 50);
+  save();
+  return true;
 }
 
 // ---------------------------------------------------------------- login bonus
@@ -119,7 +186,10 @@ export function claimLogin(today = new Date()) {
   const b = st.bonus || (st.bonus = { last: null, run: 0, stickers: {}, total: 0 });
   const key = dayKey(today);
   if (b.last === key) return null;
-  const y = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1);
+  // Continues after yesterday's visit, or across days made no-count (id034).
+  const nc = nocountDays();
+  let y = dayBefore(today);
+  while (nc[dayKey(y)] && dayKey(y) !== b.last) y = dayBefore(y);
   b.run = b.last === dayKey(y) ? b.run + 1 : 1;
   const slot = ((b.run - 1) % 7) + 1;
   const type = STICKERS[slot - 1];
@@ -133,5 +203,15 @@ export function claimLogin(today = new Date()) {
 export const stickerOn = (key) => (load().bonus?.stickers || {})[key] || null;
 export const bonusState = () => load().bonus || { last: null, run: 0, stickers: {}, total: 0 };
 
-// Test hook: forget the in-memory copy.
-export function reset() { cache = null; }
+// Erase all versions of this app's data, including the in-memory copy.
+export function reset(storage = backend()) {
+  cache = null;
+  try {
+    for (let i = storage.length - 1; i >= 0; i--) {
+      const key = storage.key(i);
+      if (key?.startsWith('dopa-drill')) {
+        try { storage.removeItem(key); } catch { /* Keep trying the remaining keys. */ }
+      }
+    }
+  } catch { /* Storage may be unavailable or blocked. */ }
+}
