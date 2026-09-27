@@ -2547,7 +2547,10 @@ addEventListener('keydown', (e) => {
   else if (e.key === 'Backspace') { press('Backspace'); e.preventDefault(); }
 });
 addEventListener('pointermove', (e) => { if (S.screen !== 'play' && !S.guideOpen) hero.lookAt({ x: e.clientX, y: e.clientY }); });
-addEventListener('resize', () => requestAnimationFrame(layoutActors));
+addEventListener('resize', () => requestAnimationFrame(() => {
+  if (S.screen === 'play' && S.problem) fitSheet(S.problem);
+  layoutActors();
+}));
 
 // Bunting flags
 (() => {

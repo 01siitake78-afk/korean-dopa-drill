@@ -279,7 +279,7 @@ body.lv9 .card { box-shadow: 0 7px 0 var(--ink), 0 0 0 5px var(--pink), 0 0 40px
 
 .pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; padding: 0 14px; }
 .pad button {
-  position: relative; height: clamp(50px, 7.4vh, 62px); border: 3px solid var(--ink); border-radius: 18px; background: #fff;
+  position: relative; height: clamp(50px, 7.4dvh, 62px); border: 3px solid var(--ink); border-radius: 18px; background: #fff;
   font-family: var(--round); font-weight: 900; font-size: 30px; box-shadow: 0 5px 0 var(--ink);
   transform: translateY(calc(var(--kick) * -2px * var(--bounce, 0)));
 }
@@ -328,10 +328,17 @@ body.lv8 .pad button { box-shadow: 0 5px 0 var(--ink), 0 0 calc(var(--kick) * 18
 .big-stamp { position: absolute; font-family: var(--chunky); color: var(--red); white-space: nowrap; transform-origin: center; }
 
 body.reduced .logo span, body.reduced .spot, body.reduced .marquee, body.reduced .pip.now, body.reduced .cell.input.active { animation: none !important; }
-@media (max-height: 700px) {
-  .sheet-wrap { min-height: 176px; }
+@media (max-height: 840px) {
+  /* Include toolbar-reduced phone heights and leave room for the bottom safe area. */
+  .sheet-wrap { min-height: clamp(96px, calc(100dvh - 490px - env(safe-area-inset-bottom)), 176px); }
+  #screen-play .card { padding-block: 8px; margin-bottom: 10px; }
+  .pad { gap: 6px; }
   .pad button { height: 48px; }
-  .stage { min-height: 96px; }
+  .stage { min-height: 80px; }
+}
+@media (max-height: 600px) {
+  .stage { min-height: 48px; }
+  .step-label { font-size: 12px; }
 }
 
 /* ------------------------------------------------------------ calendar */

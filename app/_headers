@@ -1,0 +1,4 @@
+# Keep the browser-only game payload unchanged by automatic proxy injection.
+/*
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+  X-Content-Type-Options: nosniff
