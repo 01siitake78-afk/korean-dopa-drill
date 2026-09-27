@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1024" height="1024" viewBox="267 306 1300 1300" role="img" aria-labelledby="title desc">
+  <title id="title">ドパキチ — 左右対称・正面目</title>
+  <desc id="desc">左右対称のベクタードロー版。正面を向くピンクの目と下がった丸い手。頭と胴の高さ約1.6:1、幅約2:1、胴とおなかの最大幅約1.618:1。均一な細い輪郭線、正方形、透過背景、部位別レイヤー。 眉は水平の短い楕円。</desc>
+  <metadata>Palette: pink #FF97BF; cream #FFF3E4; pale pink #FFE6F0; blue #2F79F7; outline #000000. Every visible stroke is 4.5 viewBox units (3.545 pixels at the nominal 1024-pixel size). No embedded bitmap, filters, or animation. Nested SVG groups use stable IDs. data-pivot stores animation origin in viewBox coordinates. Head and body meet without a drawn neck seam; their fills overlap. Major poses may need adjustment of the joining contours.</metadata>
+  <defs>
+    <style>.line{stroke:#000;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}</style>
+  </defs>
+  <g id="foot-left" inkscape:groupmode="layer" inkscape:label="01 左足" data-pivot="814 1282">
+    <path class="line" fill="#2F79F7" d="M810 1267 C779 1267 761 1281 735 1307 C713 1329 701 1343 718 1357 C742 1378 783 1376 816 1359 C850 1343 870 1319 850 1288 C840 1272 827 1267 810 1267Z"/>
+  </g>
+  <g id="foot-right" inkscape:groupmode="layer" inkscape:label="02 右足" data-pivot="1020 1282">
+    <path class="line" fill="#2F79F7" d="M810 1267 C779 1267 761 1281 735 1307 C713 1329 701 1343 718 1357 C742 1378 783 1376 816 1359 C850 1343 870 1319 850 1288 C840 1272 827 1267 810 1267Z" transform="translate(1834 0) scale(-1 1)"/>
+  </g>
+  <g id="arm-left" inkscape:groupmode="layer" inkscape:label="03 左腕と手" data-pivot="774 1096">
+    <g id="arm-left-shape" inkscape:groupmode="layer" inkscape:label="腕">
+      <path class="line" fill="#FF97BF" d="M774 1083 C750 1097 728 1115 711 1135 L734 1153 C750 1134 767 1119 784 1110Z"/>
+    </g>
+    <g id="hand-left" inkscape:groupmode="layer" inkscape:label="手" data-pivot="707 1137">
+      <ellipse class="line" fill="#FF97BF" cx="707" cy="1177" rx="54" ry="55"/></g>
+  </g>
+  <g id="arm-right" inkscape:groupmode="layer" inkscape:label="04 右腕と手" data-pivot="1060 1096">
+    <g id="arm-right-shape" inkscape:groupmode="layer" inkscape:label="腕">
+      <path class="line" fill="#FF97BF" d="M1060 1083 C1084 1097 1106 1115 1123 1135 L1100 1153 C1084 1134 1067 1119 1050 1110Z"/>
+    </g>
+    <g id="hand-right" inkscape:groupmode="layer" inkscape:label="手" data-pivot="1127 1137">
+      <ellipse class="line" fill="#FF97BF" cx="1127" cy="1177" rx="54" ry="55"/></g>
+  </g>
+  <g id="body" inkscape:groupmode="layer" inkscape:label="05 胴体とおなか" data-pivot="917 1130">
+    <g id="body-shape" inkscape:groupmode="layer" inkscape:label="胴体">
+      <!-- Upper fill extends beneath the head; the neck has no cross-stroke. -->
+      <path fill="#FF97BF" d="M709 1005 C752 1031 777 1069 777 1110 C777 1145 757 1174 757 1212 C757 1268 802 1295 857 1295 L977 1295 C1032 1295 1077 1268 1077 1212 C1077 1174 1057 1145 1057 1110 C1057 1069 1082 1031 1125 1005 L1125 952 L709 952Z"/>
+      <path class="line" fill="none" d="M709 1005 C752 1031 777 1069 777 1110 C777 1145 757 1174 757 1212 C757 1268 802 1295 857 1295 L977 1295 C1032 1295 1077 1268 1077 1212 C1077 1174 1057 1145 1057 1110 C1057 1069 1082 1031 1125 1005"/>
+    </g>
+    <g id="belly" inkscape:groupmode="layer" inkscape:label="おなか">
+      <ellipse class="line" fill="#FFF3E4" cx="917" cy="1192" rx="98.8854382" ry="75"/></g>
+  </g>
+  <g id="head" inkscape:groupmode="layer" inkscape:label="06 頭・耳・表情" data-pivot="917 1005">
+    <g id="ear-left" inkscape:groupmode="layer" inkscape:label="左耳" data-pivot="625 785">
+      <ellipse class="line" fill="#FF97BF" cx="505" cy="785" rx="172" ry="174"/><g id="ear-left-inner" inkscape:groupmode="layer" inkscape:label="内側">
+        <ellipse class="line" fill="#FFE6F0" cx="505" cy="785" rx="117" ry="122"/></g>
+    </g>
+    <g id="ear-right" inkscape:groupmode="layer" inkscape:label="右耳" data-pivot="1209 785">
+      <ellipse class="line" fill="#FF97BF" cx="1329" cy="785" rx="172" ry="174"/><g id="ear-right-inner" inkscape:groupmode="layer" inkscape:label="内側">
+        <ellipse class="line" fill="#FFE6F0" cx="1329" cy="785" rx="117" ry="122"/></g>
+    </g>
+    <g id="head-shape" inkscape:groupmode="layer" inkscape:label="頭の輪郭">
+      <path fill="#FF97BF" d="M709 1005 C641 964 604 914 604 823 C604 650 734 541 917 541 C1100 541 1230 650 1230 823 C1230 914 1193 964 1125 1005 L917 980Z"/>
+      <path class="line" fill="none" d="M709 1005 C641 964 604 914 604 823 C604 650 734 541 917 541 C1100 541 1230 650 1230 823 C1230 914 1193 964 1125 1005"/>
+    </g>
+    <g id="face" inkscape:groupmode="layer" inkscape:label="顔・クリーム">
+      <path class="line" fill="#FFF3E4" d="M917 631 C1082 631 1185 694 1185 834 C1185 974 1060 1030 917 1030 C774 1030 649 974 649 834 C649 694 752 631 917 631Z"/>
+    </g>
+    <g id="eye-left" inkscape:groupmode="layer" inkscape:label="左目" data-pivot="787 849">
+      <g id="eye-left-white" inkscape:groupmode="layer" inkscape:label="白い外側">
+        <ellipse class="line" fill="#FFF" cx="787" cy="849" rx="62" ry="62"/></g>
+      <g id="eye-left-pink" inkscape:groupmode="layer" inkscape:label="ピンクの内側">
+        <ellipse class="line" fill="#FF97BF" cx="787" cy="849" rx="48" ry="48"/></g>
+    </g>
+    <g id="eye-right" inkscape:groupmode="layer" inkscape:label="右目" data-pivot="1047 849">
+      <g id="eye-right-white" inkscape:groupmode="layer" inkscape:label="白い外側">
+        <ellipse class="line" fill="#FFF" cx="1047" cy="849" rx="62" ry="62"/></g>
+      <g id="eye-right-pink" inkscape:groupmode="layer" inkscape:label="ピンクの内側">
+        <ellipse class="line" fill="#FF97BF" cx="1047" cy="849" rx="48" ry="48"/></g>
+    </g>
+    <g id="brow-left" inkscape:groupmode="layer" inkscape:label="左まゆ">
+      <ellipse class="line" fill="#FF97BF" cx="842" cy="752" rx="17" ry="10"/></g>
+    <g id="brow-right" inkscape:groupmode="layer" inkscape:label="右まゆ">
+      <ellipse class="line" fill="#FF97BF" cx="992" cy="752" rx="17" ry="10"/></g>
+    <g id="cheeks" inkscape:groupmode="layer" inkscape:label="ほっぺ">
+      <ellipse fill="#FFE6F0" cx="747" cy="934" rx="24" ry="15"/>
+      <ellipse fill="#FFE6F0" cx="1087" cy="934" rx="24" ry="15"/>
+    </g>
+    <g id="mouth" inkscape:groupmode="layer" inkscape:label="口">
+      <path class="line" fill="none" d="M872 924 C890 948 944 948 962 924"/>
+    </g>
+  </g>
+</svg>
