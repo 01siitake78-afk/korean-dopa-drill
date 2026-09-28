@@ -409,18 +409,25 @@ export class Dopakichi {
 
   async clap(times = 3, audio) {
     const ok = this.begin();
+    const tk = this.token;
     const hs = this.hands;
-    hs.forEach((h) => { h.mode = 'free'; });
-    for (let i = 0; i < times && ok(); i++) {
-      const c = this.toScreen(0, -178);
-      const o = [this.toScreen(-80, -164), this.toScreen(80, -164)];
-      await tween(70, (k) => hs.forEach((h, j) => { if (ok() && !h.job) { h.x = lerp(o[j].x, c.x + (j ? 8 : -8), k); h.y = lerp(o[j].y, c.y, k); } }), easeInQuad);
-      if (!ok()) return;
-      audio && audio.clapHands();
-      if (this.S < 1.5) this.sq.kick(-1.2);
-      await tween(90, (k) => hs.forEach((h, j) => { if (ok() && !h.job) { h.x = lerp(c.x + (j ? 8 : -8), o[j].x, k); h.y = lerp(c.y, o[j].y, k); } }), easeOutQuad);
+    hs.forEach((h) => { h.mode = 'free'; h.clapToken = tk; });
+    try {
+      for (let i = 0; i < times && ok(); i++) {
+        const c = this.toScreen(0, -178);
+        const o = [this.toScreen(-80, -164), this.toScreen(80, -164)];
+        await tween(70, (k) => hs.forEach((h, j) => { if (ok() && !h.job) { h.x = lerp(o[j].x, c.x + (j ? 8 : -8), k); h.y = lerp(o[j].y, c.y, k); } }), easeInQuad);
+        if (!ok()) return;
+        audio && audio.clapHands();
+        if (this.S < 1.5) this.sq.kick(-1.2);
+        await tween(90, (k) => hs.forEach((h, j) => { if (ok() && !h.job) { h.x = lerp(c.x + (j ? 8 : -8), o[j].x, k); h.y = lerp(c.y, o[j].y, k); } }), easeOutQuad);
+      }
+    } finally {
+      // Release the hands even when another action interrupted the clap;
+      // otherwise they stay 'free' and the arms keep pointing at stale spots.
+      // Hands claimed by a later clap or busy with a job are left alone.
+      hs.forEach((h) => { if (h.clapToken === tk) { h.clapToken = 0; if (!h.job) h.mode = 'rest'; } });
     }
-    if (ok()) hs.forEach((h) => { if (!h.job) h.mode = 'rest'; });
   }
 
   async celebrate(E, { big = false, audio, variant } = {}) {
