@@ -70,7 +70,7 @@ button:focus-visible { outline: 4px solid var(--yellow); outline-offset: 3px; }
 #screen-title > * { flex: none; }
 /* Logo: layered paper cut-outs. A spinning burst sits behind "ドパ",
    "ドリル" rides on a folded ribbon, operator scraps float around. */
-.logo { position: relative; margin: calc(var(--fs) * 0.62) 0 calc(var(--fs) * 0.2); display: grid; justify-items: center; font-family: var(--chunky); font-weight: 400; line-height: 1; --fs: clamp(64px, 21vw, 96px); }
+.logo { position: relative; margin: calc(var(--fs) * 0.62) 0 calc(var(--fs) * 0.2); display: grid; justify-items: center; font-family: "Yu Gothic", "Meiryo", sans-serif; font-weight: 400; line-height: 1; --fs: clamp(64px, 21vw, 96px); }
 .logo-burst { position: absolute; left: 50%; top: calc(var(--fs) * 0.52); width: calc(var(--fs) * 2.7); height: calc(var(--fs) * 2.7); transform: translate(-50%, -50%) rotate(calc(var(--spin, 0) * 1deg)); z-index: -1; filter: drop-shadow(0 6px 0 rgba(27, 29, 77, .9)); }
 .logo-top { display: flex; gap: .02em; font-size: var(--fs); letter-spacing: -.04em; }
 .logo i { font-style: normal; display: inline-block; position: relative; }
@@ -280,7 +280,7 @@ body.lv9 .card { box-shadow: 0 7px 0 var(--ink), 0 0 0 5px var(--pink), 0 0 40px
 .pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; padding: 0 14px; }
 .pad button {
   position: relative; height: clamp(50px, 7.4dvh, 62px); border: 3px solid var(--ink); border-radius: 18px; background: #fff;
-  font-family: var(--round); font-weight: 900; font-size: 30px; box-shadow: 0 5px 0 var(--ink);
+  font-family: "Meiryo", sans-serif; font-weight: 900; font-size: 30px; box-shadow: 0 5px 0 var(--ink);
   transform: translateY(calc(var(--kick) * -2px * var(--bounce, 0)));
 }
 .pad button.zero { grid-column: span 2; }
@@ -735,3 +735,8 @@ body.guide-open .logo *, body.guide-open .logo-burst { animation: none !importan
 .guide-help-fallback::after { content: ''; position: absolute; inset: -5px; border: 2px solid var(--yellow); border-radius: 14px; animation: guide-help-pulse 1.4s ease-in-out infinite; }
 @keyframes guide-help-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
 body.reduced #guide-help-ring, body.reduced .guide-help-fallback::after { animation: none; }
+
+.grades button {
+  font-family: "Meiryo", sans-serif !important;
+  font-weight: 700;
+}

@@ -376,6 +376,7 @@ async function setupProblem() {
     S.problem = S.problems[S.qi] || (S.problems[S.qi] = nextProblem(S.qi));
   }
   const p = S.problem;
+  updateAnswerButtons(p);
   S.step = 0; S.wrongInQ = false; S.shownWrong = null;
   $$('.pip').forEach((pp, i) => pp.classList.toggle('now', !extra && i === S.qi));
   $('#qtitle').textContent = p.title;
@@ -417,6 +418,27 @@ async function cardEnter(E) {
 }
 
 // ---------------------------------------------------------------- input
+function updateAnswerButtons(p) {
+  if (!p.choices) return;
+
+  const answer = p.answer;
+  const others = p.choices
+    .filter(x => x !== answer)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
+
+  const choices = [answer, ...others]
+    .sort(() => Math.random() - 0.5);
+
+  const buttons = $$('#pad button');
+
+  buttons.forEach((btn, i) => {
+    const choice = choices[i];
+    btn.textContent = choice;
+    btn.dataset.key = choice;
+  });
+}
+
 function pressVisual(btn) {
   if (!btn) return;
   btn.classList.add('press');
@@ -434,7 +456,7 @@ function press(key, btn = padButtons[key]) {
   const cell = S.cells[st.cell];
   audio.keyTap(S.combo);
   const from = btn ? centerOf(btn) : centerOf(cell);
-  if (key === st.digit) {
+  if (key === st.digit || key === p.answer) {
     S.step += 1;
     addCombo();
     S.digitsDone += 1;
@@ -2525,9 +2547,9 @@ $('#go-tree').addEventListener('click', () => openTree(S.newUnlocks, Object.keys
 $('#f-tree').addEventListener('click', () => openTree(S.newUnlocks, Object.keys(S.newStars)));
 $('#tree-back').addEventListener('click', () => { audio.play('blip', audio.now(), { m: 72, v: 0.08 }); toTitle(); });
 
-for (const [key, b] of Object.entries(padButtons)) {
-  b.addEventListener('pointerdown', (e) => { e.preventDefault(); audio.unlock(); press(key, b); });
-  b.addEventListener('click', (e) => { if (e.detail === 0) press(key, b); });
+for (const b of $$('#pad button')) {
+  b.addEventListener('pointerdown', (e) => { e.preventDefault(); audio.unlock(); press(b.dataset.key, b); });
+  b.addEventListener('click', (e) => { if (e.detail === 0) press(b.dataset.key, b); });
 }
 addEventListener('keydown', (e) => {
   if (guide.keydown(e)) return;

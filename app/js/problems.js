@@ -271,6 +271,14 @@ function buildH(tokens, meta) {
       c += w;
     } else if (t.ans !== undefined) {
       const s = String(t.ans);
+if (meta.choices) {
+  const cid = id('x');
+  cells.push({ id: cid, r, c, ...span, text: s, kind: 'input' });
+  steps.push({ cell: cid, digit: s, label: 'こたえ', after: [], help: null });
+  c += 1;
+  maxC = Math.max(maxC, c);
+  continue;
+}
       for (const ch of s) {
         if (ch === '.') { cells.push({ id: id('dot'), r, c: c - 1, ...span, text: '.', kind: 'dot' }); continue; }
         const cid = id('x');
@@ -325,6 +333,101 @@ function fracAns(n, d, mixed) {
 const fracTok = (n, d, whole) => ({ f: [n, d, whole] });
 
 const GEN = {
+  koreanVowels(rng) {
+    const items = [
+        ['아', 'ア'],
+        ['야', 'ヤ'],
+	['어', 'オ'],
+  	['여', 'ヨ'],
+  	['오', 'オ'],
+  	['요', 'ヨ'],
+  	['우', 'ウ'],
+  	['유', 'ユ'],
+  	['으', 'ウ'],
+  	['이', 'イ'],
+  	['애', 'エ'],
+  	['얘', 'イェ'],
+  	['에', 'エ'],
+  	['예', 'イェ'],
+  	['와', 'ワ'],
+  	['왜', 'ウェ'],
+  	['외', 'ウェ'],
+  	['워', 'ウォ'],
+  	['웨', 'ウェ'],
+  	['위', 'ウィ'],
+  	['의', 'ウィ']
+];
+
+    const [hangul, answer] = pickOf(rng, items);
+
+    return buildH(
+      [{ w: hangul }, { op: '→' }, { ans: answer }],
+      {
+        title: '基本母音',
+        text: `${hangul} → ${answer}`,
+        answer,
+choices: ['ア', 'イ', 'ウ', 'オ', 'エ', 'ヤ', 'ヨ', 'ユ', 'ワ', 'ウェ', 'ウォ', 'ウィ', 'イェ']
+      }
+    );
+  },
+  koreanConsonants(rng) {
+    const items = [
+      ['가', 'カ'],
+      ['나', 'ナ'],
+      ['다', 'タ'],
+      ['라', 'ラ'],
+      ['마', 'マ'],
+      ['바', 'パ'],
+      ['사', 'サ'],
+      ['아', 'ア'],
+      ['자', 'チャ'],
+      ['차', 'チャ'],
+      ['카', 'カ'],
+      ['타', 'タ'],
+      ['파', 'パ'],
+      ['하', 'ハ']
+    ];
+
+    const [hangul, answer] = pickOf(rng, items);
+
+    return buildH(
+      [{ w: hangul }, { op: '→' }, { ans: answer }],
+      {
+        title: '基本子音',
+        text: `${hangul} → ${answer}`,
+        answer,
+        choices: ['カ', 'ナ', 'タ', 'ラ', 'マ', 'パ', 'サ', 'ア', 'チャ', 'ハ']
+      }
+    );
+  },
+
+  koreanSoundToHangul(rng) {
+    const items = [
+      ['カ', '가'],
+      ['ナ', '나'],
+      ['タ', '다'],
+      ['ラ', '라'],
+      ['マ', '마'],
+      ['パ', '바'],
+      ['サ', '사'],
+      ['ア', '아'],
+      ['チャ', '자'],
+      ['ハ', '하']
+    ];
+
+    const [sound, answer] = pickOf(rng, items);
+
+    return buildH(
+      [{ w: sound }, { op: '→' }, { ans: answer }],
+      {
+        title: '読みからハングル',
+        text: `${sound} → ${answer}`,
+       answer,
+　　　 choices: ['가', '나', '다', '라', '마', '바', '사', '아', '자', '하']
+	}
+    );
+  },
+
   compose(rng, { total }) {
     const a = R(rng)(1, total - 1);
     return buildH([{ n: total }, { w: 'は' }, { n: a }, { w: 'と' }, { ans: total - a }], { title: 'いくつといくつ', text: `${total}は${a}と`, answer: String(total - a), help: `${a}に いくつで ${total}` });
