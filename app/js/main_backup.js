@@ -249,15 +249,6 @@ function applyLevel(E, { key, bpm } = {}) {
 
 function renderSheet(p) {
   sheet.innerHTML = '';
-  if (p.text) {
-    const question = document.createElement('div');
-    question.textContent = p.text.split('→')[0].trim();
-    question.style.fontSize = '32px';
-    question.style.fontWeight = '700';
-    question.style.textAlign = 'center';
-    question.style.marginBottom = '12px';
-    sheet.appendChild(question);
-  }
   sheet.className = `sheet ${p.kind}`;
   sheet.style.setProperty('--cols', p.cols);
   sheet.style.setProperty('--rows', p.rows);
@@ -385,7 +376,6 @@ async function setupProblem() {
     S.problem = S.problems[S.qi] || (S.problems[S.qi] = nextProblem(S.qi));
   }
   const p = S.problem;
-  updateAnswerButtons(p);
   S.step = 0; S.wrongInQ = false; S.shownWrong = null;
   $$('.pip').forEach((pp, i) => pp.classList.toggle('now', !extra && i === S.qi));
   $('#qtitle').textContent = p.title;
@@ -427,27 +417,6 @@ async function cardEnter(E) {
 }
 
 // ---------------------------------------------------------------- input
-function updateAnswerButtons(p) {
-  if (!p.choices) return;
-
-  const answer = p.answer;
-  const others = p.choices
-    .filter(x => x !== answer)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 3);
-
-  const choices = [answer, ...others]
-    .sort(() => Math.random() - 0.5);
-
-  const buttons = $$('#pad button');
-
-  buttons.forEach((btn, i) => {
-    const choice = choices[i];
-    btn.textContent = choice;
-    btn.dataset.key = choice;
-  });
-}
-
 function pressVisual(btn) {
   if (!btn) return;
   btn.classList.add('press');
@@ -465,7 +434,7 @@ function press(key, btn = padButtons[key]) {
   const cell = S.cells[st.cell];
   audio.keyTap(S.combo);
   const from = btn ? centerOf(btn) : centerOf(cell);
-  if (key === st.digit || key === p.answer) {
+  if (key === st.digit) {
     S.step += 1;
     addCombo();
     S.digitsDone += 1;
@@ -692,7 +661,7 @@ async function clearProblem() {
     if (E > 0.85) pip.classList.add('rainbow'); else pip.style.setProperty('--c', cols[Math.min(3, Math.floor(E * 4.5))]);
     popEl(pip, 1.2);
   }
-  $('#step-label').innerHTML = `<b>${S.problem.answer}</b>`;
+  $('#step-label').innerHTML = `<b>${S.problem.answerText}</b>`;
   if (gained) pointsPop(gained);
   if (wasReach) audio.reachHit(E); else audio.clear(E);
   hanamaru(E);
@@ -2556,9 +2525,9 @@ $('#go-tree').addEventListener('click', () => openTree(S.newUnlocks, Object.keys
 $('#f-tree').addEventListener('click', () => openTree(S.newUnlocks, Object.keys(S.newStars)));
 $('#tree-back').addEventListener('click', () => { audio.play('blip', audio.now(), { m: 72, v: 0.08 }); toTitle(); });
 
-for (const b of $$('#pad button')) {
-  b.addEventListener('pointerdown', (e) => { e.preventDefault(); audio.unlock(); press(b.dataset.key, b); });
-  b.addEventListener('click', (e) => { if (e.detail === 0) press(b.dataset.key, b); });
+for (const [key, b] of Object.entries(padButtons)) {
+  b.addEventListener('pointerdown', (e) => { e.preventDefault(); audio.unlock(); press(key, b); });
+  b.addEventListener('click', (e) => { if (e.detail === 0) press(key, b); });
 }
 addEventListener('keydown', (e) => {
   if (guide.keydown(e)) return;
