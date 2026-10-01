@@ -4,16 +4,8 @@ export const MASTERY = { window: 6, need: 5 };
 
 export const SKILLS = [
   {
-    id: 'read-vowels',
-    name: '基本母音',
-    grade: 1,
-    lane: 0,
-    req: [],
-    gen: ['koreanVowels', {}]
-  },
-  {
     id: 'read-consonants',
-    name: '基本子音',
+    name: 'ハングル → 読み',
     grade: 1,
     lane: 0,
     req: [],
@@ -21,7 +13,7 @@ export const SKILLS = [
   },
   {
     id: 'sound-to-hangul',
-    name: '読みからハングル',
+    name: '読み → ハングル',
     grade: 1,
     lane: 0,
     req: [],
@@ -30,7 +22,8 @@ export const SKILLS = [
 ];
 
 export const SKILL = Object.fromEntries(
-  SKILLS.map((s) => [s.id, s])
+  [...SKILLS.map((s) => [s.id, s]),
+    ['read-vowels', { ...SKILLS[0], id: 'read-vowels' }]]
 );
 
 export const DEPTH = {

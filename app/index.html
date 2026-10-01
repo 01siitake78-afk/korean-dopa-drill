@@ -7,8 +7,8 @@
   <meta name="description" content="算数を解くたびに、演出と音がどんどんインフレするドリル。">
   <title>ドパドリル</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=2">
-  <script type="module" src="js/main.js"></script>
+  <link rel="stylesheet" href="style.css?v=20261001-stable-5">
+  <script type="module" src="js/main.js?v=20261001-stable-5"></script>
 </head>
 <body class="lv0">
   <div id="paper" aria-hidden="true"></div>
@@ -33,7 +33,7 @@
       </h1>
       <div class="title-stage" id="title-stage" aria-hidden="true"></div>
       <div class="modes" id="modes">
-        <button type="button" id="start" class="big-btn level-btn">じぶんレベル<small id="level-sub">はじめは じつりょくチェック</small></button>
+        <button type="button" id="start" class="big-btn level-btn">読み方</button>
         <button type="button" id="start-review" class="sub-btn review-btn review-main" hidden>ふくしゅう <b id="review-count">0</b></button>
         <div class="grades" role="group" aria-label="学習モード">
         <button type="button" data-grade="1">読み方</button>
@@ -61,6 +61,7 @@
         <div class="cal-grid" id="cal-grid" role="grid"></div>
       </section>
       <p class="hint">数字キーとBackspaceでも操作できます</p>
+      <p class="vocabulary-source">単語帳の出典：<a href="https://krdict.korean.go.kr/jpn/mainAction?nation=jpn" target="_blank" rel="noopener">国立国語院 韓国語-日本語学習辞典</a><br>初級語彙を抽出・表記を整理。辞書データ：<a href="https://creativecommons.org/licenses/by-sa/2.0/kr/" target="_blank" rel="noopener">CC BY-SA 2.0 KR</a> · <a href="data/krdict-beginner.json" download>データ</a></p>
     </section>
 
     <!-- Skill tree -->
@@ -127,12 +128,13 @@
         <div class="stamp" id="stamp" aria-hidden="true"></div>
         <div class="reach-tag" id="reach-tag" aria-hidden="true">あと1けた</div>
       </section>
-      <div class="pad" id="pad" role="group" aria-label="数字の入力">
-        <button type="button" <button type="button" data-key="ア">ア</button>
+      <div class="pad" id="pad" role="group" aria-label="答えの選択肢">
+        <button type="button" data-key="ア">ア</button>
         <button type="button" data-key="イ">イ</button>
         <button type="button" data-key="ウ">ウ</button>
         <button type="button" data-key="オ">オ</button>
       </div>
+      <aside id="vocabulary-note" class="vocabulary-note" aria-live="polite" hidden></aside>
     </section>
 
     <!-- Basic result -->
@@ -151,6 +153,7 @@
         <p class="unlock" id="r-unlock"></p>
         <div class="skill-news" id="r-skills"></div>
         <div class="quest-mini" id="r-quests"></div>
+        <details id="r-vocabulary-help" class="vocabulary-note" hidden></details>
         <div class="actions">
           <button type="button" id="go-extra" class="big-btn">エクストラへ <small>90秒</small></button>
           <button type="button" id="go-review" class="sub-btn review-btn" hidden>まちがえた問題を やりなおす</button>
@@ -176,6 +179,7 @@
         <p class="dopa-final"><small>ドパ</small><b id="f-dopa">0</b></p>
         <div class="skill-news" id="f-skills"></div>
         <div class="quest-mini" id="f-quests"></div>
+        <details id="f-vocabulary-help" class="vocabulary-note" hidden></details>
         <div class="actions">
           <button type="button" id="f-review" class="sub-btn review-btn" hidden>まちがえた問題を やりなおす</button>
           <button type="button" id="f-tree" class="sub-btn" hidden>スキルツリーを見る</button>
@@ -293,6 +297,13 @@
   <svg id="actors" aria-hidden="true"><g id="actors-back"></g><g id="actors-front"></g></svg>
   <div id="cutins" aria-hidden="true"></div>
   <div id="flash" aria-hidden="true"></div>
+  <div id="ai-dialog" role="dialog" aria-modal="true" aria-labelledby="ai-heading" hidden>
+    <div class="ai-card">
+      <h2 id="ai-heading">単語帳</h2>
+      <p id="ai-status" role="status" aria-live="polite"></p>
+      <button type="button" id="ai-cancel" class="sub-btn">戻る</button>
+    </div>
+  </div>
   <noscript>このゲームの操作にはJavaScriptが必要です。</noscript>
 </body>
 </html>

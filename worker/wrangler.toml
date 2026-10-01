@@ -1,0 +1,17 @@
+name = "korean-drill-ai"
+main = "index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+# Your GitHub Pages ORIGIN (no repository path). Local testing is allowed too.
+ALLOWED_ORIGINS = "https://YOUR-GITHUB-USERNAME.github.io,http://localhost:8000,http://127.0.0.1:8000"
+OPENAI_MODEL = "gpt-4.1-mini"
+DAILY_GENERATION_LIMIT = "20"
+
+[[durable_objects.bindings]]
+name = "GENERATION_QUOTA"
+class_name = "GenerationQuota"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["GenerationQuota"]

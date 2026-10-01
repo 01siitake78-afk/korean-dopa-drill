@@ -230,6 +230,14 @@ export function masteryRatio(prog, id) {
 // "adaptive" plans also react to answers (placement walk).
 
 export function gradePlan(grade, N, rng) {
+  if (grade === 1) {
+    // Reading has no difficulty tiers. Alternate directions, including extra.
+    const ids = ['read-consonants', 'sound-to-hangul'];
+    const offset = Math.floor(rng() * ids.length);
+    return { mode: 'grade', grade,
+      basic: Array.from({ length: N }, (_, i) => ids[(i + offset) % ids.length]),
+      extra: (k) => ids[(k + offset) % ids.length] };
+  }
   const list = skillsOfGrade(grade).sort((a, b) => DEPTH[a.id] - DEPTH[b.id]).map((s) => s.id);
   const next = skillsOfGrade(Math.min(6, grade + 1)).sort((a, b) => DEPTH[a.id] - DEPTH[b.id]).map((s) => s.id);
   const basic = Array.from({ length: N }, (_, i) => {

@@ -1,3 +1,7 @@
+import { vocabularyHelp } from './vocabulary-help.js';
+import { recordVocabularyAnswer } from './vocabulary-curriculum.js';
+import { loadVocabulary, vocabularyProblem } from './vocabulary.js';
+import { recentWords } from './vocabulary-protocol.js';
 // Game flow, input, scoring, and the "director" that turns every event into
 // escalating visuals and sound.
 import { startClock, onFrame, wait, tween, clamp, lerp, rand, pick, chance, centerOf, params,
@@ -68,14 +72,50 @@ function setLevelClasses(L) {
 }
 
 function showScreen(name) {
+  if (name === 'result' || name === 'final') {
+    const review = $(`#${name === 'result' ? 'r' : 'f'}-vocabulary-help`);
+    review.replaceChildren();
+    review.hidden = !S.plan?.vocabulary;
+    if (S.plan?.vocabulary) {
+      const summary = document.createElement('summary');
+      summary.textContent = '今回の単語・読み方・例文を見る';
+      review.appendChild(summary);
+      for (const p of S.vocabularyAnswers || []) {
+        const help = vocabularyHelp(p.word);
+        const item = document.createElement('p');
+        const title = document.createElement('strong');
+        title.textContent = `${p.word}（${help.reading}）→ ${p.answer}`;
+        item.appendChild(title);
+        if (help.example) {
+          const example = document.createElement('div');
+          example.textContent = `${help.example} ／ ${help.translation}`;
+          item.appendChild(example);
+        }
+        review.appendChild(item);
+      }
+    }
+  }
   S.screen = name;
+  protectVocabularyText();
   $$('.screen').forEach((s) => s.classList.toggle('is-active', s.id === `screen-${name}`));
   const el = $(`#screen-${name}`);
   if (!S.reduced) tween(260, (k) => { el.style.opacity = k; el.style.transform = `translateY(${(1 - k) * 18}px)`; }).then(() => { el.style.transform = ''; });
   requestAnimationFrame(layoutActors);
 }
 
+function protectVocabularyText() {
+  const layer = $('#actors');
+  layer.style.display = '';
+  layer.style.zIndex = '';
+  if (S.screen === 'play' && S.plan?.vocabulary) {
+    // The reserved stage has stable bounds; card entrance animations do not move it.
+    const r = stage.getBoundingClientRect();
+    layer.style.clipPath = `inset(${Math.max(0, r.top)}px 0px ${Math.max(0, innerHeight - r.bottom)}px 0px)`;
+  } else layer.style.clipPath = '';
+}
+
 function layoutActors() {
+  protectVocabularyText();
   // A scripted scene (the hammer) moves the hero itself.
   if (S.scene || S.guideOpen) return;
   // Cancel any running body action so it does not drag the hero back to old coordinates.
@@ -109,10 +149,11 @@ function layoutActors() {
   else if (S.screen === 'play') r = stage.getBoundingClientRect();
   else r = $(`#screen-${S.screen} .result-card`).getBoundingClientRect();
   const onCard = S.screen === 'result' || S.screen === 'final';
-  const scale = S.screen === 'title' ? clamp(r.height / 190, 0.7, 1.1) : onCard ? 0.6 : clamp(r.height / 175, 0.5, 0.74);
+  const vocabularyPlay = S.screen === 'play' && S.plan?.vocabulary;
+  const scale = vocabularyPlay ? clamp((r.height - 20) / 230, 0.25, 0.48) : S.screen === 'title' ? clamp(r.height / 190, 0.7, 1.1) : onCard ? 0.6 : clamp(r.height / 175, 0.5, 0.74);
   hero.S = scale;
   const x = r.left + r.width / 2;
-  const y = onCard ? r.top + 6 : r.bottom - 12;
+  const y = vocabularyPlay ? r.bottom - 10 : onCard ? r.top + 6 : r.bottom - 12;
   hero.place(x, y);
   hero.lift = 0; hero.rot = 0;
   crowd.forEach((c, i) => placeCrowd(c, i));
@@ -198,11 +239,12 @@ function questPop(q) {
   })();
 }
 const REVIEW_MAX = 40;
-const MODE_LABEL = { level: 'じぶんレベル', grade: (g) => `${g}ねんせい`, review: 'ふくしゅう', practice: 'れんしゅう', drill: 'ドリル' };
+const MODE_LABEL = { level: '読み方', grade: (g) => ({ 1: '読み方', 2: '単語帳', 3: 'ATEEZ' }[g] || `${g}ねんせい`), review: 'ふくしゅう', practice: 'れんしゅう', drill: 'ドリル' };
 
 // kind: 'level' | 'grade' | 'review' | 'practice' | 'drill'
 function makePlan(kind, arg) {
   const prog = progress();
+  if (kind === 'grade' && arg === 2) return { mode: 'grade', grade: 2, vocabulary: true };
   if (kind === 'grade') return gradePlan(arg, S.N, S.rng);
   if (kind === 'review') { const items = prog.review.slice(-Math.min(S.N, 10)); return reviewPlan(items); }
   if (kind === 'practice') return { mode: 'practice', skill: arg, basic: Array.from({ length: S.N }, () => arg), extra: () => { const kids = SKILLS.filter((x) => x.req.includes(arg) && isUnlocked(prog, x.id)); return kids.length ? kids[Math.floor(S.rng() * kids.length)].id : arg; } };
@@ -220,6 +262,7 @@ function makePlan(kind, arg) {
 
 function nextProblem(i) {
   const plan = S.plan;
+  if (plan.vocabulary) return vocabularyProblem(S.vocabulary[i]);
   if (plan.mode === 'review') return structuredClone(plan.items[i].problem);
   if (plan.legacy) return generate(plan.basic[i], S.rng, i === 0 ? { kind: 'add', a: 27, b: 35 } : null);
   const skill = params.get('skill') || (plan.placement ? plan.pick() : plan.basic[i]);
@@ -252,13 +295,24 @@ function renderSheet(p) {
   if (p.text) {
     const question = document.createElement('div');
     question.textContent = p.text.split('→')[0].trim();
+    if (p.vocabulary) {
+      question.className = 'vocabulary-question';
+      question.style.gridRow = '1';
+      question.style.gridColumn = '1 / -1';
+      question.textContent = '';
+      const word = document.createElement('span');
+      word.className = 'vocabulary-word';
+      word.textContent = p.word;
+      question.appendChild(word);
+
+    }
     question.style.fontSize = '32px';
     question.style.fontWeight = '700';
     question.style.textAlign = 'center';
     question.style.marginBottom = '12px';
     sheet.appendChild(question);
   }
-  sheet.className = `sheet ${p.kind}`;
+  sheet.className = `sheet ${p.kind}${p.vocabulary ? ' vocabulary' : ''}`;
   sheet.style.setProperty('--cols', p.cols);
   sheet.style.setProperty('--rows', p.rows);
   S.cells = {}; S.lines = {};
@@ -291,10 +345,15 @@ function renderSheet(p) {
     d.dataset.id = c.id;
   }
   fitSheet(p);
+  requestAnimationFrame(layoutActors);
 }
 
 // Size the grid so any layout (wide expressions, tall long division) fits the card.
 function fitSheet(p) {
+  if (p.vocabulary) {
+    sheet.style.setProperty('--ch', '56px');
+    return;
+  }
   const wrap = sheet.parentElement;
   const availW = Math.max(200, wrap.clientWidth - 16);
   const availH = parseFloat(getComputedStyle(wrap).minHeight) || 200;
@@ -329,11 +388,47 @@ function activate(k) {
 }
 
 // ---------------------------------------------------------------- flow
-function startGame(kind = 'level', arg) {
+let vocabularyLoading = null;
+$('#ai-cancel').addEventListener('click', () => {
+  vocabularyLoading?.abort();
+  vocabularyLoading = null;
+  $('#ai-dialog').hidden = true;
+});
+async function startGame(kind = 'level', arg) {
+  if (vocabularyLoading) return;
   audio.unlock();
+  let generated = null;
+  const intendedCount = pickedCount();
+  if (kind === 'grade' && arg === 2) {
+    const status = $('#ai-status');
+    const controller = new AbortController();
+    vocabularyLoading = controller;
+    $('#ai-dialog').hidden = false;
+    status.textContent = '辞書から問題を準備しています。';
+    $('#ai-cancel').focus();
+    try {
+      generated = await loadVocabulary({ basicCount: intendedCount, extraMs: EXTRA_MS,
+        recent: store.load().recentVocabulary,
+        history: store.load().vocabularyLearning || {},
+        signal: AbortSignal.any([controller.signal, AbortSignal.timeout(30000)]) });
+      if (controller.signal.aborted || vocabularyLoading !== controller) return;
+      $('#ai-dialog').hidden = true;
+    } catch (error) {
+      if (!controller.signal.aborted) {
+        status.textContent = error.name === 'TimeoutError' ? '辞書の読み込みに時間がかかっています。戻ってもう一度試してください。' : error.message;
+      }
+      return;
+    } finally {
+      if (vocabularyLoading === controller) vocabularyLoading = null;
+    }
+  }
+  S.vocabulary = generated;
+  S.vocabularyAnswers = [];
+  const note = $('#vocabulary-note');
+  if (note) { note.hidden = !generated; note.replaceChildren(); if (generated) note.textContent = '回答後に読み方と例文を表示します。'; }
   S.run += 1;
   if (S.bonusOpen) { $('#bonus').hidden = true; S.bonusOpen = false; }
-  S.N = Number($('.pick [aria-checked="true"]').dataset.count);
+  S.N = intendedCount;
   S.rng = makeRng(Number(params.get('seed') || Math.floor(Math.random() * 1e9)));
   S.sessionSigs = new Set();
   S.kind = kind; S.kindArg = arg;
@@ -377,7 +472,11 @@ async function setupProblem() {
     const tier = Math.floor(S.extra.solved / 3);
     E = 1 + Math.min(0.5, tier * 0.1);
     applyLevel(E, { key: 2 + Math.min(tier, 5), bpm: 134 + tier * 5 });
-    if (S.plan.legacy) { const pool = EXTRA_TIERS[Math.min(tier, EXTRA_TIERS.length - 1)]; S.problem = generate(pool[S.extra.solved % pool.length], S.rng); }
+    if (S.plan.vocabulary) {
+      const item = S.vocabulary[S.N + S.extra.solved];
+      if (!item) { endExtra(); return; } // Defensive only: batch covers every possible 520ms gap.
+      S.problem = vocabularyProblem(item);
+    } else if (S.plan.legacy) { const pool = EXTRA_TIERS[Math.min(tier, EXTRA_TIERS.length - 1)]; S.problem = generate(pool[S.extra.solved % pool.length], S.rng); }
     else S.problem = sessionProblem(params.get('skill') || S.plan.extra(S.extra.solved));
   } else {
     E = basicE(S.qi);
@@ -385,10 +484,16 @@ async function setupProblem() {
     S.problem = S.problems[S.qi] || (S.problems[S.qi] = nextProblem(S.qi));
   }
   const p = S.problem;
+  if (p.vocabulary) {
+    const st = store.load();
+    st.recentVocabulary = recentWords([...(st.recentVocabulary || []).filter(x => x !== p.word), p.word]);
+    store.save();
+  }
+  $('#pad').classList.toggle('vocabulary', !!p.vocabulary);
   updateAnswerButtons(p);
   S.step = 0; S.wrongInQ = false; S.shownWrong = null;
   $$('.pip').forEach((pp, i) => pp.classList.toggle('now', !extra && i === S.qi));
-  $('#qtitle').textContent = p.title;
+  $('#qtitle').textContent = p.vocabulary ? `${p.title} v5` : p.title;
   $('#qno').textContent = extra ? `EX ${S.extra.solved + 1}` : `第${S.qi + 1}問`;
   renderSheet(p);
   $('#step-label').innerHTML = '&nbsp;';
@@ -402,6 +507,7 @@ async function setupProblem() {
     const st = store.load(); st.capsule = { ...(st.capsule || {}), lastDay: store.dayKey() }; store.save();
   } else if (E > 0.22 || extra) cutin(extra ? `EX ${S.extra.solved + 1}` : last ? 'ラスト1問' : `第${S.qi + 1}問`, E);
   await cardEnter(E);
+  if (S.plan.vocabulary) layoutActors();
   if (S.screen !== 'play' || run !== S.run) return;
   S.ready = true;
   // Answer time counts only while input is open (id033).
@@ -410,7 +516,7 @@ async function setupProblem() {
 }
 
 async function cardEnter(E) {
-  if (S.reduced) { card.style.transform = ''; card.style.opacity = 1; return; }
+  if (S.reduced || S.plan?.vocabulary) { card.style.transform = ''; card.style.opacity = 1; return; }
   if (E < 0.4) {
     await tween(300, (k) => { card.style.transform = `translateX(${(1 - k) * 60}px) rotate(${(1 - k) * 3}deg)`; card.style.opacity = k; }, easeOutCubic);
   } else {
@@ -463,6 +569,12 @@ function press(key, btn = padButtons[key]) {
   const st = p.steps[S.step];
   if (!st) return;
   const cell = S.cells[st.cell];
+  if (p.vocabulary && !S.wrongInQ && !S.demo) {
+    const state = store.load();
+    state.vocabularyLearning ||= {};
+    recordVocabularyAnswer(state.vocabularyLearning, p.word, key === st.digit || key === p.answer);
+    store.save();
+  }
   audio.keyTap(S.combo);
   const from = btn ? centerOf(btn) : centerOf(cell);
   if (key === st.digit || key === p.answer) {
@@ -495,7 +607,7 @@ function press(key, btn = padButtons[key]) {
 function carry(from, cell, digit, done) {
   if (S.reduced) { done(); return; }
   const to = centerOf(cell);
-  hero.carry(from, to, digit, { E: S.E, onGrab: () => audio.grab(), onPlace: () => { audio.place(); done(); } });
+  hero.carry(from, to, digit, { E: S.E, onGrab: () => audio.grab(), onPlace: () => { audio.place(); if (S.plan?.vocabulary) layoutActors(); done(); } });
 }
 
 function erase() {
@@ -693,6 +805,28 @@ async function clearProblem() {
     popEl(pip, 1.2);
   }
   $('#step-label').innerHTML = `<b>${S.problem.answer}</b>`;
+  if (S.problem.vocabulary) {
+    const help = vocabularyHelp(S.problem.word);
+    if (!S.vocabularyAnswers.some(p => p.word === S.problem.word)) S.vocabularyAnswers.push(S.problem);
+    const note = $('#vocabulary-note');
+    note.replaceChildren();
+    const title = document.createElement('strong');
+    title.textContent = `前の答え：${S.problem.word}（${help.reading || '読み方確認中'}）→ ${S.problem.answer}`;
+    note.appendChild(title);
+    if (help.example) {
+      const example = document.createElement('div');
+      example.textContent = `${help.example} ／ ${help.translation}`;
+      note.appendChild(example);
+    }
+    note.hidden = false;
+    const question = sheet.querySelector('.vocabulary-question');
+    if (question && help.reading) {
+      const reading = document.createElement('span');
+      reading.className = 'vocabulary-context';
+      reading.textContent = `${help.reading}（発音の目安）`;
+      question.appendChild(reading);
+    }
+  }
   if (gained) pointsPop(gained);
   if (wasReach) audio.reachHit(E); else audio.clear(E);
   hanamaru(E);
@@ -1030,6 +1164,7 @@ function placeCrowd(m, i) {
   const r = stage.getBoundingClientRect();
   const off = Math.abs(m.side) > 1.5 ? 0.06 : 0.2;
   const x = m.side < 0 ? r.left + r.width * off : r.right - r.width * off;
+  if (S.plan?.vocabulary) m.S = Math.min(m.S, 0.36);
   m.place(x, r.bottom - 12 - (Math.abs(m.side) > 1.5 ? 18 : 0));
   void i;
 }
@@ -1318,6 +1453,7 @@ function modeName(plan) {
 // skill. It replaces a basic problem in the middle of the set.
 function planCapsule() {
   S.capsuleAt = -1;
+  if (S.plan.vocabulary) return;
   if (!recording() || !['level', 'grade', 'practice'].includes(S.plan.mode) || S.plan.placement || S.N < 4) return;
   if ((store.load().capsule || {}).lastDay === store.dayKey()) return;
   const c = pickCapsule(progress());
@@ -1449,7 +1585,6 @@ function refreshTitle() {
   const n = prog.review.length;
   $('#start-review').hidden = !n;
   $('#review-count').textContent = n;
-  $('#level-sub').textContent = prog.placed ? `つぎは「${SKILL[frontier(prog)[0] || ORDER[ORDER.length - 1]].name}」` : 'はじめは じつりょくチェック';
   const done = SKILLS.filter((x) => stateOf(prog, x.id) === 'mastered').length;
   $('#tree-badge').textContent = `${done}/${SKILLS.length}`;
   renderQuests();
@@ -1459,6 +1594,9 @@ function refreshTitle() {
 }
 
 function toTitle() {
+  vocabularyLoading?.abort();
+  vocabularyLoading = null;
+  $('#ai-dialog').hidden = true;
   if (S.trophyOpen) { S.trophyOpen = false; $('#trophy-got').hidden = true; }
   S.run += 1;
   S.ready = false;
@@ -1529,7 +1667,7 @@ onFrame((dt, t) => {
 
   // screen shake (keypad stays still to keep tap targets stable)
   S.shake = Math.max(0, S.shake - dt * 30);
-  const shk = S.shake * S.motion;
+  const shk = S.screen === 'play' && S.plan?.vocabulary ? 0 : S.shake * S.motion;
   const sx = shk > 0.1 && !S.reduced ? rand(-shk, shk) : 0;
   const sy = shk > 0.1 && !S.reduced ? rand(-shk, shk) : 0;
   const tr = shk > 0.1 ? `translate(${sx}px, ${sy}px)` : '';
@@ -1897,7 +2035,7 @@ function toast(msg) {
 
 // ---------------------------------------------------------------- calendar
 const cal = { y: new Date().getFullYear(), m: new Date().getMonth(), seen: new Set() };
-const MODE_NAMES = { drill: (h) => `${h.count || ''}問ドリル`, level: () => 'じぶんレベル', grade: (h) => `${h.grade}ねんせい`, review: () => 'ふくしゅう', practice: (h) => `れんしゅう（${SKILL[h.skill]?.name || ''}）` };
+const MODE_NAMES = { drill: (h) => `${h.count || ''}問ドリル`, level: () => 'じぶんレベル', grade: (h) => MODE_LABEL.grade(h.grade), review: () => 'ふくしゅう', practice: (h) => `れんしゅう（${SKILL[h.skill]?.name || ''}）` };
 const stampSvg = (score) => {
   const gold = score > 100;
   const col = gold ? '#ffb000' : '#ff4f6d';
@@ -2481,13 +2619,14 @@ $$('.pick button').forEach((b) => b.addEventListener('click', () => {
   audio.play('blip', audio.now(), { m: 76 + Number(b.dataset.count) / 2, v: 0.12 });
   if (!S.reduced) hero.hop(20 + Number(b.dataset.count) * 2 * S.motion, 320, { audio });
 }));
-$('#start').addEventListener('click', () => startGame('level'));
+$('#start').addEventListener('click', () => startGame('grade', 1));
 $('#quest-list').addEventListener('click', (e) => { const li = e.target.closest('li.go'); if (li && SKILL[li.dataset.skill]) { audio.unlock(); audio.play('blip', audio.now(), { m: 84, v: 0.12 }); startGame('practice', li.dataset.skill); } });
 $('#cal-prev').addEventListener('click', () => moveMonth(-1));
 $('#cal-next').addEventListener('click', () => moveMonth(1));
 $('#cal-grid').addEventListener('click', (e) => { const b = e.target.closest('[data-day]'); if (b) openDay(b.dataset.day); });
 $('#close-day').addEventListener('click', () => { $('#day-log').hidden = true; });
 $('#day-log').addEventListener('click', (e) => { if (e.target.id === 'day-log') $('#day-log').hidden = true; });
+$('#screen-play').addEventListener('scroll', () => requestAnimationFrame(layoutActors), { passive: true });
 $('#screen-title').addEventListener('scroll', () => requestAnimationFrame(layoutActors), { passive: true });
 $$('#screen-result, #screen-final, #tree-scroll, #tr-scroll').forEach((el) => el.addEventListener('scroll', () => requestAnimationFrame(layoutActors), { passive: true }));
 $('#open-settings').addEventListener('click', openSettings);
@@ -2561,6 +2700,11 @@ for (const b of $$('#pad button')) {
   b.addEventListener('click', (e) => { if (e.detail === 0) press(b.dataset.key, b); });
 }
 addEventListener('keydown', (e) => {
+  if (!$('#ai-dialog').hidden) {
+    if (e.key === 'Escape') $('#ai-cancel').click();
+    if (e.key === 'Tab') { e.preventDefault(); $('#ai-cancel').focus(); }
+    return;
+  }
   if (guide.keydown(e)) return;
   if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
   if (S.demo) { e.preventDefault(); stopDemo(); return; }
@@ -2574,7 +2718,11 @@ addEventListener('keydown', (e) => {
   if (S.scene) return;
   if (!$('#day-log').hidden) { if (e.key === 'Escape') $('#day-log').hidden = true; return; }
   if (e.key === 'Escape' && S.screen !== 'title') { e.preventDefault(); askToTitle(); return; }
-  if (/^[0-9]$/.test(e.key)) { audio.unlock(); press(e.key); e.preventDefault(); }
+  if (/^[0-9]$/.test(e.key)) {
+    const button = S.problem?.choices ? $$('#pad button')[Number(e.key) - 1] : null;
+    if (S.problem?.choices && !button) return;
+    audio.unlock(); press(button ? button.dataset.key : e.key, button || undefined); e.preventDefault();
+  }
   else if (e.key === 'Backspace') { press('Backspace'); e.preventDefault(); }
 });
 addEventListener('pointermove', (e) => { if (S.screen !== 'play' && !S.guideOpen) hero.lookAt({ x: e.clientX, y: e.clientY }); });

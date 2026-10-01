@@ -273,9 +273,10 @@ function buildH(tokens, meta) {
       const s = String(t.ans);
 if (meta.choices) {
   const cid = id('x');
-  cells.push({ id: cid, r, c, ...span, text: s, kind: 'input' });
+  const width = Math.max(1, Math.ceil(s.length / 2));
+  cells.push({ id: cid, r, c, cs: width, ...span, text: s, kind: 'input' });
   steps.push({ cell: cid, digit: s, label: 'こたえ', after: [], help: null });
-  c += 1;
+  c += width;
   maxC = Math.max(maxC, c);
   continue;
 }
@@ -332,165 +333,39 @@ function fracAns(n, d, mixed) {
 }
 const fracTok = (n, d, whole) => ({ f: [n, d, whole] });
 
-const GEN = {
-koreanVowels(rng) {
-  const vowels = [
-    ['ㅏ', 'ア'],
-    ['ㅑ', 'ヤ'],
-    ['ㅓ', 'オ'],
-    ['ㅕ', 'ヨ'],
-    ['ㅗ', 'オ'],
-    ['ㅛ', 'ヨ'],
-    ['ㅜ', 'ウ'],
-    ['ㅠ', 'ユ'],
-    ['ㅡ', 'ウ'],
-    ['ㅣ', 'イ']
-  ];
+// Revised Romanization, NIKL: https://www.korean.go.kr/front_eng/roman/roman_01.do
+// Unicode initial/vowel order. All entries are open syllables (no batchim).
+export const KOREAN_INITIALS = ['g','kk','n','d','tt','r','m','b','pp','s','ss','','j','jj','ch','k','t','p','h'];
+export const KOREAN_VOWELS = ['a','ae','ya','yae','eo','e','yeo','ye','o','wa','wae','oe','yo','u','wo','we','wi','yu','eu','ui','i'];
+export const KOREAN_SYLLABLES = KOREAN_INITIALS.flatMap((initial, ci) =>
+  KOREAN_VOWELS.map((vowel, vi) => ({
+    hangul: String.fromCharCode(0xAC00 + (ci * 21 + vi) * 28),
+    roman: initial + vowel
+  }))
+);
 
-  const [vowel, answer] = pickOf(rng, vowels);
-
-  const vowelOrder = [
-    'ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ',
-    'ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'
-  ];
-
-  const hangul = String.fromCharCode(
-    0xAC00 +
-    11 * 21 * 28 +
-    vowelOrder.indexOf(vowel) * 28
-  );
-
-  return buildH(
-    [{ w: hangul }, { op: '→' }, { ans: answer }],
-    {
-      title: '基本母音',
-      text: `${hangul} → ${answer}`,
-      answer,
-      choices: ['ア', 'イ', 'ウ', 'オ', 'ヤ', 'ヨ', 'ユ']
-    }
-  );
-},
-
-koreanConsonants(rng) {
-  const consonants = [
-    ['ㄱ', ['カ','コ','ク','キ']],
-    ['ㄴ', ['ナ','ノ','ヌ','ニ']],
-    ['ㄷ', ['タ','ト','トゥ','ティ']],
-    ['ㄹ', ['ラ','ロ','ル','リ']],
-    ['ㅁ', ['マ','モ','ム','ミ']],
-    ['ㅂ', ['パ','ポ','プ','ピ']],
-    ['ㅅ', ['サ','ソ','ス','シ']],
-    ['ㅈ', ['チャ','チョ','チュ','チ']],
-    ['ㅎ', ['ハ','ホ','フ','ヒ']]
-  ];
-
-  const vowels = [
-    ['ㅏ', 0],
-    ['ㅓ', 1],
-    ['ㅗ', 1],
-    ['ㅜ', 2],
-    ['ㅡ', 2],
-    ['ㅣ', 3]
-  ];
-
-  const consonantOrder = [
-    'ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ',
-    'ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'
-  ];
-
-  const vowelOrder = [
-    'ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ',
-    'ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'
-  ];
-
-  const [consonant, sounds] = pickOf(rng, consonants);
-  const [vowel, soundIndex] = pickOf(rng, vowels);
-
-  const hangul = String.fromCharCode(
-    0xAC00 +
-    consonantOrder.indexOf(consonant) * 21 * 28 +
-    vowelOrder.indexOf(vowel) * 28
-  );
-
-  const answer = sounds[soundIndex];
-
-  return buildH(
-    [{ w: hangul }, { op: '→' }, { ans: answer }],
-    {
-      title: '基本子音',
-      text: `${hangul} → ${answer}`,
-      answer,
-      choices: ['ア', answer, 'ウ', 'オ', 'イ']
-    }
-  );
-},
-
-  koreanSoundToHangul(rng) {
-  const consonants = [
-    ['ㄱ', ['カ','コ','ク','キ']],
-    ['ㄴ', ['ナ','ノ','ヌ','ニ']],
-    ['ㄷ', ['タ','ト','トゥ','ティ']],
-    ['ㄹ', ['ラ','ロ','ル','リ']],
-    ['ㅁ', ['マ','モ','ム','ミ']],
-    ['ㅂ', ['パ','ポ','プ','ピ']],
-    ['ㅅ', ['サ','ソ','ス','シ']],
-    ['ㅈ', ['チャ','チョ','チュ','チ']],
-    ['ㅎ', ['ハ','ホ','フ','ヒ']]
-  ];
-
-  const vowels = [
-    ['ㅏ', 0],
-    ['ㅓ', 1],
-    ['ㅗ', 1],
-    ['ㅜ', 2],
-    ['ㅡ', 2],
-    ['ㅣ', 3]
-  ];
-
-  const consonantOrder = [
-    'ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ',
-    'ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'
-  ];
-
-  const vowelOrder = [
-    'ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ',
-    'ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'
-  ];
-
-  function makeOne() {
-    const [consonant, sounds] = pickOf(rng, consonants);
-    const [vowel, soundIndex] = pickOf(rng, vowels);
-
-    const hangul = String.fromCharCode(
-      0xAC00 +
-      consonantOrder.indexOf(consonant) * 21 * 28 +
-      vowelOrder.indexOf(vowel) * 28
-    );
-
-    return {
-      hangul,
-      sound: sounds[soundIndex]
-    };
-  }
-
-  const problem = makeOne();
-  const choices = [problem.hangul];
-
+function koreanReading(rng, reverse = false) {
+  const item = pickOf(rng, KOREAN_SYLLABLES);
+  const answer = reverse ? item.hangul : item.roman;
+  const prompt = reverse ? item.roman : item.hangul;
+  // Sample without replacement; also works with a constant RNG.
+  const distractors = KOREAN_SYLLABLES
+    .map(x => reverse ? x.hangul : x.roman).filter(x => x !== answer);
+  const choices = [answer];
   while (choices.length < 4) {
-    const other = makeOne().hangul;
-    if (!choices.includes(other)) choices.push(other);
+    choices.push(distractors.splice(Math.floor(rng() * distractors.length), 1)[0]);
   }
+  return buildH([{ w: prompt }, { op: '→' }, { ans: answer }], {
+    title: reverse ? '読み → ハングル' : 'ハングル → 読み',
+    text: prompt, answer, choices
+  });
+}
 
-  return buildH(
-    [{ w: problem.sound }, { op: '→' }, { ans: problem.hangul }],
-    {
-      title: '読みからハングル',
-      text: `${problem.sound} → ${problem.hangul}`,
-      answer: problem.hangul,
-      choices
-    }
-  );
-},
+const GEN = {
+  // Keep the old generator name compatible with existing saved reviews.
+  koreanVowels(rng) { return koreanReading(rng); },
+  koreanConsonants(rng) { return koreanReading(rng); },
+  koreanSoundToHangul(rng) { return koreanReading(rng, true); },
 
   compose(rng, { total }) {
     const a = R(rng)(1, total - 1);
