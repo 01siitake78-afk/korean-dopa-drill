@@ -303,6 +303,7 @@ function renderSheet(p) {
       const word = document.createElement('span');
       word.className = 'vocabulary-word';
       word.textContent = p.word;
+      if (p.word.length > 10) word.style.fontSize = '22px';
       question.appendChild(word);
 
     }
@@ -493,7 +494,7 @@ async function setupProblem() {
   updateAnswerButtons(p);
   S.step = 0; S.wrongInQ = false; S.shownWrong = null;
   $$('.pip').forEach((pp, i) => pp.classList.toggle('now', !extra && i === S.qi));
-  $('#qtitle').textContent = p.vocabulary ? `${p.title} v5` : p.title;
+  $('#qtitle').textContent = p.vocabulary ? `${p.title} v9` : p.title;
   $('#qno').textContent = extra ? `EX ${S.extra.solved + 1}` : `第${S.qi + 1}問`;
   renderSheet(p);
   $('#step-label').innerHTML = '&nbsp;';
@@ -550,6 +551,7 @@ function updateAnswerButtons(p) {
   buttons.forEach((btn, i) => {
     const choice = choices[i];
     btn.textContent = choice;
+    btn.style.fontSize = p.vocabulary && choice?.length > 18 ? '14px' : '';
     btn.dataset.key = choice;
   });
 }

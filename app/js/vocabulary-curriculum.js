@@ -1,6 +1,7 @@
 // Editorial learning order, not a statistical frequency ranking.
 // Meanings and distractors are always taken from the attributed dictionary.
-export const LEARNING_WORDS = `좋다 싫다 있다 없다 하다 가다 오다 보다 듣다 먹다 마시다 자다 알다 모르다 좋아하다 사랑하다 괜찮다 고맙다 미안하다 재미있다
+export const LEARNING_WORDS = `좋다 있다 없다 하다 가다 오다 보다 듣다 먹다 알다 모르다 좋아하다 재미있다 곧 가끔 자주 항상 아직 벌써 정말
+싫다 마시다 자다 사랑하다 괜찮다 고맙다 미안하다 바로 이미
 오늘 내일 어제 지금 나중 아침 밤 여기 거기 어디 언제 같이 다시 많이 정말 너무 잘 조금 빨리 천천히
 사람 친구 가족 엄마 아빠 언니 오빠 누나 형 동생 우리 나 너 여러분 이름 만나다 이야기 말하다 웃다 울다
 기쁘다 슬프다 행복하다 즐겁다 힘들다 피곤하다 아프다 배고프다 맛있다 춥다 덥다 예쁘다 멋있다 귀엽다 보고 싶다 기다리다 원하다 생각하다 느끼다 놀라다
