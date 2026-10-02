@@ -29,3 +29,15 @@ test('beginner scaffold releases cards progressively and hints repair wrong plac
  assert.equal(fillLyricHint(parts,slots),false);
  assert.equal(new Set(slots.map(c=>c.id)).size,tokens.length);
 });
+
+import { LYRIC_GLOSSARY, lyricReading } from '../app/js/lyrics-help.js';
+test('every song card has a reading and Japanese gloss', async () => {
+ const song=JSON.parse(await readFile(new URL('../app/data/lyrics/wonderland.json',import.meta.url)));
+ for(const line of song.lines) {
+  for(const token of line.tokens) {
+   assert.ok(LYRIC_GLOSSARY[token]?.reading, token);
+   assert.ok(LYRIC_GLOSSARY[token]?.meaning, token);
+  }
+  assert.ok(lyricReading(line.tokens));
+ }
+});

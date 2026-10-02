@@ -1,3 +1,4 @@
+import { lyricTokenHelp, lyricReading } from './lyrics-help.js?v=20261002-reading-1';
 import { loadLyrics, lyricsProblem, shuffleTokens, lyricScaffold, fillLyricHint } from './lyrics.js?v=20261002-scaffold';
 import { vocabularyHelp } from './vocabulary-help.js';
 import { recordVocabularyAnswer } from './vocabulary-curriculum.js';
@@ -358,6 +359,8 @@ function renderLyrics(p) {
   sheet.setAttribute('aria-label', '歌詞の並べ替え');
   S.cells = {}; S.lines = {};
   const prompt = document.createElement('p'); prompt.className = 'lyrics-prompt'; prompt.textContent = p.japanese;
+  const reading = document.createElement('p'); reading.className = 'lyrics-reading'; reading.textContent = lyricReading(p.tokens);
+  const readingNote = document.createElement('small'); readingNote.className = 'lyrics-reading-note'; readingNote.textContent = 'カタカナは発音の目安です。';
   const answer = document.createElement('div'); answer.className = 'lyrics-answer cell input';
   answer.setAttribute('aria-label', '並べたカード');
   S.cells['lyrics-answer'] = answer;
@@ -372,15 +375,20 @@ function renderLyrics(p) {
   const hint = document.createElement('button'); hint.type = 'button'; hint.textContent = 'ヒント';
   const help = document.createElement('p'); help.className = 'lyrics-support';
   help.textContent = `固定された歌詞を見ながら、${cards.length}個のカードを空欄に置こう。ヒントは何度でも使えます。`;
+  const labelCard = (element, text) => {
+    const word = document.createElement('span'); word.className = 'lyrics-token'; word.textContent = text;
+    const meaning = document.createElement('small'); meaning.className = 'lyrics-meaning'; meaning.textContent = lyricTokenHelp(text).meaning;
+    element.replaceChildren(word, meaning);
+  };
   const paint = () => {
     answer.replaceChildren(); bank.replaceChildren();
     parts.forEach((part, i) => {
       const c = slots[i];
       if (part.fixed) {
-        const fixed = document.createElement('span'); fixed.className = 'lyrics-fixed'; fixed.textContent = part.text;
+        const fixed = document.createElement('span'); fixed.className = 'lyrics-fixed'; labelCard(fixed, part.text);
         fixed.setAttribute('aria-label', `固定 ${i + 1}番目`); answer.appendChild(fixed);
       } else if (c) {
-        const b = document.createElement('button'); b.type = 'button'; b.textContent = c.text;
+        const b = document.createElement('button'); b.type = 'button'; labelCard(b, c.text);
         b.setAttribute('aria-label', `${i + 1}番目のカードを取り消す`);
         b.onclick = () => { if (!S.ready) return; slots[i] = null; paint(); };
         answer.appendChild(b);
@@ -390,7 +398,7 @@ function renderLyrics(p) {
       }
     });
     for (const c of cards) {
-      const b = document.createElement('button'); b.type = 'button'; b.textContent = c.text;
+      const b = document.createElement('button'); b.type = 'button'; labelCard(b, c.text);
       b.disabled = slots.some(x => x?.id === c.id);
       b.onclick = () => {
         if (!S.ready) return;
@@ -422,7 +430,7 @@ function renderLyrics(p) {
       setTimeout(() => { if (S.problem === p && S.ready) paint(); }, 600);
     }
   };
-  actions.append(reset, hint, submit); sheet.append(prompt, help, answer, bank, actions); paint();
+  actions.append(reset, hint, submit); sheet.append(prompt, reading, readingNote, help, answer, bank, actions); paint();
   requestAnimationFrame(layoutActors);
 }
 

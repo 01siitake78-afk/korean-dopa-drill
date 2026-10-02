@@ -873,3 +873,9 @@ body.reduced #guide-help-ring, body.reduced .guide-help-fallback::after { animat
 .lyrics-blank { border: 2px dashed #7165b5; color: #7165b5; background: #fff; }
 .lyrics-support { margin: 0; font: 14px/1.6 Meiryo,sans-serif; }
 .lyrics-answer.cell.active::before { content: none; }
+
+.lyrics-reading { margin: 0; color: #57458b; font: 700 16px/1.7 Meiryo,sans-serif; overflow-wrap: anywhere; }
+.lyrics-reading-note { color: #685d7f; font: 12px/1.5 Meiryo,sans-serif; }
+.lyrics-sheet .lyrics-fixed, .lyrics-sheet .lyrics-answer button, .lyrics-sheet .lyrics-bank button { flex-direction: column; justify-content: center; align-items: center; display: inline-flex; gap: 3px; }
+.lyrics-meaning { display: block; font: 400 12px/1.4 Meiryo,sans-serif; color: #5a4e70; max-width: 140px; overflow-wrap: anywhere; }
+.lyrics-token { display: block; }
