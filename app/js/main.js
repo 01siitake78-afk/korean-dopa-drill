@@ -1,3 +1,4 @@
+import { loadLyrics, lyricsProblem, shuffleTokens } from './lyrics.js';
 import { vocabularyHelp } from './vocabulary-help.js';
 import { recordVocabularyAnswer } from './vocabulary-curriculum.js';
 import { loadVocabulary, vocabularyProblem } from './vocabulary.js';
@@ -107,7 +108,7 @@ function protectVocabularyText() {
   const layer = $('#actors');
   layer.style.display = '';
   layer.style.zIndex = '';
-  if (S.screen === 'play' && S.plan?.vocabulary) {
+  if (S.screen === 'play' && (S.plan?.vocabulary || S.plan?.lyrics)) {
     // The reserved stage has stable bounds; card entrance animations do not move it.
     const r = stage.getBoundingClientRect();
     layer.style.clipPath = `inset(${Math.max(0, r.top)}px 0px ${Math.max(0, innerHeight - r.bottom)}px 0px)`;
@@ -149,7 +150,7 @@ function layoutActors() {
   else if (S.screen === 'play') r = stage.getBoundingClientRect();
   else r = $(`#screen-${S.screen} .result-card`).getBoundingClientRect();
   const onCard = S.screen === 'result' || S.screen === 'final';
-  const vocabularyPlay = S.screen === 'play' && S.plan?.vocabulary;
+  const vocabularyPlay = S.screen === 'play' && (S.plan?.vocabulary || S.plan?.lyrics);
   const scale = vocabularyPlay ? clamp((r.height - 20) / 230, 0.25, 0.48) : S.screen === 'title' ? clamp(r.height / 190, 0.7, 1.1) : onCard ? 0.6 : clamp(r.height / 175, 0.5, 0.74);
   hero.S = scale;
   const x = r.left + r.width / 2;
@@ -244,6 +245,7 @@ const MODE_LABEL = { level: '読み方', grade: (g) => ({ 1: '読み方', 2: '�
 // kind: 'level' | 'grade' | 'review' | 'practice' | 'drill'
 function makePlan(kind, arg) {
   const prog = progress();
+  if (kind === 'grade' && arg === 3) return { mode: 'grade', grade: 3, lyrics: true };
   if (kind === 'grade' && arg === 2) return { mode: 'grade', grade: 2, vocabulary: true };
   if (kind === 'grade') return gradePlan(arg, S.N, S.rng);
   if (kind === 'review') { const items = prog.review.slice(-Math.min(S.N, 10)); return reviewPlan(items); }
@@ -262,6 +264,7 @@ function makePlan(kind, arg) {
 
 function nextProblem(i) {
   const plan = S.plan;
+  if (plan.lyrics) return lyricsProblem(S.lyrics[i % S.lyrics.length]);
   if (plan.vocabulary) return vocabularyProblem(S.vocabulary[i]);
   if (plan.mode === 'review') return structuredClone(plan.items[i].problem);
   if (plan.legacy) return generate(plan.basic[i], S.rng, i === 0 ? { kind: 'add', a: 27, b: 35 } : null);
@@ -292,6 +295,7 @@ function applyLevel(E, { key, bpm } = {}) {
 
 function renderSheet(p) {
   sheet.innerHTML = '';
+  if (p.lyrics) { renderLyrics(p); return; }
   if (p.text) {
     const question = document.createElement('div');
     question.textContent = p.text.split('→')[0].trim();
@@ -349,6 +353,53 @@ function renderSheet(p) {
   requestAnimationFrame(layoutActors);
 }
 
+function renderLyrics(p) {
+  sheet.className = 'sheet lyrics-sheet';
+  sheet.setAttribute('aria-label', '歌詞の並べ替え');
+  S.cells = {}; S.lines = {};
+  const prompt = document.createElement('p'); prompt.className = 'lyrics-prompt'; prompt.textContent = p.japanese;
+  const answer = document.createElement('div'); answer.className = 'lyrics-answer cell input';
+  answer.setAttribute('aria-label', '並べたカード');
+  S.cells['lyrics-answer'] = answer;
+  const bank = document.createElement('div'); bank.className = 'lyrics-bank';
+  const actions = document.createElement('div'); actions.className = 'lyrics-actions';
+  const reset = document.createElement('button'); reset.type = 'button'; reset.textContent = 'やり直す';
+  const submit = document.createElement('button'); submit.type = 'button'; submit.textContent = '答え合わせ';
+  const cards = shuffleTokens(p.tokens, S.rng); let selected = [];
+  const paint = () => {
+    answer.replaceChildren(); bank.replaceChildren();
+    for (const c of selected) {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = c.text;
+      b.setAttribute('aria-label', c.text + 'を取り消す');
+      b.onclick = () => { if (!S.ready) return; selected = selected.filter(x => x.id !== c.id); paint(); };
+      answer.appendChild(b);
+    }
+    for (const c of cards) {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = c.text;
+      b.disabled = selected.some(x => x.id === c.id);
+      b.onclick = () => { if (!S.ready) return; selected.push(c); audio.keyTap(S.combo); paint(); };
+      bank.appendChild(b);
+    }
+    submit.disabled = selected.length !== cards.length;
+  };
+  reset.onclick = () => { if (!S.ready) return; selected = []; paint(); };
+  submit.onclick = () => {
+    if (!S.ready || selected.length !== cards.length) return;
+    const value = selected.map(c => c.text).join(' ');
+    if (value === p.answer) {
+      reset.disabled = submit.disabled = true;
+      bank.querySelectorAll('button').forEach(b => b.disabled = true);
+      press(value, submit);
+    } else {
+      press(value, submit);
+      // Restore editable cards after the existing miss feedback.
+      setTimeout(() => { if (S.problem === p && S.ready) paint(); }, 600);
+    }
+  };
+  actions.append(reset, submit); sheet.append(prompt, answer, bank, actions); paint();
+  requestAnimationFrame(layoutActors);
+}
+
 // Size the grid so any layout (wide expressions, tall long division) fits the card.
 function fitSheet(p) {
   if (p.vocabulary) {
@@ -400,6 +451,19 @@ async function startGame(kind = 'level', arg) {
   audio.unlock();
   let generated = null;
   const intendedCount = pickedCount();
+  if (kind === 'grade' && arg === 3) {
+    const controller = new AbortController(); vocabularyLoading = controller;
+    try {
+      S.lyrics = await loadLyrics();
+      if (controller.signal.aborted) return;
+      if (!S.lyrics.length) throw new Error('出題できる歌詞がありません。');
+      S.lyrics = shuffleTokens(S.lyrics).map(c => c.text);
+    } catch (error) {
+      $('#ai-dialog').hidden = false;
+      $('#ai-status').textContent = error.message;
+      return;
+    } finally { if (vocabularyLoading === controller) vocabularyLoading = null; }
+  }
   if (kind === 'grade' && arg === 2) {
     const status = $('#ai-status');
     const controller = new AbortController();
@@ -426,7 +490,7 @@ async function startGame(kind = 'level', arg) {
   S.vocabulary = generated;
   S.vocabularyAnswers = [];
   const note = $('#vocabulary-note');
-  if (note) { note.hidden = !generated; note.replaceChildren(); if (generated) note.textContent = '回答後に読み方と例文を表示します。'; }
+  if (note) { note.hidden = !generated && !(kind === 'grade' && arg === 3); note.replaceChildren(); if (generated) note.textContent = '回答後に読み方と例文を表示します。'; }
   S.run += 1;
   if (S.bonusOpen) { $('#bonus').hidden = true; S.bonusOpen = false; }
   S.N = intendedCount;
@@ -473,7 +537,9 @@ async function setupProblem() {
     const tier = Math.floor(S.extra.solved / 3);
     E = 1 + Math.min(0.5, tier * 0.1);
     applyLevel(E, { key: 2 + Math.min(tier, 5), bpm: 134 + tier * 5 });
-    if (S.plan.vocabulary) {
+    if (S.plan.lyrics) {
+      S.problem = lyricsProblem(S.lyrics[(S.N + S.extra.solved) % S.lyrics.length]);
+    } else if (S.plan.vocabulary) {
       const item = S.vocabulary[S.N + S.extra.solved];
       if (!item) { endExtra(); return; } // Defensive only: batch covers every possible 520ms gap.
       S.problem = vocabularyProblem(item);
@@ -490,6 +556,8 @@ async function setupProblem() {
     st.recentVocabulary = recentWords([...(st.recentVocabulary || []).filter(x => x !== p.word), p.word]);
     store.save();
   }
+  $('#pad').hidden = !!p.lyrics;
+  card.classList.toggle('lyrics-card', !!p.lyrics);
   $('#pad').classList.toggle('vocabulary', !!p.vocabulary);
   updateAnswerButtons(p);
   S.step = 0; S.wrongInQ = false; S.shownWrong = null;
@@ -508,7 +576,7 @@ async function setupProblem() {
     const st = store.load(); st.capsule = { ...(st.capsule || {}), lastDay: store.dayKey() }; store.save();
   } else if (E > 0.22 || extra) cutin(extra ? `EX ${S.extra.solved + 1}` : last ? 'ラスト1問' : `第${S.qi + 1}問`, E);
   await cardEnter(E);
-  if (S.plan.vocabulary) layoutActors();
+  if (S.plan.vocabulary || S.plan.lyrics) layoutActors();
   if (S.screen !== 'play' || run !== S.run) return;
   S.ready = true;
   // Answer time counts only while input is open (id033).
@@ -607,7 +675,7 @@ function press(key, btn = padButtons[key]) {
 }
 
 function carry(from, cell, digit, done) {
-  if (S.reduced) { done(); return; }
+  if (S.reduced || S.problem?.lyrics) { done(); return; }
   const to = centerOf(cell);
   hero.carry(from, to, digit, { E: S.E, onGrab: () => audio.grab(), onPlace: () => { audio.place(); if (S.plan?.vocabulary) layoutActors(); done(); } });
 }
@@ -725,7 +793,7 @@ function giveHelp(st) {
 
 // Mastery bookkeeping, review list, and unlock announcements.
 function noteProblem(p, firstTry) {
-  if (S.demo) return;
+  if (S.demo || p.lyrics) return;
   const prog = progress();
   if (!firstTry && S.plan.mode !== 'review') {
     S.wrongList.push(p);
@@ -806,7 +874,15 @@ async function clearProblem() {
     if (E > 0.85) pip.classList.add('rainbow'); else pip.style.setProperty('--c', cols[Math.min(3, Math.floor(E * 4.5))]);
     popEl(pip, 1.2);
   }
-  $('#step-label').innerHTML = `<b>${S.problem.answer}</b>`;
+  $('#step-label').textContent = S.problem.answer;
+  if (S.problem.lyrics) {
+    const note = $('#vocabulary-note');
+    note.replaceChildren();
+    for (const text of [S.problem.korean, S.problem.japanese, S.problem.song]) {
+      const line = document.createElement('div'); line.textContent = text; note.appendChild(line);
+    }
+    note.hidden = false;
+  }
   if (S.problem.vocabulary) {
     const help = vocabularyHelp(S.problem.word);
     if (!S.vocabularyAnswers.some(p => p.word === S.problem.word)) S.vocabularyAnswers.push(S.problem);
@@ -1455,7 +1531,7 @@ function modeName(plan) {
 // skill. It replaces a basic problem in the middle of the set.
 function planCapsule() {
   S.capsuleAt = -1;
-  if (S.plan.vocabulary) return;
+  if (S.plan.vocabulary || S.plan.lyrics) return;
   if (!recording() || !['level', 'grade', 'practice'].includes(S.plan.mode) || S.plan.placement || S.N < 4) return;
   if ((store.load().capsule || {}).lastDay === store.dayKey()) return;
   const c = pickCapsule(progress());
@@ -1669,7 +1745,7 @@ onFrame((dt, t) => {
 
   // screen shake (keypad stays still to keep tap targets stable)
   S.shake = Math.max(0, S.shake - dt * 30);
-  const shk = S.screen === 'play' && S.plan?.vocabulary ? 0 : S.shake * S.motion;
+  const shk = S.screen === 'play' && (S.plan?.vocabulary || S.plan?.lyrics) ? 0 : S.shake * S.motion;
   const sx = shk > 0.1 && !S.reduced ? rand(-shk, shk) : 0;
   const sy = shk > 0.1 && !S.reduced ? rand(-shk, shk) : 0;
   const tr = shk > 0.1 ? `translate(${sx}px, ${sy}px)` : '';

@@ -853,3 +853,17 @@ body.reduced #guide-help-ring, body.reduced .guide-help-fallback::after { animat
 
 /* Rotating spotlights must not enlarge the game's scrollable rectangle. */
 #screen-play:has(#pad.vocabulary) .stage { overflow: clip; }
+
+/* Wrapping tap cards for lyric ordering, including narrow screens. */
+#pad[hidden] { display: none; }
+.lyrics-card .sheet-wrap { height: auto; min-height: 0; overflow: visible; }
+.sheet.lyrics-sheet { display: flex; flex-direction: column; width: 100%; gap: 14px; }
+.lyrics-prompt { font: 700 18px/1.6 Meiryo, sans-serif; margin: 0; overflow-wrap: anywhere; }
+.lyrics-answer.cell { display: flex; flex-wrap: wrap; align-content: flex-start; justify-content: flex-start; gap: 8px; min-height: 100px; width: 100%; height: auto; padding: 10px; box-sizing: border-box; font-size: 18px; border: 2px dashed #7165b5; border-radius: 12px; }
+.lyrics-bank { display: flex; flex-wrap: wrap; gap: 8px; }
+.lyrics-sheet button { min-height: 44px; max-width: 100%; padding: 8px 12px; font: 700 17px/1.4 Meiryo, sans-serif; white-space: normal; overflow-wrap: anywhere; border: 2px solid #433a70; border-radius: 10px; background: #fff; color: #242044; cursor: pointer; }
+.lyrics-sheet button:disabled { opacity: .35; cursor: default; }
+.lyrics-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.lyrics-actions button:last-child { background: #ffd23f; }
+.lyrics-card .step-label { font-size: 14px; height: auto; min-height: 28px; overflow-wrap: anywhere; }
+.lyrics-card { max-width: 100%; }

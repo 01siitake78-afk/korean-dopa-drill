@@ -1,0 +1,360 @@
+{
+  "id": "wonderland",
+  "title": "Wonderland",
+  "artist": "ATEEZ",
+  "lines": [
+    {
+      "id": "wonderland-1",
+      "korean": "지도가 부르는 곳 그 섬은 곧",
+      "japanese": "地図が呼ぶ場所 その島はまさに",
+      "tokens": [
+        "지도가",
+        "부르는",
+        "곳",
+        "그",
+        "섬은",
+        "곧"
+      ]
+    },
+    {
+      "id": "wonderland-2",
+      "korean": "만인의 꿈이자 겁",
+      "japanese": "万人の夢であり恐怖だ",
+      "tokens": [
+        "만인의",
+        "꿈이자",
+        "겁"
+      ]
+    },
+    {
+      "id": "wonderland-3",
+      "korean": "끝에 꿈꾸는 시작 날개를 펴고",
+      "japanese": "終わりに夢見る始まり 翼を広げて",
+      "tokens": [
+        "끝에",
+        "꿈꾸는",
+        "시작",
+        "날개를",
+        "펴고"
+      ]
+    },
+    {
+      "id": "wonderland-4",
+      "korean": "영원히 철없게 like Peter",
+      "japanese": "永遠に子どもなピーターパンの様に",
+      "tokens": [
+        "영원히",
+        "철없게",
+        "like",
+        "Peter"
+      ]
+    },
+    {
+      "id": "wonderland-5",
+      "korean": "터질듯한 심장을 pump it up",
+      "japanese": "張り裂けそうな心臓に気合いを入れろ",
+      "tokens": [
+        "터질듯한",
+        "심장을",
+        "pump",
+        "it",
+        "up"
+      ]
+    },
+    {
+      "id": "wonderland-6",
+      "korean": "풀린듯한 주먹을 꽉 쥐어",
+      "japanese": "力が抜けたような拳をぎゅっと握り",
+      "tokens": [
+        "풀린듯한",
+        "주먹을",
+        "꽉",
+        "쥐어"
+      ]
+    },
+    {
+      "id": "wonderland-7",
+      "korean": "자 열린다 진실의 문 그 앞에서",
+      "japanese": "さぁ 開く 真実の扉の前で",
+      "tokens": [
+        "자",
+        "열린다",
+        "진실의",
+        "문",
+        "그",
+        "앞에서"
+      ]
+    },
+    {
+      "id": "wonderland-8",
+      "korean": "부숴버릴 듯이 we on fire",
+      "japanese": "壊してしまうように 燃え上がろうか",
+      "tokens": [
+        "부숴버릴",
+        "듯이",
+        "we",
+        "on",
+        "fire"
+      ]
+    },
+    {
+      "id": "wonderland-9",
+      "korean": "너는 여기서 멈출 텐가",
+      "japanese": "君はここで立ち止まるのか",
+      "tokens": [
+        "너는",
+        "여기서",
+        "멈출",
+        "텐가"
+      ]
+    },
+    {
+      "id": "wonderland-10",
+      "korean": "그토록 원하던 것이 여기에 oh",
+      "japanese": "あんなにも望んでいた物がここに",
+      "tokens": [
+        "그토록",
+        "원하던",
+        "것이",
+        "여기에",
+        "oh"
+      ]
+    },
+    {
+      "id": "wonderland-11",
+      "korean": "다시 돌아올 수 없어도",
+      "japanese": "二度と戻って来れなくとも",
+      "tokens": [
+        "다시",
+        "돌아올",
+        "수",
+        "없어도"
+      ]
+    },
+    {
+      "id": "wonderland-12",
+      "korean": "끝이 기다리는 시작으로",
+      "japanese": "終わりの待つ始まりへと",
+      "tokens": [
+        "끝이",
+        "기다리는",
+        "시작으로"
+      ]
+    },
+    {
+      "id": "wonderland-13",
+      "korean": "On my my way 모두 발을 맞추고",
+      "japanese": "皆、自分の道を 足並みを揃えて",
+      "tokens": [
+        "On",
+        "my",
+        "my",
+        "way",
+        "모두",
+        "발을",
+        "맞추고"
+      ]
+    },
+    {
+      "id": "wonderland-14",
+      "korean": "On my my way 하나 둘 하면 뛰어",
+      "japanese": "1、2で走り出せ",
+      "tokens": [
+        "On",
+        "my",
+        "my",
+        "way",
+        "하나",
+        "둘",
+        "하면",
+        "뛰어"
+      ]
+    },
+    {
+      "id": "wonderland-15",
+      "korean": "On my my way 없는 길도 만들어",
+      "japanese": "自分のやり方で無い道も作れ",
+      "tokens": [
+        "On",
+        "my",
+        "my",
+        "way",
+        "없는",
+        "길도",
+        "만들어"
+      ]
+    },
+    {
+      "id": "wonderland-16",
+      "korean": "어서 가자 어서 가자",
+      "japanese": "さぁ行くぞ さぁ進むぞ",
+      "tokens": [
+        "어서",
+        "가자",
+        "어서",
+        "가자"
+      ]
+    },
+    {
+      "id": "wonderland-17",
+      "korean": "숨 참고 달려 내가 달려가는 get money",
+      "japanese": "息を潜めて走れ 俺が走っては稼ぐ",
+      "tokens": [
+        "숨",
+        "참고",
+        "달려",
+        "내가",
+        "달려가는",
+        "get",
+        "money"
+      ]
+    },
+    {
+      "id": "wonderland-18",
+      "korean": "I got a win 더 외쳐대",
+      "japanese": "勝利を手にしたんだ もっと叫べ",
+      "tokens": [
+        "I",
+        "got",
+        "a",
+        "win",
+        "더",
+        "외쳐대"
+      ]
+    },
+    {
+      "id": "wonderland-19",
+      "korean": "Acre보다 크게 쳐버리는 탬버린",
+      "japanese": "エーカーよりも遠くまで響くタンバリン",
+      "tokens": [
+        "Acre보다",
+        "크게",
+        "쳐버리는",
+        "탬버린"
+      ]
+    },
+    {
+      "id": "wonderland-20",
+      "korean": "잭 스패로우보다 높이",
+      "japanese": "ジャックスパロウより高く",
+      "tokens": [
+        "잭",
+        "스패로우보다",
+        "높이"
+      ]
+    },
+    {
+      "id": "wonderland-21",
+      "korean": "가라고 나 가라고 난 흔들림 없이",
+      "japanese": "行けと 俺に行けと 俺は揺るがずに",
+      "tokens": [
+        "가라고",
+        "나",
+        "가라고",
+        "난",
+        "흔들림",
+        "없이"
+      ]
+    },
+    {
+      "id": "wonderland-22",
+      "korean": "때려 BANG BANG",
+      "japanese": "撃てバンッバンッ",
+      "tokens": [
+        "때려",
+        "BANG",
+        "BANG"
+      ]
+    },
+    {
+      "id": "wonderland-23",
+      "korean": "단번에 숨이 마치 down with us get it going",
+      "japanese": "まるで同時に息をするかの様に",
+      "tokens": [
+        "단번에",
+        "숨이",
+        "마치",
+        "down",
+        "with",
+        "us",
+        "get",
+        "it",
+        "going"
+      ]
+    },
+    {
+      "id": "wonderland-24",
+      "korean": "터져버려도 상관없어 난",
+      "japanese": "張り裂けても 俺は構わない",
+      "tokens": [
+        "터져버려도",
+        "상관없어",
+        "난"
+      ]
+    },
+    {
+      "id": "wonderland-25",
+      "korean": "지금 이곳은 끝의 시작",
+      "japanese": "今この場所は 終わりの始まり",
+      "tokens": [
+        "지금",
+        "이곳은",
+        "끝의",
+        "시작"
+      ]
+    },
+    {
+      "id": "wonderland-26",
+      "korean": "그토록 원하던 것이 눈앞에 oh",
+      "japanese": "あんなにも望んでいた物が目の前に",
+      "tokens": [
+        "그토록",
+        "원하던",
+        "것이",
+        "눈앞에",
+        "oh"
+      ]
+    },
+    {
+      "id": "wonderland-27",
+      "korean": "누군가는 가야 할 곳",
+      "japanese": "誰かは 行かなければならない場所",
+      "tokens": [
+        "누군가는",
+        "가야",
+        "할",
+        "곳"
+      ]
+    },
+    {
+      "id": "wonderland-28",
+      "korean": "쉽지만은 않더라도",
+      "japanese": "容易いわけではないけれど",
+      "tokens": [
+        "쉽지만은",
+        "않더라도"
+      ]
+    },
+    {
+      "id": "wonderland-29",
+      "korean": "그 이유가 우린 맘에 들어",
+      "japanese": "その理由が俺達は気に入ったから",
+      "tokens": [
+        "그",
+        "이유가",
+        "우린",
+        "맘에",
+        "들어"
+      ]
+    },
+    {
+      "id": "wonderland-30",
+      "korean": "뛰어 뛰어",
+      "japanese": "走れ 走れ",
+      "tokens": [
+        "뛰어",
+        "뛰어"
+      ]
+    }
+  ]
+}
