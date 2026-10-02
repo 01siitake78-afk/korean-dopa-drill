@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { shuffleTokens, lyricsProblem } from '../app/js/lyrics.js';
+import { SONGS, loadLyrics, shuffleTokens, lyricsProblem } from '../app/js/lyrics.js';
 test('song lines reconstruct faithfully and shuffled duplicate cards stay distinct', async () => {
  const song = JSON.parse(await readFile(new URL('../app/data/lyrics/wonderland.json', import.meta.url)));
  assert.equal(song.lines.length, 30);
@@ -32,12 +32,34 @@ test('beginner scaffold releases cards progressively and hints repair wrong plac
 
 import { LYRIC_GLOSSARY, lyricReading } from '../app/js/lyrics-help.js';
 test('every song card has a reading and Japanese gloss', async () => {
- const song=JSON.parse(await readFile(new URL('../app/data/lyrics/wonderland.json',import.meta.url)));
+ for (const {file} of SONGS) {
+ const song=JSON.parse(await readFile(new URL('../app/data/lyrics/'+file,import.meta.url)));
  for(const line of song.lines) {
   for(const token of line.tokens) {
    assert.ok(LYRIC_GLOSSARY[token]?.reading, token);
    assert.ok(LYRIC_GLOSSARY[token]?.meaning, token);
   }
   assert.ok(lyricReading(line.tokens));
+ }
+ }
+});
+
+test('all three songs load into the question pool and can be completed with hints', async (t) => {
+ t.mock.method(globalThis, 'fetch', async url => ({
+  ok: true, json: async () => JSON.parse(await readFile(url, 'utf8')),
+ }));
+ const lines = await loadLyrics();
+ assert.equal(lines.length, 76);
+ assert.deepEqual(new Set(lines.map(line => line.song)), new Set(['Wonderland', 'HALAZIA', 'BAD']));
+ assert.equal(new Set(lines.map(line => line.id)).size, lines.length);
+ for (const line of lines) {
+  assert.match(line.korean, /[가-힣]/);
+  assert.doesNotMatch(line.japanese, /歌詞を検索する|語学教材を探す/);
+  const parts = lyricScaffold(line.tokens);
+  assert.ok(parts.filter(part => !part.fixed).length <= 3);
+  const slots = parts.map(part => part.fixed ? part : null);
+  for (let i = 0; i < parts.length; i++) fillLyricHint(parts, slots);
+  assert.equal(slots.map(card => card.text).join(' '), line.korean);
+  assert.equal(new Set(slots.map(card => card.id)).size, parts.length);
  }
 });

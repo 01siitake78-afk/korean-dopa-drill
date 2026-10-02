@@ -1,0 +1,357 @@
+{
+  "id": "halazia",
+  "title": "HALAZIA",
+  "artist": "ATEEZ",
+  "lines": [
+    {
+      "id": "halazia-1",
+      "korean": "빛이 되어주오, oh, Halazia",
+      "japanese": "光になってくれ Halazia",
+      "tokens": [
+        "빛이",
+        "되어주오,",
+        "oh, Halazia"
+      ]
+    },
+    {
+      "id": "halazia-2",
+      "korean": "Oh, no, 모든 것이 말라가네, ooh, yeah",
+      "japanese": "Oh no 全てが枯れていく",
+      "tokens": [
+        "Oh, no,",
+        "모든 것이",
+        "말라가네,",
+        "ooh, yeah"
+      ]
+    },
+    {
+      "id": "halazia-3",
+      "korean": "점점 잃어 감에 익숙해져 가, 가",
+      "japanese": "だんだんと失ってくことに慣れていくんだ",
+      "tokens": [
+        "점점",
+        "잃어 감에",
+        "익숙해져",
+        "가, 가"
+      ]
+    },
+    {
+      "id": "halazia-4",
+      "korean": "마비되어 가네",
+      "japanese": "麻痺していくんだ",
+      "tokens": [
+        "마비되어",
+        "가네"
+      ]
+    },
+    {
+      "id": "halazia-5",
+      "korean": "묶여 버린 자유 속에",
+      "japanese": "縛られた自由の中で",
+      "tokens": [
+        "묶여 버린",
+        "자유",
+        "속에"
+      ]
+    },
+    {
+      "id": "halazia-6",
+      "korean": "내 안에 작은 fantasy",
+      "japanese": "僕の中の小さな fantasy",
+      "tokens": [
+        "내 안에",
+        "작은",
+        "fantasy"
+      ]
+    },
+    {
+      "id": "halazia-7",
+      "korean": "듣고 싶어 난",
+      "japanese": "僕は聞きたいんだ",
+      "tokens": [
+        "듣고 싶어",
+        "난"
+      ]
+    },
+    {
+      "id": "halazia-8",
+      "korean": "사랑의 숨소리를",
+      "japanese": "愛の息の音を",
+      "tokens": [
+        "사랑의",
+        "숨소리를"
+      ]
+    },
+    {
+      "id": "halazia-9",
+      "korean": "알고 싶어 난",
+      "japanese": "僕は知りたいんだ",
+      "tokens": [
+        "알고 싶어",
+        "난"
+      ]
+    },
+    {
+      "id": "halazia-10",
+      "korean": "이대로 괜찮은지",
+      "japanese": "このままでいいのか",
+      "tokens": [
+        "이대로",
+        "괜찮은지"
+      ]
+    },
+    {
+      "id": "halazia-11",
+      "korean": "Mm, 소리를 잃은 작은 파랑새야",
+      "japanese": "Mm 声を失った小さな青い鳥よ",
+      "tokens": [
+        "Mm,",
+        "소리를 잃은",
+        "작은",
+        "파랑새야"
+      ]
+    },
+    {
+      "id": "halazia-12",
+      "korean": "속삭임이 들려오는구나",
+      "japanese": "囁き声が聞こえてくるんだ",
+      "tokens": [
+        "속삭임이",
+        "들려오는구나"
+      ]
+    },
+    {
+      "id": "halazia-13",
+      "korean": "시작되는 깊은 울림",
+      "japanese": "始まる深い響き",
+      "tokens": [
+        "시작되는",
+        "깊은",
+        "울림"
+      ]
+    },
+    {
+      "id": "halazia-14",
+      "korean": "세상을 뒤집을 목소리",
+      "japanese": "世界を覆す声",
+      "tokens": [
+        "세상을",
+        "뒤집을",
+        "목소리"
+      ]
+    },
+    {
+      "id": "halazia-15",
+      "korean": "살아있다는 게 뭔지 느낄 수 없어",
+      "japanese": "生きてるってことがどういうことなのか感じられない",
+      "tokens": [
+        "살아있다는 게",
+        "뭔지",
+        "느낄 수 없어"
+      ]
+    },
+    {
+      "id": "halazia-16",
+      "korean": "난 이 순간에도",
+      "japanese": "僕はこの瞬間にも",
+      "tokens": [
+        "난",
+        "이 순간에도"
+      ]
+    },
+    {
+      "id": "halazia-17",
+      "korean": "한없이 차가운 이 세상을 물들여",
+      "japanese": "果てしなく冷たいこの世界を染める",
+      "tokens": [
+        "한없이",
+        "차가운",
+        "이 세상을",
+        "물들여"
+      ]
+    },
+    {
+      "id": "halazia-18",
+      "korean": "제발 숨다운 숨을 쉬게 해주오",
+      "japanese": "どうか息ができるようにしてくれ",
+      "tokens": [
+        "제발",
+        "숨다운 숨을",
+        "쉬게 해주오"
+      ]
+    },
+    {
+      "id": "halazia-19",
+      "korean": "춤다운 춤을 추게 해주오",
+      "japanese": "踊らせてくれ",
+      "tokens": [
+        "춤다운 춤을",
+        "추게 해주오"
+      ]
+    },
+    {
+      "id": "halazia-20",
+      "korean": "꿈다운 꿈을 꾸게 해주고",
+      "japanese": "夢を見させてくれ",
+      "tokens": [
+        "꿈다운 꿈을",
+        "꾸게 해주고"
+      ]
+    },
+    {
+      "id": "halazia-21",
+      "korean": "이 모든 감각을 느끼게 해주오",
+      "japanese": "この全ての感覚を感じさせてくれ",
+      "tokens": [
+        "이 모든 감각을",
+        "느끼게 해주오"
+      ]
+    },
+    {
+      "id": "halazia-22",
+      "korean": "사랑마저 삼켜버린",
+      "japanese": "愛さえ飲み込んでしまう",
+      "tokens": [
+        "사랑마저",
+        "삼켜버린"
+      ]
+    },
+    {
+      "id": "halazia-23",
+      "korean": "이곳에 파도를 일으킬 때",
+      "japanese": "ここで波を起こす時",
+      "tokens": [
+        "이곳에",
+        "파도를",
+        "일으킬 때"
+      ]
+    },
+    {
+      "id": "halazia-24",
+      "korean": "영원 영원할 이 움직임",
+      "japanese": "永遠のこの動き",
+      "tokens": [
+        "영원 영원할",
+        "이 움직임"
+      ]
+    },
+    {
+      "id": "halazia-25",
+      "korean": "거울 속 비친 넌 누구인가",
+      "japanese": "鏡の中に映る君は誰?",
+      "tokens": [
+        "거울 속",
+        "비친 넌",
+        "누구인가"
+      ]
+    },
+    {
+      "id": "halazia-26",
+      "korean": "기대 안에 기대 이 길의 뒤에",
+      "japanese": "期待の中の期待 この道の後に",
+      "tokens": [
+        "기대 안에 기대",
+        "이 길의 뒤에"
+      ]
+    },
+    {
+      "id": "halazia-27",
+      "korean": "시대와 미래 사이에 난 어디에 있을까?",
+      "japanese": "時代と未来の間で僕はどこにいるのかな?",
+      "tokens": [
+        "시대와 미래",
+        "사이에",
+        "난 어디에",
+        "있을까?"
+      ]
+    },
+    {
+      "id": "halazia-28",
+      "korean": "두려움에 가린 진실, yeah",
+      "japanese": "恐怖に覆われた真実",
+      "tokens": [
+        "두려움에",
+        "가린 진실,",
+        "yeah"
+      ]
+    },
+    {
+      "id": "halazia-29",
+      "korean": "피어나 저 위로",
+      "japanese": "蘇れ あの上で",
+      "tokens": [
+        "피어나",
+        "저 위로"
+      ]
+    },
+    {
+      "id": "halazia-30",
+      "korean": "선명히 저 위로",
+      "japanese": "鮮明に あの上で",
+      "tokens": [
+        "선명히",
+        "저 위로"
+      ]
+    },
+    {
+      "id": "halazia-31",
+      "korean": "우린 무얼 위해 이토록 침묵했던 것인가",
+      "japanese": "僕達は何のためにこんなにも黙ってたのか",
+      "tokens": [
+        "우린",
+        "무얼 위해",
+        "이토록",
+        "침묵했던 것인가"
+      ]
+    },
+    {
+      "id": "halazia-32",
+      "korean": "이건 누구를 위한 어둠 속인가",
+      "japanese": "これは誰のための暗闇なのか",
+      "tokens": [
+        "이건",
+        "누구를 위한",
+        "어둠 속인가"
+      ]
+    },
+    {
+      "id": "halazia-33",
+      "korean": "한 가지 소원을 들어주심 과연 빛을 주실까?",
+      "japanese": "一つだけ願いを聞いてくれるなら 果たして光をくれるだろうか",
+      "tokens": [
+        "한 가지 소원을",
+        "들어주심",
+        "과연",
+        "빛을 주실까?"
+      ]
+    },
+    {
+      "id": "halazia-34",
+      "korean": "차가운 절망 대신 뜨거운 열정을",
+      "japanese": "冷たい絶望の代わりに熱い情熱を",
+      "tokens": [
+        "차가운 절망 대신",
+        "뜨거운 열정을"
+      ]
+    },
+    {
+      "id": "halazia-35",
+      "korean": "느끼고 싶어",
+      "japanese": "感じたい",
+      "tokens": [
+        "느끼고",
+        "싶어"
+      ]
+    },
+    {
+      "id": "halazia-36",
+      "korean": "어둠을 걷어줘, oh, Halazia",
+      "japanese": "暗闇を取り除いてくれ oh Halazia",
+      "tokens": [
+        "어둠을",
+        "걷어줘,",
+        "oh, Halazia"
+      ]
+    }
+  ]
+}

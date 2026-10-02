@@ -1,5 +1,9 @@
 // Add songs here; each JSON contains title, artist and paired lines with tokens.
-export const SONGS = [{ id: 'wonderland', file: 'wonderland.json' }];
+export const SONGS = [
+  { id: 'wonderland', file: 'wonderland.json' },
+  { id: 'halazia', file: 'halazia.json' },
+  { id: 'bad', file: 'bad.json' },
+];
 export function shuffleTokens(tokens, rng = Math.random) {
   const cards = tokens.map((text, id) => ({ text, id }));
   for (let i = cards.length - 1; i > 0; i--) {

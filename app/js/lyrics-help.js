@@ -469,6 +469,485 @@ export const LYRIC_GLOSSARY = {
     "meaning": "揺れ・迷い"
   }
 };
+// Phrase-level support for the user-provided HALAZIA and BAD lyrics.
+Object.assign(LYRIC_GLOSSARY, {
+  "빛이": {
+    "reading": "ピチ",
+    "meaning": "光に"
+  },
+  "되어주오,": {
+    "reading": "トェオジュオ",
+    "meaning": "なってください"
+  },
+  "oh, Halazia": {
+    "reading": "オー ハラジア",
+    "meaning": "ああ、ハラジア（呼びかけ）"
+  },
+  "Oh, no,": {
+    "reading": "オー ノー",
+    "meaning": "ああ、なんてことだ"
+  },
+  "모든 것이": {
+    "reading": "モドゥン コシ",
+    "meaning": "すべてが"
+  },
+  "말라가네,": {
+    "reading": "マルラガネ",
+    "meaning": "枯れていく"
+  },
+  "ooh, yeah": {
+    "reading": "ウー イェー",
+    "meaning": "ウー、イェー（掛け声）"
+  },
+  "점점": {
+    "reading": "チョムジョム",
+    "meaning": "だんだん"
+  },
+  "잃어 감에": {
+    "reading": "イロ ガメ",
+    "meaning": "失っていくことに"
+  },
+  "익숙해져": {
+    "reading": "イクッスケジョ",
+    "meaning": "慣れていく"
+  },
+  "가, 가": {
+    "reading": "カ カ",
+    "meaning": "いく、いく"
+  },
+  "마비되어": {
+    "reading": "マビドェオ",
+    "meaning": "麻痺して"
+  },
+  "가네": {
+    "reading": "カネ",
+    "meaning": "いくんだ"
+  },
+  "묶여 버린": {
+    "reading": "ムッキョ ボリン",
+    "meaning": "縛られてしまった"
+  },
+  "자유": {
+    "reading": "チャユ",
+    "meaning": "自由"
+  },
+  "속에": {
+    "reading": "ソゲ",
+    "meaning": "中に"
+  },
+  "내 안에": {
+    "reading": "ネ アネ",
+    "meaning": "僕の中に"
+  },
+  "작은": {
+    "reading": "チャグン",
+    "meaning": "小さな"
+  },
+  "fantasy": {
+    "reading": "ファンタジー",
+    "meaning": "幻想"
+  },
+  "듣고 싶어": {
+    "reading": "トゥッコ シポ",
+    "meaning": "聞きたい"
+  },
+  "난": {
+    "reading": "ナン",
+    "meaning": "僕は"
+  },
+  "사랑의": {
+    "reading": "サランエ",
+    "meaning": "愛の"
+  },
+  "숨소리를": {
+    "reading": "スムソリルル",
+    "meaning": "息の音を"
+  },
+  "알고 싶어": {
+    "reading": "アルゴ シポ",
+    "meaning": "知りたい"
+  },
+  "이대로": {
+    "reading": "イデロ",
+    "meaning": "このままで"
+  },
+  "괜찮은지": {
+    "reading": "クェンチャヌンジ",
+    "meaning": "大丈夫なのか"
+  },
+  "Mm,": {
+    "reading": "ンー",
+    "meaning": "うーん（ハミング）"
+  },
+  "소리를 잃은": {
+    "reading": "ソリルル イルン",
+    "meaning": "声を失った"
+  },
+  "파랑새야": {
+    "reading": "パランセヤ",
+    "meaning": "青い鳥よ"
+  },
+  "속삭임이": {
+    "reading": "ソクッサギミ",
+    "meaning": "囁きが"
+  },
+  "들려오는구나": {
+    "reading": "トゥルリョオヌングナ",
+    "meaning": "聞こえてくるんだね"
+  },
+  "시작되는": {
+    "reading": "シジャクトェヌン",
+    "meaning": "始まる"
+  },
+  "깊은": {
+    "reading": "キプン",
+    "meaning": "深い"
+  },
+  "울림": {
+    "reading": "ウルリム",
+    "meaning": "響き"
+  },
+  "세상을": {
+    "reading": "セサンウル",
+    "meaning": "世界を"
+  },
+  "뒤집을": {
+    "reading": "トゥィジブル",
+    "meaning": "覆す"
+  },
+  "목소리": {
+    "reading": "モクッソリ",
+    "meaning": "声"
+  },
+  "살아있다는 게": {
+    "reading": "サライッタヌン ゲ",
+    "meaning": "生きているということが"
+  },
+  "뭔지": {
+    "reading": "ムォンジ",
+    "meaning": "何なのか"
+  },
+  "느낄 수 없어": {
+    "reading": "ヌッキル ス オプソ",
+    "meaning": "感じられない"
+  },
+  "이 순간에도": {
+    "reading": "イ スンガネド",
+    "meaning": "この瞬間にも"
+  },
+  "한없이": {
+    "reading": "ハノプシ",
+    "meaning": "果てしなく"
+  },
+  "차가운": {
+    "reading": "チャガウン",
+    "meaning": "冷たい"
+  },
+  "이 세상을": {
+    "reading": "イ セサンウル",
+    "meaning": "この世界を"
+  },
+  "물들여": {
+    "reading": "ムルドゥリョ",
+    "meaning": "染めて"
+  },
+  "제발": {
+    "reading": "チェバル",
+    "meaning": "どうか"
+  },
+  "숨다운 숨을": {
+    "reading": "スムダウン スムル",
+    "meaning": "息らしい息を"
+  },
+  "쉬게 해주오": {
+    "reading": "スィゲ ヘジュオ",
+    "meaning": "吸えるようにしてください"
+  },
+  "춤다운 춤을": {
+    "reading": "チュムダウン チュムル",
+    "meaning": "踊りらしい踊りを"
+  },
+  "추게 해주오": {
+    "reading": "チュゲ ヘジュオ",
+    "meaning": "踊れるようにしてください"
+  },
+  "꿈다운 꿈을": {
+    "reading": "ックムダウン ックムル",
+    "meaning": "夢らしい夢を"
+  },
+  "꾸게 해주고": {
+    "reading": "ックゲ ヘジュゴ",
+    "meaning": "見られるようにして"
+  },
+  "이 모든 감각을": {
+    "reading": "イ モドゥン カムガグル",
+    "meaning": "このすべての感覚を"
+  },
+  "느끼게 해주오": {
+    "reading": "ヌッキゲ ヘジュオ",
+    "meaning": "感じられるようにしてください"
+  },
+  "사랑마저": {
+    "reading": "サランマジョ",
+    "meaning": "愛さえ"
+  },
+  "삼켜버린": {
+    "reading": "サムキョボリン",
+    "meaning": "飲み込んでしまった"
+  },
+  "이곳에": {
+    "reading": "イゴセ",
+    "meaning": "ここに"
+  },
+  "파도를": {
+    "reading": "パドルル",
+    "meaning": "波を"
+  },
+  "일으킬 때": {
+    "reading": "イルキル ッテ",
+    "meaning": "起こすとき"
+  },
+  "영원 영원할": {
+    "reading": "ヨンウォン ヨンウォナル",
+    "meaning": "永遠に続く"
+  },
+  "이 움직임": {
+    "reading": "イ ウムジギム",
+    "meaning": "この動き"
+  },
+  "거울 속": {
+    "reading": "コウル ソク",
+    "meaning": "鏡の中"
+  },
+  "비친 넌": {
+    "reading": "ピチン ノン",
+    "meaning": "映った君は"
+  },
+  "누구인가": {
+    "reading": "ヌグインガ",
+    "meaning": "誰なのか"
+  },
+  "기대 안에 기대": {
+    "reading": "キデ アネ キデ",
+    "meaning": "期待の中の期待"
+  },
+  "이 길의 뒤에": {
+    "reading": "イ キレ トゥィエ",
+    "meaning": "この道の後ろに"
+  },
+  "시대와 미래": {
+    "reading": "シデワ ミレ",
+    "meaning": "時代と未来"
+  },
+  "사이에": {
+    "reading": "サイエ",
+    "meaning": "間に"
+  },
+  "난 어디에": {
+    "reading": "ナン オディエ",
+    "meaning": "僕はどこに"
+  },
+  "있을까?": {
+    "reading": "イッスルッカ",
+    "meaning": "いるのだろう？"
+  },
+  "두려움에": {
+    "reading": "トゥリョウメ",
+    "meaning": "恐れに"
+  },
+  "가린 진실,": {
+    "reading": "カリン チンシル",
+    "meaning": "覆われた真実"
+  },
+  "yeah": {
+    "reading": "イェー",
+    "meaning": "イェー（掛け声）"
+  },
+  "피어나": {
+    "reading": "ピオナ",
+    "meaning": "咲き誇れ"
+  },
+  "저 위로": {
+    "reading": "チョ ウィロ",
+    "meaning": "あの上へ"
+  },
+  "선명히": {
+    "reading": "ソンミョンヒ",
+    "meaning": "鮮明に"
+  },
+  "우린": {
+    "reading": "ウリン",
+    "meaning": "僕たちは"
+  },
+  "무얼 위해": {
+    "reading": "ムオル ウィヘ",
+    "meaning": "何のために"
+  },
+  "이토록": {
+    "reading": "イトロク",
+    "meaning": "こんなにも"
+  },
+  "침묵했던 것인가": {
+    "reading": "チンムケットン コシンガ",
+    "meaning": "黙っていたのか"
+  },
+  "이건": {
+    "reading": "イゴン",
+    "meaning": "これは"
+  },
+  "누구를 위한": {
+    "reading": "ヌグルル ウィハン",
+    "meaning": "誰のための"
+  },
+  "어둠 속인가": {
+    "reading": "オドゥム ソギンガ",
+    "meaning": "暗闇なのか"
+  },
+  "한 가지 소원을": {
+    "reading": "ハン ガジ ソウォヌル",
+    "meaning": "ひとつの願いを"
+  },
+  "들어주심": {
+    "reading": "トゥロジュシム",
+    "meaning": "聞き入れてくれるなら（原文表記）"
+  },
+  "과연": {
+    "reading": "クァヨン",
+    "meaning": "果たして"
+  },
+  "빛을 주실까?": {
+    "reading": "ピチュル チュシルッカ",
+    "meaning": "光をくださるだろうか？"
+  },
+  "차가운 절망 대신": {
+    "reading": "チャガウン チョルマン テシン",
+    "meaning": "冷たい絶望の代わりに"
+  },
+  "뜨거운 열정을": {
+    "reading": "ットゥゴウン ヨルチョンウル",
+    "meaning": "熱い情熱を"
+  },
+  "느끼고": {
+    "reading": "ヌッキゴ",
+    "meaning": "感じることを"
+  },
+  "싶어": {
+    "reading": "シポ",
+    "meaning": "したい"
+  },
+  "어둠을": {
+    "reading": "オドゥムル",
+    "meaning": "暗闇を"
+  },
+  "걷어줘,": {
+    "reading": "コドジュォ",
+    "meaning": "取り除いて"
+  },
+  "어지러워": {
+    "reading": "オジロウォ",
+    "meaning": "目がくらむ"
+  },
+  "너의 그 미소": {
+    "reading": "ノエ ク ミソ",
+    "meaning": "君のその笑顔"
+  },
+  "눈이 멀어": {
+    "reading": "ヌニ モロ",
+    "meaning": "目がくらむ"
+  },
+  "Stuck in your halo": {
+    "reading": "スタック イン ユア ヘイロー",
+    "meaning": "君の後光に囚われて"
+  },
+  "빠져버려": {
+    "reading": "ッパジョボリョ",
+    "meaning": "はまってしまう"
+  },
+  "이제 포로": {
+    "reading": "イジェ ポロ",
+    "meaning": "今や虜"
+  },
+  "홀렸네": {
+    "reading": "ホルリョンネ",
+    "meaning": "魅了された"
+  },
+  "막 아득해": {
+    "reading": "マク アドゥケ",
+    "meaning": "すっかりぼんやりする"
+  },
+  "나도 몰라": {
+    "reading": "ナド モルラ",
+    "meaning": "僕も分からない"
+  },
+  "어떡해": {
+    "reading": "オットケ",
+    "meaning": "どうしよう"
+  },
+  "네게 빠져": {
+    "reading": "ネゲ ッパジョ",
+    "meaning": "君に溺れて"
+  },
+  "허우적대": {
+    "reading": "ホウジョクッテ",
+    "meaning": "もがく"
+  },
+  "짜릿해서 난": {
+    "reading": "ッチャリテソ ナン",
+    "meaning": "刺激的で僕は"
+  },
+  "brr 떨려": {
+    "reading": "ブルル ットルリョ",
+    "meaning": "ブルッと震える"
+  },
+  "넌 향기로운 amiga": {
+    "reading": "ノン ヒャンギロウン アミガ",
+    "meaning": "君は香り立つ女友達"
+  },
+  "Bella figura,": {
+    "reading": "ベッラ フィグーラ",
+    "meaning": "美しい姿"
+  },
+  "got that peso": {
+    "reading": "ガット ザット ペソ",
+    "meaning": "その存在感がある"
+  },
+  "미쳐버려": {
+    "reading": "ミチョボリョ",
+    "meaning": "おかしくなりそう"
+  },
+  "청양고추": {
+    "reading": "チョンヤンゴチュ",
+    "meaning": "青陽唐辛子"
+  },
+  "Vibe she spicy": {
+    "reading": "ヴァイブ シー スパイシー",
+    "meaning": "刺激的な彼女の雰囲気"
+  },
+  "난 너만 바래": {
+    "reading": "ナン ノマン パレ",
+    "meaning": "僕は君だけを望む"
+  },
+  "내가 찾던": {
+    "reading": "ネガ チャットン",
+    "meaning": "僕が探していた"
+  },
+  "Euphoria": {
+    "reading": "ユーフォリア",
+    "meaning": "幸福感"
+  },
+  "너에게 바치리": {
+    "reading": "ノエゲ パチリ",
+    "meaning": "君に捧げよう"
+  },
+  "나의": {
+    "reading": "ナエ",
+    "meaning": "僕の"
+  },
+  "La Victoria": {
+    "reading": "ラ ビクトリア",
+    "meaning": "勝利"
+  }
+});
 export function lyricTokenHelp(token) {
   return LYRIC_GLOSSARY[token] || { reading: token, meaning: '意味を確認中' };
 }

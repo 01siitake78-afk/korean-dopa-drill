@@ -1,0 +1,106 @@
+{
+  "id": "bad",
+  "title": "BAD",
+  "artist": "ATEEZ",
+  "lines": [
+    {
+      "id": "bad-1",
+      "korean": "어지러워 너의 그 미소",
+      "japanese": "君のその笑顔に目がくらむ",
+      "tokens": [
+        "어지러워",
+        "너의 그 미소"
+      ]
+    },
+    {
+      "id": "bad-2",
+      "korean": "눈이 멀어 Stuck in your halo",
+      "japanese": "君の後光に目を奪われる",
+      "tokens": [
+        "눈이 멀어",
+        "Stuck in your halo"
+      ]
+    },
+    {
+      "id": "bad-3",
+      "korean": "빠져버려 난 이제 포로",
+      "japanese": "もう完全にハマってしまった 僕は君の虜だ",
+      "tokens": [
+        "빠져버려",
+        "난",
+        "이제 포로"
+      ]
+    },
+    {
+      "id": "bad-4",
+      "korean": "홀렸네 막 아득해 나도 몰라 어떡해",
+      "japanese": "完全に魅了されてしまった どうしていいか分からない",
+      "tokens": [
+        "홀렸네",
+        "막 아득해",
+        "나도 몰라",
+        "어떡해"
+      ]
+    },
+    {
+      "id": "bad-5",
+      "korean": "네게 빠져 허우적대 허우적대 허우적대",
+      "japanese": "君に溺れて もがいて もがいて もがいている",
+      "tokens": [
+        "네게 빠져",
+        "허우적대",
+        "허우적대",
+        "허우적대"
+      ]
+    },
+    {
+      "id": "bad-6",
+      "korean": "짜릿해서 난 brr 떨려 넌 향기로운 amiga",
+      "japanese": "刺激的すぎて僕は震える 君は香り立つ女友達",
+      "tokens": [
+        "짜릿해서 난",
+        "brr 떨려",
+        "넌 향기로운 amiga"
+      ]
+    },
+    {
+      "id": "bad-7",
+      "korean": "Bella figura, got that peso 미쳐버려",
+      "japanese": "美しいスタイルに、その色気 僕はおかしくなりそうだ",
+      "tokens": [
+        "Bella figura,",
+        "got that peso",
+        "미쳐버려"
+      ]
+    },
+    {
+      "id": "bad-8",
+      "korean": "청양고추 Vibe she spicy",
+      "japanese": "青陽唐辛子みたいに刺激的で辛い雰囲気だ",
+      "tokens": [
+        "청양고추",
+        "Vibe she spicy"
+      ]
+    },
+    {
+      "id": "bad-9",
+      "korean": "난 너만 바래 내가 찾던 Euphoria",
+      "japanese": "僕は君だけを求めている ずっと探していた幸福そのものだ",
+      "tokens": [
+        "난 너만 바래",
+        "내가 찾던",
+        "Euphoria"
+      ]
+    },
+    {
+      "id": "bad-10",
+      "korean": "너에게 바치리 나의 La Victoria",
+      "japanese": "僕の勝利、そのすべてを君に捧げよう",
+      "tokens": [
+        "너에게 바치리",
+        "나의",
+        "La Victoria"
+      ]
+    }
+  ]
+}
