@@ -1,4 +1,4 @@
-import { loadLyrics, lyricsProblem, shuffleTokens, lyricScaffold, fillLyricHint } from './lyrics.js';
+import { loadLyrics, lyricsProblem, shuffleTokens, lyricScaffold, fillLyricHint } from './lyrics.js?v=20261002-scaffold';
 import { vocabularyHelp } from './vocabulary-help.js';
 import { recordVocabularyAnswer } from './vocabulary-curriculum.js';
 import { loadVocabulary, vocabularyProblem } from './vocabulary.js';
