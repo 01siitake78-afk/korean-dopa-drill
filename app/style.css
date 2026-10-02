@@ -292,6 +292,8 @@ body.lv4 .pad button[data-key="8"], body.lv4 .pad button[data-key="4"] { backgro
 body.lv4 .pad button[data-key="9"], body.lv4 .pad button[data-key="5"], body.lv4 .pad button[data-key="1"] { background: #e3ebff; }
 body.lv4 .pad button[data-key="6"], body.lv4 .pad button[data-key="2"], body.lv4 .pad button[data-key="0"] { background: #dcfaef; }
 body.lv8 .pad button { box-shadow: 0 5px 0 var(--ink), 0 0 calc(var(--kick) * 18px) rgba(255, 210, 63, .9); }
+/* Keep reading and vocabulary choices still, including during taps. */
+#pad.choices button { --bounce: 0; transform: none; }
 .pad button:disabled { opacity: .5; }
 
 /* ------------------------------------------------------------ results */

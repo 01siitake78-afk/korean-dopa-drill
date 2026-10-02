@@ -593,6 +593,7 @@ async function setupProblem() {
   $('#pad').hidden = !!p.lyrics;
   card.classList.toggle('lyrics-card', !!p.lyrics);
   $('#pad').classList.toggle('vocabulary', !!p.vocabulary);
+  $('#pad').classList.toggle('choices', !!p.choices);
   updateAnswerButtons(p);
   S.step = 0; S.wrongInQ = false; S.shownWrong = null;
   $$('.pip').forEach((pp, i) => pp.classList.toggle('now', !extra && i === S.qi));
