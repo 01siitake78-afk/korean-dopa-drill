@@ -1,4 +1,4 @@
-import { loadLyrics, lyricsProblem, shuffleTokens } from './lyrics.js';
+import { loadLyrics, lyricsProblem, shuffleTokens, lyricScaffold, fillLyricHint } from './lyrics.js';
 import { vocabularyHelp } from './vocabulary-help.js';
 import { recordVocabularyAnswer } from './vocabulary-curriculum.js';
 import { loadVocabulary, vocabularyProblem } from './vocabulary.js';
@@ -365,38 +365,64 @@ function renderLyrics(p) {
   const actions = document.createElement('div'); actions.className = 'lyrics-actions';
   const reset = document.createElement('button'); reset.type = 'button'; reset.textContent = 'やり直す';
   const submit = document.createElement('button'); submit.type = 'button'; submit.textContent = '答え合わせ';
-  const cards = shuffleTokens(p.tokens, S.rng); let selected = [];
+  const history = store.load().lyricsLearning || {};
+  const parts = lyricScaffold(p.tokens, history[p.id]?.successes || 0);
+  const slots = parts.map(part => part.fixed ? part : null);
+  const cards = shuffleTokens(parts.filter(part => !part.fixed), S.rng).map(card => card.text);
+  const hint = document.createElement('button'); hint.type = 'button'; hint.textContent = 'ヒント';
+  const help = document.createElement('p'); help.className = 'lyrics-support';
+  help.textContent = `固定された歌詞を見ながら、${cards.length}個のカードを空欄に置こう。ヒントは何度でも使えます。`;
   const paint = () => {
     answer.replaceChildren(); bank.replaceChildren();
-    for (const c of selected) {
-      const b = document.createElement('button'); b.type = 'button'; b.textContent = c.text;
-      b.setAttribute('aria-label', c.text + 'を取り消す');
-      b.onclick = () => { if (!S.ready) return; selected = selected.filter(x => x.id !== c.id); paint(); };
-      answer.appendChild(b);
-    }
+    parts.forEach((part, i) => {
+      const c = slots[i];
+      if (part.fixed) {
+        const fixed = document.createElement('span'); fixed.className = 'lyrics-fixed'; fixed.textContent = part.text;
+        fixed.setAttribute('aria-label', `固定 ${i + 1}番目`); answer.appendChild(fixed);
+      } else if (c) {
+        const b = document.createElement('button'); b.type = 'button'; b.textContent = c.text;
+        b.setAttribute('aria-label', `${i + 1}番目のカードを取り消す`);
+        b.onclick = () => { if (!S.ready) return; slots[i] = null; paint(); };
+        answer.appendChild(b);
+      } else {
+        const blank = document.createElement('span'); blank.className = 'lyrics-blank'; blank.textContent = `空欄 ${i + 1}`;
+        answer.appendChild(blank);
+      }
+    });
     for (const c of cards) {
       const b = document.createElement('button'); b.type = 'button'; b.textContent = c.text;
-      b.disabled = selected.some(x => x.id === c.id);
-      b.onclick = () => { if (!S.ready) return; selected.push(c); audio.keyTap(S.combo); paint(); };
+      b.disabled = slots.some(x => x?.id === c.id);
+      b.onclick = () => {
+        if (!S.ready) return;
+        const i = slots.findIndex(x => !x); if (i < 0) return;
+        slots[i] = c; audio.keyTap(S.combo); paint();
+      };
       bank.appendChild(b);
     }
-    submit.disabled = selected.length !== cards.length;
+    submit.disabled = slots.some(x => !x);
+    hint.disabled = slots.every((c, i) => c?.text === parts[i].text);
   };
-  reset.onclick = () => { if (!S.ready) return; selected = []; paint(); };
+  reset.onclick = () => { if (!S.ready) return; parts.forEach((part, i) => { slots[i] = part.fixed ? part : null; }); paint(); };
+  hint.onclick = () => {
+    if (!S.ready) return;
+    if (fillLyricHint(parts, slots)) { audio.keyTap(S.combo); paint(); }
+  };
   submit.onclick = () => {
-    if (!S.ready || selected.length !== cards.length) return;
-    const value = selected.map(c => c.text).join(' ');
+    if (!S.ready || slots.some(x => !x)) return;
+    const value = slots.map(c => c.text).join(' ');
     if (value === p.answer) {
-      reset.disabled = submit.disabled = true;
+      reset.disabled = submit.disabled = hint.disabled = true;
       bank.querySelectorAll('button').forEach(b => b.disabled = true);
+      const saved = store.load(); saved.lyricsLearning ||= {};
+      const previous = saved.lyricsLearning[p.id]?.successes || 0;
+      saved.lyricsLearning[p.id] = { successes: previous + 1 }; store.save();
       press(value, submit);
     } else {
       press(value, submit);
-      // Restore editable cards after the existing miss feedback.
       setTimeout(() => { if (S.problem === p && S.ready) paint(); }, 600);
     }
   };
-  actions.append(reset, submit); sheet.append(prompt, answer, bank, actions); paint();
+  actions.append(reset, hint, submit); sheet.append(prompt, help, answer, bank, actions); paint();
   requestAnimationFrame(layoutActors);
 }
 
@@ -1095,7 +1121,7 @@ function comboGrade() {
   return p && p.skill && SKILL[p.skill] ? SKILL[p.skill].grade : 3;
 }
 function armCombo(first) {
-  S.comboLimit = comboWindowMs(comboGrade(), first);
+  S.comboLimit = S.problem?.lyrics ? Math.max(60000, S.problem.tokens.length * 10000) : comboWindowMs(comboGrade(), first);
   S.comboEnd = now() + S.comboLimit;
 }
 function addCombo() {

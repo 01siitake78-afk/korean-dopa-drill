@@ -28,3 +28,18 @@ export function lyricsProblem(line) {
     answer: line.korean, cols: 1, rows: 1, cells: [], lines: [],
     steps: [{ cell: 'lyrics-answer', digit: line.korean, label: 'カードをタップして並べ、答え合わせ' }] };
 }
+
+// Release one additional card after every three successful completions.
+export function lyricScaffold(tokens, successes = 0) {
+  const movableCount = Math.min(tokens.length, (tokens.length <= 4 ? 2 : 3) + Math.floor(Math.max(0, successes) / 3));
+  const movable = new Set(Array.from({ length: movableCount }, (_, i) => Math.floor((i + .5) * tokens.length / movableCount)));
+  return tokens.map((text, id) => ({ text, id, fixed: !movable.has(id) }));
+}
+export function fillLyricHint(parts, slots) {
+  const target = parts.findIndex((part, i) => !part.fixed && slots[i]?.text !== part.text);
+  if (target < 0) return false;
+  const usedAt = slots.findIndex(card => card?.id === parts[target].id);
+  if (usedAt >= 0) slots[usedAt] = null;
+  slots[target] = parts[target];
+  return true;
+}

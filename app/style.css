@@ -867,3 +867,9 @@ body.reduced #guide-help-ring, body.reduced .guide-help-fallback::after { animat
 .lyrics-actions button:last-child { background: #ffd23f; }
 .lyrics-card .step-label { font-size: 14px; height: auto; min-height: 28px; overflow-wrap: anywhere; }
 .lyrics-card { max-width: 100%; }
+
+.lyrics-fixed, .lyrics-blank { display: inline-flex; align-items: center; min-height: 44px; max-width: 100%; padding: 8px 10px; box-sizing: border-box; border-radius: 10px; font: 700 17px/1.4 Meiryo,sans-serif; overflow-wrap: anywhere; }
+.lyrics-fixed { background: #e8e5f4; border: 2px solid #b7afce; }
+.lyrics-blank { border: 2px dashed #7165b5; color: #7165b5; background: #fff; }
+.lyrics-support { margin: 0; font: 14px/1.6 Meiryo,sans-serif; }
+.lyrics-answer.cell.active::before { content: none; }
