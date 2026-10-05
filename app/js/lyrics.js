@@ -3,6 +3,7 @@ export const SONGS = [
   { id: 'wonderland', file: 'wonderland.json' },
   { id: 'halazia', file: 'halazia.json' },
   { id: 'bad', file: 'bad.json' },
+  { id: 'enough', file: 'enough.json' },
 ];
 export function shuffleTokens(tokens, rng = Math.random) {
   const cards = tokens.map((text, id) => ({ text, id }));

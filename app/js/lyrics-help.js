@@ -948,6 +948,17 @@ Object.assign(LYRIC_GLOSSARY, {
     "meaning": "勝利"
   }
 });
+// Phrase-level support for the user-provided ENOuGH excerpt.
+Object.assign(LYRIC_GLOSSARY, {
+  "수십 년": { "reading": "スシム ニョン", "meaning": "何十年" },
+  "지나": { "reading": "チナ", "meaning": "過ぎて" },
+  "저 끝에": { "reading": "チョ ックテ", "meaning": "あの果てに" },
+  "닿을 때": { "reading": "タウル ッテ", "meaning": "辿り着くとき" },
+  "이 우주에": { "reading": "イ ウジュエ", "meaning": "この宇宙に" },
+  "둘이면": { "reading": "トゥリミョン", "meaning": "二人なら・二人いれば" },
+  "나는": { "reading": "ナヌン", "meaning": "僕は" },
+  "족해": { "reading": "チョケ", "meaning": "十分だ・満ち足りている" }
+});
 export function lyricTokenHelp(token) {
   return LYRIC_GLOSSARY[token] || { reading: token, meaning: '意味を確認中' };
 }

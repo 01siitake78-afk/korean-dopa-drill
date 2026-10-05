@@ -44,13 +44,13 @@ test('every song card has a reading and Japanese gloss', async () => {
  }
 });
 
-test('all three songs load into the question pool and can be completed with hints', async (t) => {
+test('all four songs load into the question pool and can be completed with hints', async (t) => {
  t.mock.method(globalThis, 'fetch', async url => ({
   ok: true, json: async () => JSON.parse(await readFile(url, 'utf8')),
  }));
  const lines = await loadLyrics();
- assert.equal(lines.length, 76);
- assert.deepEqual(new Set(lines.map(line => line.song)), new Set(['Wonderland', 'HALAZIA', 'BAD']));
+ assert.equal(lines.length, 78);
+ assert.deepEqual(new Set(lines.map(line => line.song)), new Set(['Wonderland', 'HALAZIA', 'BAD', 'ENOuGH']));
  assert.equal(new Set(lines.map(line => line.id)).size, lines.length);
  for (const line of lines) {
   assert.match(line.korean, /[가-힣]/);
