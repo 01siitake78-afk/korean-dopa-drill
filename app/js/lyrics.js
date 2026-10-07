@@ -4,6 +4,8 @@ export const SONGS = [
   { id: 'halazia', file: 'halazia.json' },
   { id: 'bad', file: 'bad.json' },
   { id: 'enough', file: 'enough.json' },
+  { id: 'on-the-road', file: 'on-the-road.json' },
+  { id: 'choose', file: 'choose.json' },
 ];
 export function shuffleTokens(tokens, rng = Math.random) {
   const cards = tokens.map((text, id) => ({ text, id }));
@@ -48,3 +50,4 @@ export function fillLyricHint(parts, slots) {
   slots[target] = parts[target];
   return true;
 }
+

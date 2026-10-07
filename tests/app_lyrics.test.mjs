@@ -44,17 +44,17 @@ test('every song card has a reading and Japanese gloss', async () => {
  }
 });
 
-test('all four songs load into the question pool and can be completed with hints', async (t) => {
+test('all six songs load into the question pool and can be completed with hints', async (t) => {
  t.mock.method(globalThis, 'fetch', async url => ({
   ok: true, json: async () => JSON.parse(await readFile(url, 'utf8')),
  }));
  const lines = await loadLyrics();
- assert.equal(lines.length, 78);
- assert.deepEqual(new Set(lines.map(line => line.song)), new Set(['Wonderland', 'HALAZIA', 'BAD', 'ENOuGH']));
+ assert.equal(lines.length, 127);
+ assert.deepEqual(new Set(lines.map(line => line.song)), new Set(['Wonderland', 'HALAZIA', 'BAD', 'ENOuGH', 'On The Road', 'Choose']));
  assert.equal(new Set(lines.map(line => line.id)).size, lines.length);
  for (const line of lines) {
   assert.match(line.korean, /[가-힣]/);
-  assert.doesNotMatch(line.japanese, /歌詞を検索する|語学教材を探す/);
+  assert.doesNotMatch(line.japanese, /歌詞を検索する|語学教材を探す|翻訳サービス比較|ヒップホップを聴く|音楽配信を聴く/);
   const parts = lyricScaffold(line.tokens);
   assert.ok(parts.filter(part => !part.fixed).length <= 3);
   const slots = parts.map(part => part.fixed ? part : null);
@@ -63,3 +63,4 @@ test('all four songs load into the question pool and can be completed with hints
   assert.equal(new Set(slots.map(card => card.id)).size, parts.length);
  }
 });
+
