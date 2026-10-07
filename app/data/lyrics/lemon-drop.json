@@ -1,0 +1,237 @@
+{
+  "id": "lemon-drop",
+  "title": "Lemon Drop",
+  "artist": "ATEEZ",
+  "lines": [
+    {
+      "id": "lemon-drop-1",
+      "korean": "너만 보여 여기에",
+      "japanese": "君だけ見える ここに",
+      "tokens": [
+        "너만",
+        "보여",
+        "여기에"
+      ]
+    },
+    {
+      "id": "lemon-drop-2",
+      "korean": "Yeah 자꾸만 너에게 끌려 too insidious",
+      "japanese": "Yeah しきりに君に惹かれる too insidious",
+      "tokens": [
+        "Yeah",
+        "자꾸만 너에게",
+        "끌려",
+        "too insidious"
+      ]
+    },
+    {
+      "id": "lemon-drop-3",
+      "korean": "Yeah 시선을 빼앗겨버려 eyes locked onto you",
+      "japanese": "Yeah 視線を奪われる eyes locked onto you",
+      "tokens": [
+        "Yeah",
+        "시선을",
+        "빼앗겨버려",
+        "eyes locked onto you"
+      ]
+    },
+    {
+      "id": "lemon-drop-4",
+      "korean": "사랑은 완벽하진 않지만 Focus on me",
+      "japanese": "愛は完璧ではないけれど Focus on me",
+      "tokens": [
+        "사랑은",
+        "완벽하진 않지만",
+        "Focus on me"
+      ]
+    },
+    {
+      "id": "lemon-drop-5",
+      "korean": "온몸이 떨려 네 소리가 내게는 반주같이",
+      "japanese": "体中が震える 君の声は僕にとって酒のように",
+      "tokens": [
+        "온몸이 떨려",
+        "네 소리가",
+        "내게는",
+        "반주같이"
+      ]
+    },
+    {
+      "id": "lemon-drop-6",
+      "korean": "쓰고 달고 그래 한 상에 차려진 Luxury",
+      "japanese": "苦く甘くて そう テーブルに並んだLuxury",
+      "tokens": [
+        "쓰고 달고",
+        "그래",
+        "한 상에 차려진",
+        "Luxury"
+      ]
+    },
+    {
+      "id": "lemon-drop-7",
+      "korean": "넌 너무 나빠 더는 자극하지 마 Brrr dat dat",
+      "japanese": "君は本当に悪いね これ以上刺激しないでBrrr dat dat",
+      "tokens": [
+        "넌 너무 나빠",
+        "더는",
+        "자극하지 마",
+        "Brrr dat dat"
+      ]
+    },
+    {
+      "id": "lemon-drop-8",
+      "korean": "풀고 감아 돌리고 다시 담아",
+      "japanese": "ほどいて 巻いて 回して また入れる",
+      "tokens": [
+        "풀고 감아",
+        "돌리고",
+        "다시 담아"
+      ]
+    },
+    {
+      "id": "lemon-drop-9",
+      "korean": "Cassette tape 같은 그저 그런 영화",
+      "japanese": "Cassette tapeみたいな それなりの映画",
+      "tokens": [
+        "Cassette tape 같은",
+        "그저 그런",
+        "영화"
+      ]
+    },
+    {
+      "id": "lemon-drop-10",
+      "korean": "여기저기 Woo 그저 그런 fools",
+      "japanese": "あちこちWoo ただそれなりのfools",
+      "tokens": [
+        "여기저기",
+        "Woo",
+        "그저 그런 fools"
+      ]
+    },
+    {
+      "id": "lemon-drop-11",
+      "korean": "걱정 마 난 그 반대 Woo",
+      "japanese": "心配するな 僕はその反対 Woo",
+      "tokens": [
+        "걱정 마",
+        "난 그 반대",
+        "Woo"
+      ]
+    },
+    {
+      "id": "lemon-drop-12",
+      "korean": "뜨거워 여름밤 열기",
+      "japanese": "熱い 夏の夜の熱気",
+      "tokens": [
+        "뜨거워",
+        "여름밤 열기"
+      ]
+    },
+    {
+      "id": "lemon-drop-13",
+      "korean": "너와 나 둘만의 Party",
+      "japanese": "君と僕 2人だけのParty",
+      "tokens": [
+        "너와 나",
+        "둘만의",
+        "Party"
+      ]
+    },
+    {
+      "id": "lemon-drop-14",
+      "korean": "Cheers to this night 잔을 위로",
+      "japanese": "Cheers to this night グラスを上に",
+      "tokens": [
+        "Cheers to this night",
+        "잔을 위로"
+      ]
+    },
+    {
+      "id": "lemon-drop-15",
+      "korean": "조금 더 Closer",
+      "japanese": "もう少し Closer",
+      "tokens": [
+        "조금 더",
+        "Closer"
+      ]
+    },
+    {
+      "id": "lemon-drop-16",
+      "korean": "시큼한 Type 자극 Too much",
+      "japanese": "酸っぱいType 刺激はToo much",
+      "tokens": [
+        "시큼한 Type",
+        "자극",
+        "Too much"
+      ]
+    },
+    {
+      "id": "lemon-drop-17",
+      "korean": "이건 Fine dine Just good time",
+      "japanese": "これは Fine dine Just good time",
+      "tokens": [
+        "이건",
+        "Fine dine",
+        "Just good time"
+      ]
+    },
+    {
+      "id": "lemon-drop-18",
+      "korean": "침이 고여 막 입가심은 Lemon Drop",
+      "japanese": "唾が出る 口直しはLemon Drop",
+      "tokens": [
+        "침이 고여 막",
+        "입가심은",
+        "Lemon Drop"
+      ]
+    },
+    {
+      "id": "lemon-drop-19",
+      "korean": "입에 담기엔 넌 너무 Naughty",
+      "japanese": "口に入れるには 君はすごくNaughty",
+      "tokens": [
+        "입에 담기엔",
+        "넌 너무",
+        "Naughty"
+      ]
+    },
+    {
+      "id": "lemon-drop-20",
+      "korean": "눈빛 찌릿하면 머릿속에 Parade",
+      "japanese": "視線にしびれたら 頭の中にParade",
+      "tokens": [
+        "눈빛 찌릿하면",
+        "머릿속에",
+        "Parade"
+      ]
+    },
+    {
+      "id": "lemon-drop-21",
+      "korean": "겨우 들뜬 맘 책임지길 바라",
+      "japanese": "やっと高まった気持ち 責任取ってよ",
+      "tokens": [
+        "겨우 들뜬 맘",
+        "책임지길",
+        "바라"
+      ]
+    },
+    {
+      "id": "lemon-drop-22",
+      "korean": "누가 뭐래도, 도, 도",
+      "japanese": "誰が何と言おうと",
+      "tokens": [
+        "누가 뭐래도,",
+        "도, 도"
+      ]
+    },
+    {
+      "id": "lemon-drop-23",
+      "korean": "너 원하는 대로, 로, 로",
+      "japanese": "君が望む通りに",
+      "tokens": [
+        "너 원하는 대로,",
+        "로, 로"
+      ]
+    }
+  ]
+}

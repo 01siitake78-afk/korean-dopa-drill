@@ -1470,6 +1470,277 @@ Object.assign(LYRIC_GLOSSARY, {
     "meaning": "君からだということ"
   }
 });
+// Phrase cards from the user-provided Lemon Drop lyrics.
+Object.assign(LYRIC_GLOSSARY, {
+  "너만": {
+    "reading": "ノマン",
+    "meaning": "君だけ"
+  },
+  "보여": {
+    "reading": "ポヨ",
+    "meaning": "見える"
+  },
+  "여기에": {
+    "reading": "ヨギエ",
+    "meaning": "ここに"
+  },
+  "Yeah": {
+    "reading": "イェー",
+    "meaning": "そう"
+  },
+  "자꾸만 너에게": {
+    "reading": "チャックマン ノエゲ",
+    "meaning": "しきりに君に"
+  },
+  "끌려": {
+    "reading": "ックルリョ",
+    "meaning": "惹かれる"
+  },
+  "too insidious": {
+    "reading": "トゥー インシディアス",
+    "meaning": "とても密かに忍び寄る"
+  },
+  "시선을": {
+    "reading": "シソヌル",
+    "meaning": "視線を"
+  },
+  "빼앗겨버려": {
+    "reading": "ッペアッキョボリョ",
+    "meaning": "奪われてしまう"
+  },
+  "eyes locked onto you": {
+    "reading": "アイズ ロックト オントゥー ユー",
+    "meaning": "君から目を離せない"
+  },
+  "사랑은": {
+    "reading": "サランウン",
+    "meaning": "愛は"
+  },
+  "완벽하진 않지만": {
+    "reading": "ワンビョカジン アンチマン",
+    "meaning": "完璧ではないけれど"
+  },
+  "Focus on me": {
+    "reading": "フォーカス オン ミー",
+    "meaning": "僕に集中して"
+  },
+  "온몸이 떨려": {
+    "reading": "オンモミ ットルリョ",
+    "meaning": "体中が震える"
+  },
+  "네 소리가": {
+    "reading": "ニ ソリガ",
+    "meaning": "君の声が"
+  },
+  "내게는": {
+    "reading": "ネゲヌン",
+    "meaning": "僕にとっては"
+  },
+  "반주같이": {
+    "reading": "パンジュガッチ",
+    "meaning": "伴奏のように（対訳では酒にたとえる）"
+  },
+  "쓰고 달고": {
+    "reading": "ッスゴ タルゴ",
+    "meaning": "苦くて甘くて"
+  },
+  "그래": {
+    "reading": "クレ",
+    "meaning": "そう"
+  },
+  "한 상에 차려진": {
+    "reading": "ハン サンエ チャリョジン",
+    "meaning": "食卓に並べられた"
+  },
+  "Luxury": {
+    "reading": "ラグジュアリー",
+    "meaning": "贅沢"
+  },
+  "넌 너무 나빠": {
+    "reading": "ノン ノム ナッパ",
+    "meaning": "君は本当に悪い"
+  },
+  "더는": {
+    "reading": "トヌン",
+    "meaning": "これ以上は"
+  },
+  "자극하지 마": {
+    "reading": "チャグカジ マ",
+    "meaning": "刺激しないで"
+  },
+  "Brrr dat dat": {
+    "reading": "ブルル ダッ ダッ",
+    "meaning": "掛け声"
+  },
+  "풀고 감아": {
+    "reading": "プルゴ カマ",
+    "meaning": "ほどいて巻いて"
+  },
+  "돌리고": {
+    "reading": "トルリゴ",
+    "meaning": "回して"
+  },
+  "다시 담아": {
+    "reading": "タシ タマ",
+    "meaning": "また入れて"
+  },
+  "Cassette tape 같은": {
+    "reading": "カセット テイプ カットゥン",
+    "meaning": "カセットテープみたいな"
+  },
+  "그저 그런": {
+    "reading": "クジョ クロン",
+    "meaning": "それなりの"
+  },
+  "영화": {
+    "reading": "ヨンファ",
+    "meaning": "映画"
+  },
+  "여기저기": {
+    "reading": "ヨギジョギ",
+    "meaning": "あちこち"
+  },
+  "Woo": {
+    "reading": "ウー",
+    "meaning": "掛け声"
+  },
+  "그저 그런 fools": {
+    "reading": "クジョ クロン フールズ",
+    "meaning": "ただそれなりの愚か者たち"
+  },
+  "걱정 마": {
+    "reading": "コクチョン マ",
+    "meaning": "心配しないで"
+  },
+  "난 그 반대": {
+    "reading": "ナン ク パンデ",
+    "meaning": "僕はその反対"
+  },
+  "뜨거워": {
+    "reading": "ットゥゴウォ",
+    "meaning": "熱い"
+  },
+  "여름밤 열기": {
+    "reading": "ヨルムパム ヨルギ",
+    "meaning": "夏の夜の熱気"
+  },
+  "너와 나": {
+    "reading": "ノワ ナ",
+    "meaning": "君と僕"
+  },
+  "둘만의": {
+    "reading": "トゥルマネ",
+    "meaning": "二人だけの"
+  },
+  "Party": {
+    "reading": "パーティー",
+    "meaning": "パーティー"
+  },
+  "Cheers to this night": {
+    "reading": "チアーズ トゥー ディス ナイト",
+    "meaning": "この夜に乾杯"
+  },
+  "잔을 위로": {
+    "reading": "チャヌル ウィロ",
+    "meaning": "グラスを上に"
+  },
+  "조금 더": {
+    "reading": "チョグム ド",
+    "meaning": "もう少し"
+  },
+  "Closer": {
+    "reading": "クローサー",
+    "meaning": "近くへ"
+  },
+  "시큼한 Type": {
+    "reading": "シクマン タイプ",
+    "meaning": "酸っぱいタイプ"
+  },
+  "자극": {
+    "reading": "チャグク",
+    "meaning": "刺激"
+  },
+  "Too much": {
+    "reading": "トゥー マッチ",
+    "meaning": "強すぎる・多すぎる"
+  },
+  "이건": {
+    "reading": "イゴン",
+    "meaning": "これは"
+  },
+  "Fine dine": {
+    "reading": "ファイン ダイン",
+    "meaning": "上質な食事"
+  },
+  "Just good time": {
+    "reading": "ジャスト グッド タイム",
+    "meaning": "ただ楽しい時間"
+  },
+  "침이 고여 막": {
+    "reading": "チミ コヨ マク",
+    "meaning": "唾がどんどん溜まる"
+  },
+  "입가심은": {
+    "reading": "イプカシムン",
+    "meaning": "口直しは"
+  },
+  "Lemon Drop": {
+    "reading": "レモン ドロップ",
+    "meaning": "レモンドロップ"
+  },
+  "입에 담기엔": {
+    "reading": "イベ タムギエン",
+    "meaning": "口に入れるには"
+  },
+  "넌 너무": {
+    "reading": "ノン ノム",
+    "meaning": "君はすごく"
+  },
+  "Naughty": {
+    "reading": "ノーティー",
+    "meaning": "いたずらで大胆"
+  },
+  "눈빛 찌릿하면": {
+    "reading": "ヌンピッ ッチリタミョン",
+    "meaning": "視線にしびれたら"
+  },
+  "머릿속에": {
+    "reading": "モリッソゲ",
+    "meaning": "頭の中に"
+  },
+  "Parade": {
+    "reading": "パレード",
+    "meaning": "パレード"
+  },
+  "겨우 들뜬 맘": {
+    "reading": "キョウ トゥルットゥン マム",
+    "meaning": "やっと高まった気持ち"
+  },
+  "책임지길": {
+    "reading": "チェギムジギル",
+    "meaning": "責任を取ってくれることを"
+  },
+  "바라": {
+    "reading": "パラ",
+    "meaning": "望む"
+  },
+  "누가 뭐래도,": {
+    "reading": "ヌガ ムォレド",
+    "meaning": "誰が何と言おうと"
+  },
+  "도, 도": {
+    "reading": "ド ド",
+    "meaning": "語尾の繰り返し"
+  },
+  "너 원하는 대로,": {
+    "reading": "ノ ウォナヌン デロ",
+    "meaning": "君が望む通りに"
+  },
+  "로, 로": {
+    "reading": "ロ ロ",
+    "meaning": "語尾の繰り返し"
+  }
+});
 export function lyricTokenHelp(token) {
   return LYRIC_GLOSSARY[token] || { reading: token, meaning: '意味を確認中' };
 }
