@@ -40,18 +40,32 @@ export function makeVocabularyBatch(data, { basicCount, extraMs, recent = [], hi
   const active = learningPool(entries, history);
   if (active.length < 4) throw new Error('学習用の辞書データが足りません。');
   const studied = active.filter(e => history[e.word]?.attempts > 0);
-  const fresh = shuffle(active.filter(e => !history[e.word]?.attempts), rng);
-  // Start with a small set; later sessions introduce at most two words.
-  const introduced = fresh.slice(0, studied.length ? 2 : 6);
-  const pool = [...studied, ...introduced];
+  const recentList = recentWords(recent);
+  const recency = new Map(recentList.map((word, i) => [word, i + 1]));
+  const recentRank = e => recency.get(e.word) || 0;
+  const fresh = shuffle(active.filter(e => !history[e.word]?.attempts), rng)
+    .sort((a, b) => recentRank(a) - recentRank(b));
+  // About 40% new words, with more when there is not enough review material.
+  const newCount = Math.max(Math.ceil(basicCount * .4), basicCount - studied.length);
+  const introduced = fresh.slice(0, newCount);
   const due = shuffle(studied, rng).sort((a,b) =>
     Number((history[a.word].due || 0) > now) - Number((history[b.word].due || 0) > now) ||
-    (history[a.word].streak || 0) - (history[b.word].streak || 0));
+    recentRank(a) - recentRank(b) ||
+    (history[a.word].streak || 0) - (history[b.word].streak || 0) ||
+    (history[a.word].lastSeen || 0) - (history[b.word].lastSeen || 0));
   const candidates = [];
-  // Alternate review with a small number of new words in the normal part.
-  const first = [...due];
-  introduced.forEach((e,i) => first.splice(Math.min(1 + i * 4, first.length), 0, e));
-  candidates.push(...first.slice(0, basicCount));
+  // Spread new words across the normal part; do not repeat until necessary.
+  const first = due.slice(0, Math.max(0, basicCount - introduced.length));
+  introduced.forEach((e, i) => first.splice(Math.min(1 + i * 2, first.length), 0, e));
+  // Start differently from the previous session whenever another word exists.
+  if (first[0]?.word === recentList.at(-1) && first.length > 1) first.push(first.shift());
+  candidates.push(...first);
+  // EX focuses on this session's new words and reviews that are due.
+  // Mastered words whose review date is still ahead stay out unless needed.
+  const pool = [...new Map([...first, ...due.filter(e => (history[e.word].due || 0) <= now)]
+    .map(e => [e.word, e])).values()];
+  // A one-question session still needs two words to avoid a repeat-only loop.
+  if (pool.length < 2) pool.push(active.find(e => e.word !== pool[0]?.word));
   while (candidates.length < expected) {
     const cycle = shuffle(pool, rng);
     for (const entry of cycle) {
@@ -102,3 +116,4 @@ export function vocabularyProblem(q) {
   p.answerText = `${q.word} → ${q.meaning}`;
   return p;
 }
+

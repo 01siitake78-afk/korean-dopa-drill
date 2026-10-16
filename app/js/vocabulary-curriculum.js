@@ -29,8 +29,11 @@ export function learningPool(entries, history = {}) {
   const byWord = new Map(entries.map(e => [e.word, e]));
   const ordered = [...new Set(LEARNING_WORDS)].map(w => byWord.get(w)).filter(Boolean);
   let size = Math.min(20, ordered.length);
-  while (size < ordered.length && ordered.slice(0, size).filter(e => (history[e.word]?.streak || 0) >= 3).length >= Math.ceil(size * .8)) {
+  // Keep at least five unseen words available. Unlocking is based on exposure,
+  // not spaced mastery, so another session can progress immediately.
+  while (size < ordered.length && ordered.slice(0, size).filter(e => history[e.word]?.attempts > 0).length >= size - 5) {
     size = Math.min(size + 10, ordered.length);
   }
   return ordered.slice(0, size);
 }
+
