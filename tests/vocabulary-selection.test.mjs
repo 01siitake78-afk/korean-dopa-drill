@@ -2,11 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { makeVocabularyBatch, loadVocabulary, vocabularyProblem } from '../app/js/vocabulary.js';
-import { learningPool, recordVocabularyAnswer } from '../app/js/vocabulary-curriculum.js';
+import { learningPool, recordVocabularyAnswer, SUPPLEMENTAL_WORDS } from '../app/js/vocabulary-curriculum.js';
+import { vocabularyHelp } from '../app/js/vocabulary-help.js';
 import { batchSize } from '../app/js/vocabulary-protocol.js';
 import { makeRng } from '../app/js/problems.js';
 
 const data = JSON.parse(readFileSync(new URL('../app/data/krdict-beginner.json', import.meta.url)));
+const entries = [...data.entries, ...SUPPLEMENTAL_WORDS];
 const now = Date.UTC(2026, 9, 16);
 const options = { basicCount: 10, extraMs: 90000, now };
 const words = batch => batch.map(q => q.word);
@@ -18,7 +20,7 @@ test('first normal round has ten different beginner words and a full EX batch', 
   const result = batch();
   assert.equal(result.length, batchSize(10, 90000));
   assert.equal(new Set(words(result.slice(0, 10))).size, 10);
-  const initial = new Set(learningPool(data.entries).map(e => e.word));
+  const initial = new Set(learningPool(entries).map(e => e.word));
   for (const q of result) {
     assert.ok(initial.has(q.word));
     assert.equal(new Set([q.meaning, ...q.distractors]).size, 4);
@@ -36,7 +38,7 @@ test('next normal round includes four unseen words and six reviews', () => {
 });
 
 test('recent history rotates reviews even with the same random seed', () => {
-  const initial = learningPool(data.entries);
+  const initial = learningPool(entries);
   const history = studied(initial);
   const before = batch({ history }).slice(0, 10);
   const after = batch({ history, recent: words(before) }).slice(0, 10);
@@ -45,14 +47,14 @@ test('recent history rotates reviews even with the same random seed', () => {
 });
 
 test('fifteen attempted words unlock the next ten immediately without mastery', () => {
-  const initial = learningPool(data.entries);
+  const initial = learningPool(entries);
   assert.equal(initial.length, 20);
   const history = studied(initial.slice(0, 15), { streak: 0 });
-  assert.equal(learningPool(data.entries, history).length, 30);
+  assert.equal(learningPool(entries, history).length, 30);
 });
 
 test('due reviews take priority and mastered words wait when alternatives exist', () => {
-  const active = learningPool(data.entries);
+  const active = learningPool(entries);
   const history = studied(active, { streak: 3, due: now + 86400000 });
   const due = active.slice(0, 6);
   Object.assign(history, studied(due, { streak: 0 }));
@@ -82,7 +84,7 @@ test('all supported counts terminate, fill EX, and avoid consecutive repeats', (
 });
 
 test('selection preserves existing history and spaced-credit rules', () => {
-  const history = studied(learningPool(data.entries));
+  const history = studied(learningPool(entries));
   const saved = structuredClone(history);
   batch({ history });
   assert.deepEqual(history, saved);
@@ -105,4 +107,25 @@ test('static dictionary loading passes history and recent words to selection', a
     } });
   assert.equal(calls, 1);
   assert.equal(result.slice(0, 10).filter(q => !history[q.word]).length, 4);
+});
+
+
+test('everyday time and question words are available from the first round with help', () => {
+  const requested = ['지금', '오늘', '어제', '누구', '어디', '무엇', '어떤', '얼마'];
+  const initial = new Set(learningPool(entries).map(e => e.word));
+  const generated = new Set();
+  for (let seed = 0; seed < 30; seed++) {
+    batch({ rng: makeRng(seed) }).slice(0, 10).forEach(q => generated.add(q.word));
+  }
+  for (const word of [...requested, '내일', '언제', '왜', '뭐']) {
+    assert.ok(initial.has(word), word);
+    assert.ok(generated.has(word), word);
+    const help = vocabularyHelp(word);
+    assert.ok(help.reading && help.example && help.translation, word);
+  }
+  for (const q of batch()) {
+    if (q.word === '무엇' || q.word === '뭐') {
+      assert.ok(q.distractors.every(x => !x.includes('何')));
+    }
+  }
 });

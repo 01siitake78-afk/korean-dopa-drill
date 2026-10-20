@@ -2,7 +2,7 @@ import { batchSize, validateBatch, recentWords } from './vocabulary-protocol.js'
 import { _internal } from './problems.js';
 
 const DATA_URL = new URL('../data/krdict-beginner.json', import.meta.url);
-import { learningPool } from './vocabulary-curriculum.js';
+import { learningPool, SUPPLEMENTAL_WORDS } from './vocabulary-curriculum.js';
 
 function shuffle(items, rng) {
   const result = [...items];
@@ -28,7 +28,9 @@ export function makeVocabularyBatch(data, { basicCount, extraMs, recent = [], hi
     throw new Error('辞書データが足りません。app/data フォルダーもコピーしてください。');
   }
   const seen = new Set();
-  const entries = data.entries.map(entry => {
+  const dictionaryWords = new Set(data.entries.map(entry => entry.word));
+  const supplemental = SUPPLEMENTAL_WORDS.filter(entry => !dictionaryWords.has(entry.word));
+  const entries = [...data.entries, ...supplemental].map(entry => {
     if (typeof entry.word !== 'string' || typeof entry.meaning !== 'string' ||
         !Array.isArray(entry.aliases) || !entry.aliases.every(x => typeof x === 'string') ||
         typeof entry.topic !== 'string' || typeof entry.context !== 'string' || seen.has(entry.word)) {
@@ -116,4 +118,5 @@ export function vocabularyProblem(q) {
   p.answerText = `${q.word} → ${q.meaning}`;
   return p;
 }
+
 
