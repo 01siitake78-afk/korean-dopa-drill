@@ -1,0 +1,357 @@
+{
+  "id": "up",
+  "title": "UP",
+  "artist": "ATEEZ",
+  "lines": [
+    {
+      "id": "up-1",
+      "korean": "Yeah 한계를 넘어 Feel the power taking over me",
+      "japanese": "Yeah 限界を超えろ　俺を支配していく力を感じる",
+      "tokens": [
+        "Yeah",
+        "한계를",
+        "넘어",
+        "Feel the power taking over me"
+      ]
+    },
+    {
+      "id": "up-2",
+      "korean": "떨어 떨어 알잖아 We are the enemy",
+      "japanese": "震えろ　震えろ　分かってるだろ　俺たちこそが敵だ",
+      "tokens": [
+        "떨어 떨어",
+        "알잖아",
+        "We are the enemy"
+      ]
+    },
+    {
+      "id": "up-3",
+      "korean": "막아봐 Nobody’s gonna ever stop the scene",
+      "japanese": "止められるものなら止めてみろ　誰にもこの舞台は止められない",
+      "tokens": [
+        "막아봐",
+        "Nobody’s gonna ever stop the scene"
+      ]
+    },
+    {
+      "id": "up-4",
+      "korean": "뒤집어 미친놈 같이 완전히",
+      "japanese": "すべてひっくり返せ　狂った奴みたいに徹底的に",
+      "tokens": [
+        "뒤집어",
+        "미친놈 같이",
+        "완전히"
+      ]
+    },
+    {
+      "id": "up-5",
+      "korean": "휴식 따위 Ain’t for us, lock in",
+      "japanese": "休息なんて俺たちには必要ない　集中しろ",
+      "tokens": [
+        "휴식 따위",
+        "Ain’t for us, lock in"
+      ]
+    },
+    {
+      "id": "up-6",
+      "korean": "걍 밀어 넣어",
+      "japanese": "そのまま押し込め",
+      "tokens": [
+        "걍",
+        "밀어 넣어"
+      ]
+    },
+    {
+      "id": "up-7",
+      "korean": "자극하지 마 Tear it all apart",
+      "japanese": "俺を刺激するな　すべてぶち壊してやる",
+      "tokens": [
+        "자극하지 마",
+        "Tear it all apart"
+      ]
+    },
+    {
+      "id": "up-8",
+      "korean": "Whoa 턱끝까지 차오른 독",
+      "japanese": "Whoa 喉元まで込み上げてきた毒",
+      "tokens": [
+        "Whoa",
+        "턱끝까지",
+        "차오른 독"
+      ]
+    },
+    {
+      "id": "up-9",
+      "korean": "난 계속 원해 더",
+      "japanese": "俺はまだまだ欲しいんだ",
+      "tokens": [
+        "난",
+        "계속",
+        "원해 더"
+      ]
+    },
+    {
+      "id": "up-10",
+      "korean": "소리 질러 My name",
+      "japanese": "叫べ　俺の名前を",
+      "tokens": [
+        "소리 질러",
+        "My name"
+      ]
+    },
+    {
+      "id": "up-11",
+      "korean": "터져 온몸에 진동이 Risin’ UP",
+      "japanese": "全身に振動が弾ける　高まっていく",
+      "tokens": [
+        "터져",
+        "온몸에",
+        "진동이",
+        "Risin’ UP"
+      ]
+    },
+    {
+      "id": "up-12",
+      "korean": "때가 됐어 싹 뒤집어",
+      "japanese": "時が来た　すべてひっくり返せ",
+      "tokens": [
+        "때가 됐어",
+        "싹",
+        "뒤집어"
+      ]
+    },
+    {
+      "id": "up-13",
+      "korean": "미쳐 날뛰어 ‘Bout to go UP",
+      "japanese": "狂ったように暴れ回れ　今こそ駆け上がる",
+      "tokens": [
+        "미쳐 날뛰어",
+        "‘Bout to go UP"
+      ]
+    },
+    {
+      "id": "up-14",
+      "korean": "퍼져 온몸에 열기가 Burnin’ UP",
+      "japanese": "全身に熱気が広がる　燃え上がっていく",
+      "tokens": [
+        "퍼져",
+        "온몸에",
+        "열기가",
+        "Burnin’ UP"
+      ]
+    },
+    {
+      "id": "up-15",
+      "korean": "전부를 원해 다 위치로",
+      "japanese": "すべてが欲しい　すべてをあるべき場所へ",
+      "tokens": [
+        "전부를 원해",
+        "다 위치로"
+      ]
+    },
+    {
+      "id": "up-16",
+      "korean": "끝까지 올라가 Yeah we go UP",
+      "japanese": "頂点まで駆け上がれ　Yeah 俺たちは上へ",
+      "tokens": [
+        "끝까지",
+        "올라가",
+        "Yeah we go UP"
+      ]
+    },
+    {
+      "id": "up-17",
+      "korean": "8년째 조인 Tension",
+      "japanese": "8年間ずっと張り詰めてきた緊張感",
+      "tokens": [
+        "8년째",
+        "조인",
+        "Tension"
+      ]
+    },
+    {
+      "id": "up-18",
+      "korean": "숨도 안 쉬고 Take off",
+      "japanese": "息つく暇もなく　飛び立つ",
+      "tokens": [
+        "숨도 안 쉬고",
+        "Take off"
+      ]
+    },
+    {
+      "id": "up-19",
+      "korean": "더 무거워진 체급",
+      "japanese": "さらに上がった俺たちの階級",
+      "tokens": [
+        "더 무거워진",
+        "체급"
+      ]
+    },
+    {
+      "id": "up-20",
+      "korean": "내 Rival을 내게서 check up",
+      "japanese": "俺のライバルを　俺自身の中に見いだす",
+      "tokens": [
+        "내 Rival을",
+        "내게서",
+        "check up"
+      ]
+    },
+    {
+      "id": "up-21",
+      "korean": "또 다음 위",
+      "japanese": "さらにその上へ",
+      "tokens": [
+        "또",
+        "다음 위"
+      ]
+    },
+    {
+      "id": "up-22",
+      "korean": "이 Symphony를 진두지휘",
+      "japanese": "この交響曲を俺が指揮する",
+      "tokens": [
+        "이 Symphony를",
+        "진두지휘"
+      ]
+    },
+    {
+      "id": "up-23",
+      "korean": "TREASURE부터 GOLDEN HOUR까지",
+      "japanese": "『TREASURE』から『GOLDEN HOUR』まで",
+      "tokens": [
+        "TREASURE부터",
+        "GOLDEN HOUR까지"
+      ]
+    },
+    {
+      "id": "up-24",
+      "korean": "도화지를 채웠지 Page by page",
+      "japanese": "真っ白なキャンバスを埋めてきた　一ページずつ",
+      "tokens": [
+        "도화지를",
+        "채웠지",
+        "Page by page"
+      ]
+    },
+    {
+      "id": "up-25",
+      "korean": "매스컴과 이슈몰이 끝없는 포화 속",
+      "japanese": "マスコミや話題作り　絶え間ない集中砲火の中で",
+      "tokens": [
+        "매스컴과",
+        "이슈몰이",
+        "끝없는 포화 속"
+      ]
+    },
+    {
+      "id": "up-26",
+      "korean": "창대한 길이 열렸지 한 끗 차이로 갈렸지",
+      "japanese": "壮大な道が開けた　ほんのわずかな差が運命を分けた",
+      "tokens": [
+        "창대한 길이",
+        "열렸지",
+        "한 끗 차이로",
+        "갈렸지"
+      ]
+    },
+    {
+      "id": "up-27",
+      "korean": "그 이유가 우린 맘에 들어서 정상을 찍고 올라왔지",
+      "japanese": "その理由が俺たちは気に入った　頂点を極め　さらに上へと登ってきた",
+      "tokens": [
+        "그 이유가",
+        "우린 맘에 들어서",
+        "정상을 찍고",
+        "올라왔지"
+      ]
+    },
+    {
+      "id": "up-28",
+      "korean": "영겁의 시간 속 쌓아 올린 Painful",
+      "japanese": "果てしない時の中で積み重ねてきた痛み",
+      "tokens": [
+        "영겁의 시간 속",
+        "쌓아 올린",
+        "Painful"
+      ]
+    },
+    {
+      "id": "up-29",
+      "korean": "거침없는 춤에는 없어 다른 Rule",
+      "japanese": "誰にも止められない俺たちのダンスに　ほかのルールなんてない",
+      "tokens": [
+        "거침없는 춤에는",
+        "없어",
+        "다른 Rule"
+      ]
+    },
+    {
+      "id": "up-30",
+      "korean": "꿈꿔왔던 꿈들을 이제 현실로 전부 이 판에 올려",
+      "japanese": "夢見てきたすべてを現実に変え　この舞台に懸ける",
+      "tokens": [
+        "꿈꿔왔던 꿈들을",
+        "이제 현실로",
+        "전부",
+        "이 판에 올려"
+      ]
+    },
+    {
+      "id": "up-31",
+      "korean": "끝이 없는 태도 우린 정상이 없어 Till we die",
+      "japanese": "終わりなき俺たちの姿勢　俺たちに常識なんてない　死ぬその時まで",
+      "tokens": [
+        "끝이 없는 태도",
+        "우린 정상이 없어",
+        "Till we die"
+      ]
+    },
+    {
+      "id": "up-32",
+      "korean": "더 가져와 더 I want more yeah",
+      "japanese": "もっと持ってこい　もっとだ　俺はまだ欲しい",
+      "tokens": [
+        "더 가져와 더",
+        "I want more yeah"
+      ]
+    },
+    {
+      "id": "up-33",
+      "korean": "끝이 없어 난 I want more yeah",
+      "japanese": "俺に終わりなんてない　まだまだ欲しいんだ",
+      "tokens": [
+        "끝이 없어 난",
+        "I want more yeah"
+      ]
+    },
+    {
+      "id": "up-34",
+      "korean": "세상 모든 위 We breaking boundaries",
+      "japanese": "世界のあらゆる頂点へ　俺たちは限界を打ち破る",
+      "tokens": [
+        "세상 모든 위",
+        "We breaking boundaries"
+      ]
+    },
+    {
+      "id": "up-35",
+      "korean": "올라가 모두의 기억 속에 숨 쉬길",
+      "japanese": "駆け上がれ　みんなの記憶の中で生き続けられるように",
+      "tokens": [
+        "올라가",
+        "모두의 기억 속에",
+        "숨 쉬길"
+      ]
+    },
+    {
+      "id": "up-36",
+      "korean": "이곳에 남기리 우리의 발길이",
+      "japanese": "俺たちの足跡を　この場所に刻み残そう",
+      "tokens": [
+        "이곳에 남기리",
+        "우리의 발길이"
+      ]
+    }
+  ]
+}
