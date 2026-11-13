@@ -1741,6 +1741,385 @@ Object.assign(LYRIC_GLOSSARY, {
     "meaning": "語尾の繰り返し"
   }
 });
+// Phrase cards from the user-provided UP lyrics.
+Object.assign(LYRIC_GLOSSARY, {
+  "Yeah": {
+    "reading": "イェー",
+    "meaning": "Yeah"
+  },
+  "한계를": {
+    "reading": "ハンゲルル",
+    "meaning": "限界を"
+  },
+  "넘어": {
+    "reading": "ノモ",
+    "meaning": "超えて"
+  },
+  "Feel the power taking over me": {
+    "reading": "フィール ザ パワー テイキング オーヴァー ミー",
+    "meaning": "俺を支配していく力を感じる"
+  },
+  "떨어 떨어": {
+    "reading": "トロ トロ",
+    "meaning": "震えろ 震えろ"
+  },
+  "알잖아": {
+    "reading": "アルジャナ",
+    "meaning": "分かっているだろ"
+  },
+  "We are the enemy": {
+    "reading": "ウィー アー ジ エネミー",
+    "meaning": "俺たちこそが敵だ"
+  },
+  "막아봐": {
+    "reading": "マガボァ",
+    "meaning": "止めてみろ"
+  },
+  "Nobody’s gonna ever stop the scene": {
+    "reading": "ノーバディーズ ゴナ エヴァー ストップ ザ シーン",
+    "meaning": "誰にもこの舞台は止められない"
+  },
+  "뒤집어": {
+    "reading": "トゥィジボ",
+    "meaning": "ひっくり返せ"
+  },
+  "미친놈 같이": {
+    "reading": "ミチンノム カチ",
+    "meaning": "狂った奴みたいに"
+  },
+  "완전히": {
+    "reading": "ワンジョニ",
+    "meaning": "完全に・徹底的に"
+  },
+  "휴식 따위": {
+    "reading": "ヒュシク ッタウィ",
+    "meaning": "休息なんて"
+  },
+  "Ain’t for us, lock in": {
+    "reading": "エイント フォー アス ロック イン",
+    "meaning": "俺たちには必要ない 集中しろ"
+  },
+  "걍": {
+    "reading": "キャン",
+    "meaning": "そのまま・ただ（그냥の略）"
+  },
+  "밀어 넣어": {
+    "reading": "ミロ ノオ",
+    "meaning": "押し込め"
+  },
+  "자극하지 마": {
+    "reading": "チャグカジ マ",
+    "meaning": "刺激するな"
+  },
+  "Tear it all apart": {
+    "reading": "テア イット オール アパート",
+    "meaning": "すべてぶち壊す"
+  },
+  "Whoa": {
+    "reading": "ウォー",
+    "meaning": "Whoa（掛け声）"
+  },
+  "턱끝까지": {
+    "reading": "トクックッカジ",
+    "meaning": "顎先・喉元まで"
+  },
+  "차오른 독": {
+    "reading": "チャオルン トク",
+    "meaning": "込み上げてきた毒"
+  },
+  "난": {
+    "reading": "ナン",
+    "meaning": "俺は"
+  },
+  "계속": {
+    "reading": "ケソク",
+    "meaning": "ずっと・引き続き"
+  },
+  "원해 더": {
+    "reading": "ウォネ ト",
+    "meaning": "もっと欲しい"
+  },
+  "소리 질러": {
+    "reading": "ソリ チルロ",
+    "meaning": "声を上げろ・叫べ"
+  },
+  "My name": {
+    "reading": "マイ ネイム",
+    "meaning": "俺の名前を"
+  },
+  "터져": {
+    "reading": "トジョ",
+    "meaning": "弾ける"
+  },
+  "온몸에": {
+    "reading": "オンモメ",
+    "meaning": "全身に"
+  },
+  "진동이": {
+    "reading": "チンドンイ",
+    "meaning": "振動が"
+  },
+  "Risin’ UP": {
+    "reading": "ライジン アップ",
+    "meaning": "高まっていく"
+  },
+  "때가 됐어": {
+    "reading": "ッテガ トェッソ",
+    "meaning": "時が来た"
+  },
+  "싹": {
+    "reading": "ッサク",
+    "meaning": "すっかり・すべて"
+  },
+  "미쳐 날뛰어": {
+    "reading": "ミチョ ナルットゥィオ",
+    "meaning": "狂ったように暴れ回れ"
+  },
+  "‘Bout to go UP": {
+    "reading": "バウト トゥ ゴー アップ",
+    "meaning": "今こそ駆け上がる"
+  },
+  "퍼져": {
+    "reading": "ポジョ",
+    "meaning": "広がる"
+  },
+  "열기가": {
+    "reading": "ヨルギガ",
+    "meaning": "熱気が"
+  },
+  "Burnin’ UP": {
+    "reading": "バーニン アップ",
+    "meaning": "燃え上がっていく"
+  },
+  "전부를 원해": {
+    "reading": "チョンブルル ウォネ",
+    "meaning": "すべてが欲しい"
+  },
+  "다 위치로": {
+    "reading": "タ ウィチロ",
+    "meaning": "すべてあるべき位置へ"
+  },
+  "끝까지": {
+    "reading": "ックッカジ",
+    "meaning": "最後・頂点まで"
+  },
+  "올라가": {
+    "reading": "オルラガ",
+    "meaning": "上がれ・駆け上がれ"
+  },
+  "Yeah we go UP": {
+    "reading": "イェー ウィー ゴー アップ",
+    "meaning": "Yeah 俺たちは上へ"
+  },
+  "8년째": {
+    "reading": "パルリョンッチェ",
+    "meaning": "8年目・8年間ずっと"
+  },
+  "조인": {
+    "reading": "チョイン",
+    "meaning": "締め付けた・張り詰めた"
+  },
+  "Tension": {
+    "reading": "テンション",
+    "meaning": "緊張感"
+  },
+  "숨도 안 쉬고": {
+    "reading": "スムド アン シゴ",
+    "meaning": "息もつかずに"
+  },
+  "Take off": {
+    "reading": "テイク オフ",
+    "meaning": "飛び立つ"
+  },
+  "더 무거워진": {
+    "reading": "ト ムゴウォジン",
+    "meaning": "さらに重くなった"
+  },
+  "체급": {
+    "reading": "チェグプ",
+    "meaning": "階級・体重別の区分"
+  },
+  "내 Rival을": {
+    "reading": "ネ ライバルル",
+    "meaning": "俺のライバルを"
+  },
+  "내게서": {
+    "reading": "ネゲソ",
+    "meaning": "俺自身の中に・俺から"
+  },
+  "check up": {
+    "reading": "チェック アップ",
+    "meaning": "確認する・見いだす"
+  },
+  "또": {
+    "reading": "ット",
+    "meaning": "さらに・また"
+  },
+  "다음 위": {
+    "reading": "タウム ウィ",
+    "meaning": "次の上へ"
+  },
+  "이 Symphony를": {
+    "reading": "イ シンフォニルル",
+    "meaning": "この交響曲を"
+  },
+  "진두지휘": {
+    "reading": "チンドゥジフィ",
+    "meaning": "先頭に立って指揮する"
+  },
+  "TREASURE부터": {
+    "reading": "トレジャーブト",
+    "meaning": "TREASUREから"
+  },
+  "GOLDEN HOUR까지": {
+    "reading": "ゴールデン アワーッカジ",
+    "meaning": "GOLDEN HOURまで"
+  },
+  "도화지를": {
+    "reading": "トファジルル",
+    "meaning": "画用紙・キャンバスを"
+  },
+  "채웠지": {
+    "reading": "チェウォッチ",
+    "meaning": "埋めてきた"
+  },
+  "Page by page": {
+    "reading": "ページ バイ ページ",
+    "meaning": "一ページずつ"
+  },
+  "매스컴과": {
+    "reading": "メスコムグァ",
+    "meaning": "マスコミと"
+  },
+  "이슈몰이": {
+    "reading": "イシュモリ",
+    "meaning": "話題作り"
+  },
+  "끝없는 포화 속": {
+    "reading": "ックドムヌン ポファ ソク",
+    "meaning": "絶え間ない集中砲火の中"
+  },
+  "창대한 길이": {
+    "reading": "チャンデハン キリ",
+    "meaning": "壮大な道が"
+  },
+  "열렸지": {
+    "reading": "ヨルリョッチ",
+    "meaning": "開けた"
+  },
+  "한 끗 차이로": {
+    "reading": "ハン ックッ チャイロ",
+    "meaning": "ほんのわずかな差で"
+  },
+  "갈렸지": {
+    "reading": "カルリョッチ",
+    "meaning": "分かれた・運命が分かれた"
+  },
+  "그 이유가": {
+    "reading": "ク イユガ",
+    "meaning": "その理由が"
+  },
+  "우린 맘에 들어서": {
+    "reading": "ウリン マメ トゥロソ",
+    "meaning": "俺たちは気に入って"
+  },
+  "정상을 찍고": {
+    "reading": "チョンサンウル ッチクコ",
+    "meaning": "頂点を極めて"
+  },
+  "올라왔지": {
+    "reading": "オルラワッチ",
+    "meaning": "登ってきた"
+  },
+  "영겁의 시간 속": {
+    "reading": "ヨンゴベ シガン ソク",
+    "meaning": "果てしない時の中"
+  },
+  "쌓아 올린": {
+    "reading": "ッサア オルリン",
+    "meaning": "積み上げた"
+  },
+  "Painful": {
+    "reading": "ペインフル",
+    "meaning": "痛みを伴う・痛み"
+  },
+  "거침없는 춤에는": {
+    "reading": "コチモムヌン チュメヌン",
+    "meaning": "誰にも止められないダンスには"
+  },
+  "없어": {
+    "reading": "オプソ",
+    "meaning": "ない"
+  },
+  "다른 Rule": {
+    "reading": "タルン ルール",
+    "meaning": "ほかのルール"
+  },
+  "꿈꿔왔던 꿈들을": {
+    "reading": "ックムックォワットン ックムドゥルル",
+    "meaning": "夢見てきた夢を"
+  },
+  "이제 현실로": {
+    "reading": "イジェ ヒョンシルロ",
+    "meaning": "今 現実へ"
+  },
+  "전부": {
+    "reading": "チョンブ",
+    "meaning": "すべて"
+  },
+  "이 판에 올려": {
+    "reading": "イ パネ オルリョ",
+    "meaning": "この舞台に懸ける"
+  },
+  "끝이 없는 태도": {
+    "reading": "ックチ オムヌン テド",
+    "meaning": "終わりなき姿勢"
+  },
+  "우린 정상이 없어": {
+    "reading": "ウリン チョンサンイ オプソ",
+    "meaning": "俺たちに常識なんてない"
+  },
+  "Till we die": {
+    "reading": "ティル ウィー ダイ",
+    "meaning": "死ぬその時まで"
+  },
+  "더 가져와 더": {
+    "reading": "ト カジョワ ト",
+    "meaning": "もっと持ってこい もっと"
+  },
+  "I want more yeah": {
+    "reading": "アイ ウォント モア イェー",
+    "meaning": "まだ欲しい"
+  },
+  "끝이 없어 난": {
+    "reading": "ックチ オプソ ナン",
+    "meaning": "俺には終わりがない"
+  },
+  "세상 모든 위": {
+    "reading": "セサン モドゥン ウィ",
+    "meaning": "世界のあらゆる頂点へ"
+  },
+  "We breaking boundaries": {
+    "reading": "ウィー ブレイキング バウンダリーズ",
+    "meaning": "俺たちは限界を打ち破る"
+  },
+  "모두의 기억 속에": {
+    "reading": "モドゥエ キオク ソゲ",
+    "meaning": "みんなの記憶の中で"
+  },
+  "숨 쉬길": {
+    "reading": "スム シュィギル",
+    "meaning": "息づくように・生き続けるように"
+  },
+  "이곳에 남기리": {
+    "reading": "イゴセ ナムギリ",
+    "meaning": "この場所に残そう"
+  },
+  "우리의 발길이": {
+    "reading": "ウリエ パルギリ",
+    "meaning": "俺たちの足跡を"
+  }
+});
 export function lyricTokenHelp(token) {
   return LYRIC_GLOSSARY[token] || { reading: token, meaning: '意味を確認中' };
 }
