@@ -1,0 +1,450 @@
+{
+  "id": "answer",
+  "title": "Answer",
+  "artist": "ATEEZ",
+  "lines": [
+    {
+      "id": "answer-1",
+      "korean": "건배하자 like a thunder",
+      "japanese": "雷のように乾杯しよう",
+      "tokens": [
+        "건배하자",
+        "like a thunder"
+      ]
+    },
+    {
+      "id": "answer-2",
+      "korean": "네 모든 걸 채워",
+      "japanese": "君の全てを満たすよ",
+      "tokens": [
+        "네 모든 걸",
+        "채워"
+      ]
+    },
+    {
+      "id": "answer-3",
+      "korean": "넘쳐흐를 듯이",
+      "japanese": "溢れ流れるように",
+      "tokens": [
+        "넘쳐흐를",
+        "듯이"
+      ]
+    },
+    {
+      "id": "answer-4",
+      "korean": "모두 잔을 머리 위로",
+      "japanese": "みんなグラスを頭の上へ",
+      "tokens": [
+        "모두",
+        "잔을",
+        "머리 위로"
+      ]
+    },
+    {
+      "id": "answer-5",
+      "korean": "세상 어디에서든 보일 수 있게",
+      "japanese": "世界のどこからだって見えるように",
+      "tokens": [
+        "세상 어디에서든",
+        "보일 수 있게"
+      ]
+    },
+    {
+      "id": "answer-6",
+      "korean": "손을 펴 시선은 위로 say oh",
+      "japanese": "手を広げて視線は上へ say oh",
+      "tokens": [
+        "손을 펴",
+        "시선은 위로",
+        "say oh"
+      ]
+    },
+    {
+      "id": "answer-7",
+      "korean": "잔을 들어 마주 보며 say oh",
+      "japanese": "グラスを掲げて向かい合いながら say oh",
+      "tokens": [
+        "잔을 들어",
+        "마주 보며",
+        "say oh"
+      ]
+    },
+    {
+      "id": "answer-8",
+      "korean": "끝은 먼 시작임을 우린 뱉어내",
+      "japanese": "終わりは遠い始まりだということをぼくらは吐き出すのさ",
+      "tokens": [
+        "끝은 먼",
+        "시작임을",
+        "우린 뱉어내"
+      ]
+    },
+    {
+      "id": "answer-9",
+      "korean": "기억해 발끝부터 함께",
+      "japanese": "覚えていてつま先から一緒に",
+      "tokens": [
+        "기억해",
+        "발끝부터",
+        "함께"
+      ]
+    },
+    {
+      "id": "answer-10",
+      "korean": "타올라야지 더",
+      "japanese": "もっと燃え上がらなきゃ",
+      "tokens": [
+        "타올라야지",
+        "더"
+      ]
+    },
+    {
+      "id": "answer-11",
+      "korean": "계속해 불을 지펴",
+      "japanese": "炎を焚きつけ続けろ",
+      "tokens": [
+        "계속해",
+        "불을 지펴"
+      ]
+    },
+    {
+      "id": "answer-12",
+      "korean": "매일이 finale show",
+      "japanese": "毎日が finale show",
+      "tokens": [
+        "매일이",
+        "finale show"
+      ]
+    },
+    {
+      "id": "answer-13",
+      "korean": "내일이 마치",
+      "japanese": "明日がまるで",
+      "tokens": [
+        "내일이",
+        "마치"
+      ]
+    },
+    {
+      "id": "answer-14",
+      "korean": "열기를 죽이지 마",
+      "japanese": "熱気を冷まさないで",
+      "tokens": [
+        "열기를",
+        "죽이지 마"
+      ]
+    },
+    {
+      "id": "answer-15",
+      "korean": "너와 나면 푸른빛 띠우니깐",
+      "japanese": "君とぼくなら青い光を放つから",
+      "tokens": [
+        "너와 나면",
+        "푸른빛",
+        "띠우니깐"
+      ]
+    },
+    {
+      "id": "answer-16",
+      "korean": "불타는 태양과",
+      "japanese": "燃える太陽と",
+      "tokens": [
+        "불타는",
+        "태양과"
+      ]
+    },
+    {
+      "id": "answer-17",
+      "korean": "덮치던 파도는",
+      "japanese": "迫り来る波は",
+      "tokens": [
+        "덮치던",
+        "파도는"
+      ]
+    },
+    {
+      "id": "answer-18",
+      "korean": "우리에겐 별게 아닌걸",
+      "japanese": "ぼくたちにとって何てことないんだ",
+      "tokens": [
+        "우리에겐",
+        "별게 아닌걸"
+      ]
+    },
+    {
+      "id": "answer-19",
+      "korean": "더 들어와 봐",
+      "japanese": "もっと入っておいでよ",
+      "tokens": [
+        "더",
+        "들어와 봐"
+      ]
+    },
+    {
+      "id": "answer-20",
+      "korean": "두려운 것도 anymore",
+      "japanese": "怖いものも anymore",
+      "tokens": [
+        "두려운 것도",
+        "anymore"
+      ]
+    },
+    {
+      "id": "answer-21",
+      "korean": "누구도 손댈 수 없어",
+      "japanese": "誰にも手を出せないよ",
+      "tokens": [
+        "누구도",
+        "손댈 수 없어"
+      ]
+    },
+    {
+      "id": "answer-22",
+      "korean": "타는 불꽃처럼",
+      "japanese": "燃える炎のように",
+      "tokens": [
+        "타는",
+        "불꽃처럼"
+      ]
+    },
+    {
+      "id": "answer-23",
+      "korean": "불러 불러 우릴 지금 불러",
+      "japanese": "呼んで　呼んで　ぼくらを今",
+      "tokens": [
+        "불러 불러",
+        "우릴",
+        "지금 불러"
+      ]
+    },
+    {
+      "id": "answer-24",
+      "korean": "타올라 불꽃처럼",
+      "japanese": "燃え上がれ　炎のように",
+      "tokens": [
+        "타올라",
+        "불꽃처럼"
+      ]
+    },
+    {
+      "id": "answer-25",
+      "korean": "아무것도 없는 사막",
+      "japanese": "何もない砂漠",
+      "tokens": [
+        "아무것도",
+        "없는 사막"
+      ]
+    },
+    {
+      "id": "answer-26",
+      "korean": "그곳에서 출발한 우리 시작",
+      "japanese": "その場所から出発したぼくたちの始まり",
+      "tokens": [
+        "그곳에서",
+        "출발한",
+        "우리 시작"
+      ]
+    },
+    {
+      "id": "answer-27",
+      "korean": "뜨겁게 뜨겁게",
+      "japanese": "熱く　熱く",
+      "tokens": [
+        "뜨겁게",
+        "뜨겁게"
+      ]
+    },
+    {
+      "id": "answer-28",
+      "korean": "그땔 기억해",
+      "japanese": "あの時を覚えてる",
+      "tokens": [
+        "그땔",
+        "기억해"
+      ]
+    },
+    {
+      "id": "answer-29",
+      "korean": "둥글게 둥글게",
+      "japanese": "丸く　丸く",
+      "tokens": [
+        "둥글게",
+        "둥글게"
+      ]
+    },
+    {
+      "id": "answer-30",
+      "korean": "모여 다음 앞에서",
+      "japanese": "集まれ　次のステージを前にして",
+      "tokens": [
+        "모여",
+        "다음 앞에서"
+      ]
+    },
+    {
+      "id": "answer-31",
+      "korean": "우린 세상에 다 야유해",
+      "japanese": "ぼくたちは世界にやじを飛ばす",
+      "tokens": [
+        "우린",
+        "세상에 다",
+        "야유해"
+      ]
+    },
+    {
+      "id": "answer-32",
+      "korean": "답이 없는 어둠 속",
+      "japanese": "答えのない暗闇の中",
+      "tokens": [
+        "답이 없는",
+        "어둠 속"
+      ]
+    },
+    {
+      "id": "answer-33",
+      "korean": "우리의 존재를 밝혀내",
+      "japanese": "ぼくたちの存在をハッキリさせるんだ",
+      "tokens": [
+        "우리의 존재를",
+        "밝혀내"
+      ]
+    },
+    {
+      "id": "answer-34",
+      "korean": "여기 모두 모여라",
+      "japanese": "みんなここに集まれ",
+      "tokens": [
+        "여기",
+        "모두 모여라"
+      ]
+    },
+    {
+      "id": "answer-35",
+      "korean": "뜨겁다면 Join us",
+      "japanese": "熱いなら Join us",
+      "tokens": [
+        "뜨겁다면",
+        "Join us"
+      ]
+    },
+    {
+      "id": "answer-36",
+      "korean": "세상 모든 걸 원한다면",
+      "japanese": "世界の全てを望むなら",
+      "tokens": [
+        "세상 모든 걸",
+        "원한다면"
+      ]
+    },
+    {
+      "id": "answer-37",
+      "korean": "외로워 괴로워",
+      "japanese": "寂しいよ　苦しいよ",
+      "tokens": [
+        "외로워",
+        "괴로워"
+      ]
+    },
+    {
+      "id": "answer-38",
+      "korean": "무서워 두려워",
+      "japanese": "怖いよ　恐ろしいよ",
+      "tokens": [
+        "무서워",
+        "두려워"
+      ]
+    },
+    {
+      "id": "answer-39",
+      "korean": "했던 지난날은 됐어",
+      "japanese": "そんな思いをしていた過ぎた日々はもういい",
+      "tokens": [
+        "했던 지난날은",
+        "됐어"
+      ]
+    },
+    {
+      "id": "answer-40",
+      "korean": "깃발 들고 우린 hands up",
+      "japanese": "旗を持ってぼくらは hands up",
+      "tokens": [
+        "깃발 들고",
+        "우린",
+        "hands up"
+      ]
+    },
+    {
+      "id": "answer-41",
+      "korean": "모두 준비되었는가",
+      "japanese": "みんな準備はできたかい？",
+      "tokens": [
+        "모두",
+        "준비되었는가"
+      ]
+    },
+    {
+      "id": "answer-42",
+      "korean": "우리가 보이는가",
+      "japanese": "ぼくらが見えるかい？",
+      "tokens": [
+        "우리가",
+        "보이는가"
+      ]
+    },
+    {
+      "id": "answer-43",
+      "korean": "타오르는 눈빛과",
+      "japanese": "燃え上がる瞳と",
+      "tokens": [
+        "타오르는",
+        "눈빛과"
+      ]
+    },
+    {
+      "id": "answer-44",
+      "korean": "삼킬 듯한 함성이",
+      "japanese": "飲み込むような歓声が",
+      "tokens": [
+        "삼킬 듯한",
+        "함성이"
+      ]
+    },
+    {
+      "id": "answer-45",
+      "korean": "온 세상을 울리는 걸",
+      "japanese": "全世界をとどろかすんだ",
+      "tokens": [
+        "온 세상을",
+        "울리는 걸"
+      ]
+    },
+    {
+      "id": "answer-46",
+      "korean": "듣고 있다면",
+      "japanese": "聞いているなら",
+      "tokens": [
+        "듣고",
+        "있다면"
+      ]
+    },
+    {
+      "id": "answer-47",
+      "korean": "지금 내 곁으로 와줘",
+      "japanese": "今ぼくのそばに来てよ",
+      "tokens": [
+        "지금",
+        "내 곁으로",
+        "와줘"
+      ]
+    },
+    {
+      "id": "answer-48",
+      "korean": "함께 할 수 있게",
+      "japanese": "一緒にいられるように",
+      "tokens": [
+        "함께",
+        "할 수 있게"
+      ]
+    }
+  ]
+}
