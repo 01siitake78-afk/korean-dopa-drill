@@ -7,6 +7,7 @@ export const SONGS = [
   { id: 'on-the-road', file: 'on-the-road.json' },
   { id: 'choose', file: 'choose.json' },
   { id: 'lemon-drop', file: 'lemon-drop.json' },
+  { id: 'up', file: 'up.json' },
 ];
 export function shuffleTokens(tokens, rng = Math.random) {
   const cards = tokens.map((text, id) => ({ text, id }));
