@@ -2120,6 +2120,377 @@ Object.assign(LYRIC_GLOSSARY, {
     "meaning": "俺たちの足跡を"
   }
 });
+// Phrase cards from the user-provided Answer lyrics.
+Object.assign(LYRIC_GLOSSARY, {
+  "건배하자": {
+    "reading": "コンベハジャ",
+    "meaning": "乾杯しよう"
+  },
+  "like a thunder": {
+    "reading": "ライク ア サンダー",
+    "meaning": "雷のように"
+  },
+  "네 모든 걸": {
+    "reading": "ニ モドゥン ゴル",
+    "meaning": "君のすべてを"
+  },
+  "채워": {
+    "reading": "チェウォ",
+    "meaning": "満たして"
+  },
+  "넘쳐흐를": {
+    "reading": "ノムチョフルル",
+    "meaning": "溢れ流れる"
+  },
+  "잔을": {
+    "reading": "チャヌル",
+    "meaning": "グラスを"
+  },
+  "머리 위로": {
+    "reading": "モリ ウィロ",
+    "meaning": "頭の上へ"
+  },
+  "세상 어디에서든": {
+    "reading": "セサン オディエソドゥン",
+    "meaning": "世界のどこからでも"
+  },
+  "보일 수 있게": {
+    "reading": "ポイル ス イッケ",
+    "meaning": "見えるように"
+  },
+  "손을 펴": {
+    "reading": "ソヌル ピョ",
+    "meaning": "手を広げて"
+  },
+  "시선은 위로": {
+    "reading": "シソヌン ウィロ",
+    "meaning": "視線は上へ"
+  },
+  "say oh": {
+    "reading": "セイ オー",
+    "meaning": "ohと声を上げて"
+  },
+  "잔을 들어": {
+    "reading": "チャヌル トゥロ",
+    "meaning": "グラスを掲げて"
+  },
+  "마주 보며": {
+    "reading": "マジュ ボミョ",
+    "meaning": "向かい合いながら"
+  },
+  "끝은 먼": {
+    "reading": "ックトゥン モン",
+    "meaning": "終わりは遠い"
+  },
+  "시작임을": {
+    "reading": "シジャギムル",
+    "meaning": "始まりだということを"
+  },
+  "우린 뱉어내": {
+    "reading": "ウリン ペトネ",
+    "meaning": "ぼくらは吐き出す"
+  },
+  "기억해": {
+    "reading": "キオケ",
+    "meaning": "覚えていて"
+  },
+  "발끝부터": {
+    "reading": "パルックップト",
+    "meaning": "つま先から"
+  },
+  "함께": {
+    "reading": "ハムッケ",
+    "meaning": "一緒に"
+  },
+  "타올라야지": {
+    "reading": "タオルラヤジ",
+    "meaning": "燃え上がらなきゃ"
+  },
+  "계속해": {
+    "reading": "ケソケ",
+    "meaning": "続けろ"
+  },
+  "불을 지펴": {
+    "reading": "プルル チピョ",
+    "meaning": "炎を焚きつけろ"
+  },
+  "매일이": {
+    "reading": "メイリ",
+    "meaning": "毎日が"
+  },
+  "finale show": {
+    "reading": "フィナーレ ショー",
+    "meaning": "フィナーレのショー"
+  },
+  "내일이": {
+    "reading": "ネイリ",
+    "meaning": "明日が"
+  },
+  "열기를": {
+    "reading": "ヨルギルル",
+    "meaning": "熱気を"
+  },
+  "죽이지 마": {
+    "reading": "チュギジ マ",
+    "meaning": "冷ますな・消すな"
+  },
+  "너와 나면": {
+    "reading": "ノワ ナミョン",
+    "meaning": "君とぼくなら"
+  },
+  "푸른빛": {
+    "reading": "プルンビッ",
+    "meaning": "青い光を"
+  },
+  "띠우니깐": {
+    "reading": "ッティウニッカン",
+    "meaning": "放つから"
+  },
+  "불타는": {
+    "reading": "プルタヌン",
+    "meaning": "燃える"
+  },
+  "태양과": {
+    "reading": "テヤングァ",
+    "meaning": "太陽と"
+  },
+  "덮치던": {
+    "reading": "トプチドン",
+    "meaning": "襲いかかっていた"
+  },
+  "파도는": {
+    "reading": "パドヌン",
+    "meaning": "波は"
+  },
+  "우리에겐": {
+    "reading": "ウリエゲン",
+    "meaning": "ぼくたちにとっては"
+  },
+  "별게 아닌걸": {
+    "reading": "ピョルゲ アニンゴル",
+    "meaning": "大したことではないんだ"
+  },
+  "들어와 봐": {
+    "reading": "トゥロワ ブァ",
+    "meaning": "入っておいでよ"
+  },
+  "두려운 것도": {
+    "reading": "トゥリョウン ゴット",
+    "meaning": "怖いものも"
+  },
+  "anymore": {
+    "reading": "エニモア",
+    "meaning": "もうこれ以上"
+  },
+  "누구도": {
+    "reading": "ヌグド",
+    "meaning": "誰も"
+  },
+  "손댈 수 없어": {
+    "reading": "ソンデル ス オプソ",
+    "meaning": "手を出せない"
+  },
+  "타는": {
+    "reading": "タヌン",
+    "meaning": "燃える"
+  },
+  "불꽃처럼": {
+    "reading": "プルッコッチョロム",
+    "meaning": "炎のように"
+  },
+  "불러 불러": {
+    "reading": "プルロ プルロ",
+    "meaning": "呼んで 呼んで"
+  },
+  "우릴": {
+    "reading": "ウリル",
+    "meaning": "ぼくらを"
+  },
+  "지금 불러": {
+    "reading": "チグム プルロ",
+    "meaning": "今呼んで"
+  },
+  "타올라": {
+    "reading": "タオルラ",
+    "meaning": "燃え上がれ"
+  },
+  "아무것도": {
+    "reading": "アムゴット",
+    "meaning": "何も"
+  },
+  "없는 사막": {
+    "reading": "オムヌン サマク",
+    "meaning": "ない砂漠"
+  },
+  "그곳에서": {
+    "reading": "クゴセソ",
+    "meaning": "その場所から"
+  },
+  "출발한": {
+    "reading": "チュルバラン",
+    "meaning": "出発した"
+  },
+  "우리 시작": {
+    "reading": "ウリ シジャク",
+    "meaning": "ぼくたちの始まり"
+  },
+  "뜨겁게": {
+    "reading": "ットゥゴプケ",
+    "meaning": "熱く"
+  },
+  "그땔": {
+    "reading": "クッテル",
+    "meaning": "あの時を"
+  },
+  "둥글게": {
+    "reading": "トゥングルゲ",
+    "meaning": "丸く"
+  },
+  "모여": {
+    "reading": "モヨ",
+    "meaning": "集まれ"
+  },
+  "다음 앞에서": {
+    "reading": "タウム アペソ",
+    "meaning": "次を前にして"
+  },
+  "세상에 다": {
+    "reading": "セサンエ タ",
+    "meaning": "世界に向かって"
+  },
+  "야유해": {
+    "reading": "ヤユヘ",
+    "meaning": "やじを飛ばす・冷やかす"
+  },
+  "답이 없는": {
+    "reading": "タビ オムヌン",
+    "meaning": "答えのない"
+  },
+  "어둠 속": {
+    "reading": "オドゥム ソク",
+    "meaning": "暗闇の中"
+  },
+  "우리의 존재를": {
+    "reading": "ウリエ チョンジェルル",
+    "meaning": "ぼくたちの存在を"
+  },
+  "밝혀내": {
+    "reading": "パルキョネ",
+    "meaning": "明らかにする"
+  },
+  "여기": {
+    "reading": "ヨギ",
+    "meaning": "ここに"
+  },
+  "모두 모여라": {
+    "reading": "モドゥ モヨラ",
+    "meaning": "みんな集まれ"
+  },
+  "뜨겁다면": {
+    "reading": "ットゥゴプタミョン",
+    "meaning": "熱いなら"
+  },
+  "Join us": {
+    "reading": "ジョイン アス",
+    "meaning": "ぼくらの仲間に加わって"
+  },
+  "세상 모든 걸": {
+    "reading": "セサン モドゥン ゴル",
+    "meaning": "世界のすべてを"
+  },
+  "원한다면": {
+    "reading": "ウォナンダミョン",
+    "meaning": "望むなら"
+  },
+  "외로워": {
+    "reading": "ウェロウォ",
+    "meaning": "寂しい"
+  },
+  "괴로워": {
+    "reading": "クェロウォ",
+    "meaning": "苦しい"
+  },
+  "무서워": {
+    "reading": "ムソウォ",
+    "meaning": "怖い"
+  },
+  "두려워": {
+    "reading": "トゥリョウォ",
+    "meaning": "恐ろしい"
+  },
+  "했던 지난날은": {
+    "reading": "ヘットン チナンナルン",
+    "meaning": "そう言っていた過ぎた日々は"
+  },
+  "됐어": {
+    "reading": "トェッソ",
+    "meaning": "もういい"
+  },
+  "깃발 들고": {
+    "reading": "キッパル トゥルゴ",
+    "meaning": "旗を持って"
+  },
+  "hands up": {
+    "reading": "ハンズ アップ",
+    "meaning": "手を上げろ"
+  },
+  "준비되었는가": {
+    "reading": "チュンビドェオンヌンガ",
+    "meaning": "準備はできたか"
+  },
+  "우리가": {
+    "reading": "ウリガ",
+    "meaning": "ぼくらが"
+  },
+  "보이는가": {
+    "reading": "ポイヌンガ",
+    "meaning": "見えるか"
+  },
+  "타오르는": {
+    "reading": "タオルヌン",
+    "meaning": "燃え上がる"
+  },
+  "눈빛과": {
+    "reading": "ヌンピックァ",
+    "meaning": "眼差しと"
+  },
+  "삼킬 듯한": {
+    "reading": "サムキル トゥタン",
+    "meaning": "飲み込むような"
+  },
+  "함성이": {
+    "reading": "ハムソンイ",
+    "meaning": "歓声が"
+  },
+  "온 세상을": {
+    "reading": "オン セサンウル",
+    "meaning": "全世界を"
+  },
+  "울리는 걸": {
+    "reading": "ウルリヌン ゴル",
+    "meaning": "響かせるんだ"
+  },
+  "듣고": {
+    "reading": "トゥッコ",
+    "meaning": "聞いて"
+  },
+  "있다면": {
+    "reading": "イッタミョン",
+    "meaning": "いるなら"
+  },
+  "내 곁으로": {
+    "reading": "ネ ギョトゥロ",
+    "meaning": "ぼくのそばへ"
+  },
+  "와줘": {
+    "reading": "ワジョ",
+    "meaning": "来てほしい"
+  },
+  "할 수 있게": {
+    "reading": "ハル ス イッケ",
+    "meaning": "できるように"
+  }
+});
 export function lyricTokenHelp(token) {
   return LYRIC_GLOSSARY[token] || { reading: token, meaning: '意味を確認中' };
 }
