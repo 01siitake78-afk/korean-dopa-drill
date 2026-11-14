@@ -899,3 +899,6 @@ body.reduced #guide-help-ring, body.reduced .guide-help-fallback::after { animat
 #screen-play:has(.lyrics-card) .sheet-wrap { height: auto; min-height: 0; }
 #screen-play:has(.lyrics-card) .lyrics-prompt,
 #screen-play:has(.lyrics-card) .lyrics-reading { white-space: normal; overflow: visible; text-overflow: clip; }
+
+.lyrics-source-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 6px; color: #2a4fd6; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.lyrics-source-link:focus-visible { outline: 3px solid #2a4fd6; outline-offset: 3px; border-radius: 4px; }
