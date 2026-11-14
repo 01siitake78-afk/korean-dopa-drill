@@ -1,14 +1,14 @@
 // Add songs here; each JSON contains title, artist and paired lines with tokens.
 export const SONGS = [
-  { id: 'wonderland', file: 'wonderland.json' },
-  { id: 'halazia', file: 'halazia.json' },
-  { id: 'bad', file: 'bad.json' },
-  { id: 'enough', file: 'enough.json' },
-  { id: 'on-the-road', file: 'on-the-road.json' },
-  { id: 'choose', file: 'choose.json' },
-  { id: 'lemon-drop', file: 'lemon-drop.json' },
-  { id: 'up', file: 'up.json' },
-  { id: 'answer', file: 'answer.json' },
+  { id: 'wonderland', file: 'wonderland.json', sourceUrl: 'https://share.google/OL2mAoYizvTU9UR4U' },
+  { id: 'halazia', file: 'halazia.json', sourceUrl: 'https://share.google/KLunZJ5ABPasOaA2T' },
+  { id: 'bad', file: 'bad.json', sourceUrl: 'https://share.google/mmtCk2O7tmGq4IynM' },
+  { id: 'enough', file: 'enough.json', sourceUrl: 'https://share.google/Cl96WGDIHiTX4KGCj' },
+  { id: 'on-the-road', file: 'on-the-road.json', sourceUrl: 'https://share.google/U1G7tXfKptmj6FNIw' },
+  { id: 'choose', file: 'choose.json', sourceUrl: 'https://share.google/C1VSp410j2wP7LzQu' },
+  { id: 'lemon-drop', file: 'lemon-drop.json', sourceUrl: 'https://share.google/3x22rURSgSKgqzJ8s' },
+  { id: 'up', file: 'up.json', sourceUrl: 'https://share.google/BLQS7Yjbbxyjo3z3h' },
+  { id: 'answer', file: 'answer.json', sourceUrl: 'https://share.google/lUcb2jVckko5r5dSa' },
 ];
 export function shuffleTokens(tokens, rng = Math.random) {
   const cards = tokens.map((text, id) => ({ text, id }));
@@ -26,11 +26,11 @@ export async function loadLyrics() {
   const songs = await Promise.all(SONGS.map(async song => {
     const response = await fetch(new URL('../data/lyrics/' + song.file, import.meta.url));
     if (!response.ok) throw new Error('歌詞データを読み込めませんでした。');
-    return response.json();
+    return { ...await response.json(), sourceUrl: song.sourceUrl };
   }));
   return songs.flatMap(song => song.lines.map(line => {
     if (!line.japanese || !line.korean || !Array.isArray(line.tokens) || line.tokens.length < 2 || line.tokens.join(' ') !== line.korean) throw new Error('歌詞データの形式が正しくありません。');
-    return { ...line, song: song.title };
+    return { ...line, song: song.title, sourceUrl: song.sourceUrl };
   }));
 }
 export function lyricsProblem(line) {
