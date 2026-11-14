@@ -1,5 +1,5 @@
 import { lyricTokenHelp, lyricReading } from './lyrics-help.js?v=20261114-answer';
-import { loadLyrics, lyricsProblem, shuffleTokens, lyricScaffold, fillLyricHint } from './lyrics.js?v=20261114-answer';
+import { loadLyrics, lyricsProblem, shuffleTokens, lyricScaffold, fillLyricHint } from './lyrics.js?v=20261114-lyrics-links';
 import { vocabularyHelp } from './vocabulary-help.js';
 import { recordVocabularyAnswer } from './vocabulary-curriculum.js';
 import { loadVocabulary, vocabularyProblem } from './vocabulary.js';
@@ -915,6 +915,16 @@ async function clearProblem() {
     note.replaceChildren();
     for (const text of [S.problem.korean, S.problem.japanese, S.problem.song]) {
       const line = document.createElement('div'); line.textContent = text; note.appendChild(line);
+    }
+    if (S.problem.sourceUrl) {
+      const link = document.createElement('a');
+      link.className = 'lyrics-source-link';
+      link.href = S.problem.sourceUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = `${S.problem.song} の歌詞全文を見る ↗`;
+      link.setAttribute('aria-label', `${S.problem.song} の歌詞全文を見る（別タブで開きます）`);
+      note.appendChild(link);
     }
     note.hidden = false;
   }
